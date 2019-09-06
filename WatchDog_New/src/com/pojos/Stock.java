@@ -6,7 +6,6 @@ public class Stock
 	private int securityId;
 	private float highestPrice;
 	private float lowestPrice;
-	private float marketPrice;
 	private float ltp;
 	
 	public Stock(int firmId, int securityId, float highestPrice, float lowestPrice, float marketPrice, float ltp) 
