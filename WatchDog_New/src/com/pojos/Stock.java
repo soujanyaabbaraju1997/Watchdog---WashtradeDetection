@@ -8,13 +8,12 @@ public class Stock
 	private float lowestPrice;
 	private float ltp;
 	
-	public Stock(int firmId, int securityId, float highestPrice, float lowestPrice, float marketPrice, float ltp) 
+	public Stock(int firmId, int securityId, float highestPrice, float lowestPrice, float ltp) 
 	{
 		this.firmId = firmId;
 		this.securityId = securityId;
 		this.highestPrice = highestPrice;
 		this.lowestPrice = lowestPrice;
-		this.marketPrice = marketPrice;
 		this.ltp = ltp;
 	}
 
@@ -56,16 +55,6 @@ public class Stock
 	public void setLowestPrice(float lowestPrice)
 	{
 		this.lowestPrice = lowestPrice;
-	}
-
-	public float getMarketPrice() 
-	{
-		return marketPrice;
-	}
-
-	public void setMarketPrice(float marketPrice)
-	{
-		this.marketPrice = marketPrice;
 	}
 
 	public float getLtp() 
