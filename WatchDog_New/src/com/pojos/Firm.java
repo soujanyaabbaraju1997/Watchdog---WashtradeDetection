@@ -11,7 +11,7 @@ public class Firm
 		this.firmId = firmId;
 		this.firmName = firmName;
 	}
-
+	
 	public int getFirmId()
 	{
 		return firmId;
