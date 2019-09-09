@@ -1,6 +1,7 @@
 package com.pojos;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Trade 
 {
@@ -19,6 +20,10 @@ public class Trade
 		;
 	}
 
+	public Trade() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Trade(int tradeId, Trader trader, Time timeStamp, boolean tradeType, int securityId, int qty,
 			float dealPrice, int firmId, int brokerId) 
 	{
@@ -123,4 +128,6 @@ public class Trade
 		this.brokerId = brokerId;
 	}
 
+	
+		
 }
