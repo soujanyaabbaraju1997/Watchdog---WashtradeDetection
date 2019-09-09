@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 			{
 				RequestDispatcher rd=request.getRequestDispatcher("admin.html");
 				rd.forward(request, response);
-
+					//
 				
 			}
 			else
