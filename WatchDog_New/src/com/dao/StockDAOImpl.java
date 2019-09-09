@@ -20,7 +20,7 @@ public class StockDAOImpl implements StockDAO
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("DRIVER LOADED SUCCESSFULLY");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "admin");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
 			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
@@ -36,8 +36,7 @@ public class StockDAOImpl implements StockDAO
 	{
 		int rows_inserted = 0;
 		Connection conn = openConnection();
-		String INSERT_STOCK = "insert into stocks"
-				+ " values(?,?,?,?,?)";
+		String INSERT_STOCK = "insert into stocks values(?,?,?,?,?)";
 		PreparedStatement ps;
 			
 		try
@@ -62,46 +61,12 @@ public class StockDAOImpl implements StockDAO
 		
 		return rows_inserted;		
 	}
-
-	@Override
-	public Stock deleteStock(int firmId, int securityId) 
-	{
-	String DELETE_STOCK = "delete from stocks where firmId=?"+" and firmId=?";
-		
-		Connection conn = openConnection();
-		PreparedStatement ps;
-		
-		Stock stock = null;
-		
-		stock = findStock(firmId, securityId);
-		
-		if(stock!=null)
-		{
-			try
-			{
-				ps = conn.prepareStatement(DELETE_STOCK);
-				ps.setInt(1, firmId);
-				ps.setInt(2, securityId);
-				ps.executeQuery();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}		
-			return stock;
-		}
-		else
-		{
-			stock = new Stock();
-			return stock;
-		}	
-	}
-
+	
 	@Override
 	public Stock findStock(int firmId, int securityId)
 	{
 		Stock stock = new Stock();
-		String FIND_STOCK = "select * from stock where firmId=?"+" and firmId=?";
+		String FIND_STOCK = "select * from stocks where firm_id=? and security_id=?";
 		
 		Connection conn = openConnection();
 		PreparedStatement ps;
@@ -135,6 +100,42 @@ public class StockDAOImpl implements StockDAO
 		return stock;
 	}
 
+
+	@Override
+	public Stock deleteStock(int firmId, int securityId) 
+	{
+	String DELETE_STOCK = "delete from stocks where firm_id=? and security_id=?";
+		
+		Connection conn = openConnection();
+		PreparedStatement ps;
+		
+		Stock stock = null;
+		
+		stock = findStock(firmId, securityId);
+		
+		if(stock!=null)
+		{
+			try
+			{
+				ps = conn.prepareStatement(DELETE_STOCK);
+				ps.setInt(1, firmId);
+				ps.setInt(2, securityId);
+				ps.executeQuery();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}		
+			return stock;
+		}
+		else
+		{
+			stock = new Stock();
+			return stock;
+		}	
+	}
+
+	
 	
 	@Override
 	public boolean updateHighPrice(int firmId, int securityId)
@@ -145,7 +146,7 @@ public class StockDAOImpl implements StockDAO
 		System.out.println("Enter new highest price: ");
 		float highestPrice = sc.nextFloat();
 		
-		String UPDATE_STOCK = "update users set highestPrice=?" + " where firmId=?"+ " and stockId=?";
+		String UPDATE_STOCK = "update users set highest_price=? where firm_id=? and security_id=?";
 		
 		try
 		{
@@ -178,7 +179,7 @@ public class StockDAOImpl implements StockDAO
 		System.out.println("Enter new lowest price: ");
 		float lowestPrice = sc.nextFloat();
 		
-		String UPDATE_STOCK = "update users set lowestPrice=?" + " where firmId=?"+ " and stockId=?";
+		String UPDATE_STOCK = "update users set lowest_price=? where firm_id=? and security_id=?";
 		
 		try
 		{
@@ -211,7 +212,7 @@ public class StockDAOImpl implements StockDAO
 		System.out.println("Enter new LTP: ");
 		float ltp = sc.nextFloat();
 		
-		String UPDATE_STOCK = "update users set ltp=?" + " where firmId=?"+ " and stockId=?";
+		String UPDATE_STOCK = "update users set ltp=?  where firm_id=? and security_id=?";
 		
 		try
 		{

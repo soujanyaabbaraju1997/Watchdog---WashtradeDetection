@@ -14,15 +14,13 @@ public class Trade
 	private float dealPrice;
 	private int firmId;
 	private int brokerId;
-	
+	private int isWashTrade;
 	public Trade()
 	{
 		;
 	}
 
-	public Trade() {
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	public Trade(int tradeId, Trader trader, Time timeStamp, boolean tradeType, int securityId, int qty,
 			float dealPrice, int firmId, int brokerId) 
@@ -37,7 +35,21 @@ public class Trade
 		this.dealPrice = dealPrice;
 		this.firmId = firmId;
 		this.brokerId = brokerId;
+		this.isWashTrade = 0;
 	}
+	
+
+	public int getIsWashTrade() {
+		return isWashTrade;
+	}
+
+
+
+	public void setIsWashTrade(int isWashTrade) {
+		this.isWashTrade = isWashTrade;
+	}
+
+
 
 	public int getTradeId()
 	{

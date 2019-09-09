@@ -2,6 +2,7 @@ package com.pojos;
 
 public class Stock 
 {
+	
 	private int firmId;
 	private int securityId;
 	private float highestPrice;

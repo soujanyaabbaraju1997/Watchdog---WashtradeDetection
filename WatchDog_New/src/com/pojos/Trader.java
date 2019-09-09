@@ -6,29 +6,25 @@ public class Trader extends User
 	private int traderId;
 	private String traderName;
 	private Date dateReg;
-<<<<<<< Upstream, based on branch 'master' of https://github.com/soujanyaabbaraju1997/Project_Repo.git
 	private List<Trade> trades;			//HAS-A relationship. 1:*
-	
 	public Trader()
 	{
 		this.setAdmin(0);
 	}
 	
 	public Trader(int traderId, String traderName, Date dateReg, String username, String password, String emailId, long phone, Date dob) 
-=======
-	private List<Trade> trades;			//HAS-A relationship. 1:*	
-	public Trader(int traderId, String traderName, Date dateReg, List<Trade> trades) 
->>>>>>> a8ecffc Gaurav init
+	//public Trader(int traderId, String traderName, Date dateReg, List<Trade> trades) 
 	{
+		super(username, password, emailId, phone, dob);
 		this.traderId = traderId;
 		this.traderName = traderName;
 		this.dateReg = dateReg;
 		this.setAdmin(0);
-		this.setUsername(username);
-		this.setPassword(password);
-		this.setEmailId(emailId);
-		this.setPhone(phone);
-		this.setDob(dob);
+//		this.setUsername(username);
+//		this.setPassword(password);
+//		this.setEmailId(emailId);
+//		this.setPhone(phone);
+//		this.setDob(dob);
 	}
 	public int getTraderId() 
 	{

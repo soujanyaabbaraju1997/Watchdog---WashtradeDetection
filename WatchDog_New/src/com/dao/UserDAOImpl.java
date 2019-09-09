@@ -20,7 +20,7 @@ public class UserDAOImpl implements UserDAO
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("DRIVER LOADED SUCCESSFULLY");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "admin");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
 			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
@@ -36,8 +36,7 @@ public class UserDAOImpl implements UserDAO
 	{
 		int rows_inserted = 0;
 		Connection conn = openConnection();
-		String INSERT_USER = "insert into users"
-				+ " values(NULL, NULL, NULL, ?, ?, ?, ?, ?, ?)";
+		String INSERT_USER = "insert into users values(NULL, NULL, NULL, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement ps;
 			
 		try
