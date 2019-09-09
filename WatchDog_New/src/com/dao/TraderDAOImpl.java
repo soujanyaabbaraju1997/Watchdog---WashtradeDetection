@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import com.pojos.Trader;
 import com.pojos.User;
-
+//
 public class TraderDAOImpl implements TraderDAO
 {
 

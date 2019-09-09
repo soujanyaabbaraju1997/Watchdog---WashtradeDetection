@@ -161,7 +161,7 @@ public class CheckImplementations
 		
 		
 //=========================================================================================================================
-//								add trade
+//								add trade....
 		TradeDAO tdao = new TradeDAOImpl();
 		long millis=System.currentTimeMillis();  
 		java.sql.Time time=new java.sql.Time(millis);

@@ -1,5 +1,6 @@
 package com.pojos;
 import java.sql.Date;
+//
 import java.util.List;
 public class Trader extends User
 {

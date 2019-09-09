@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.pojos.User;
-
+//
 public class UserDAOImpl implements UserDAO
 {
 	

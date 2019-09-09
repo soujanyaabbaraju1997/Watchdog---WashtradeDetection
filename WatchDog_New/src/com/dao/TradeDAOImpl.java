@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.pojos.Trade;
 import com.pojos.Trader;
-
+//
 public class TradeDAOImpl implements TradeDAO
 {
 	Connection openConnection()
