@@ -8,6 +8,11 @@ public class Stock
 	private float lowestPrice;
 	private float ltp;
 	
+	public Stock()
+	{
+		;
+	}
+	
 	public Stock(int firmId, int securityId, float highestPrice, float lowestPrice, float ltp) 
 	{
 		this.firmId = firmId;
@@ -66,6 +71,5 @@ public class Stock
 	{
 		this.ltp = ltp;
 	}
-	
-	
+		
 }

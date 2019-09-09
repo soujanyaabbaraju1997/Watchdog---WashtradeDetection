@@ -10,13 +10,22 @@ public class Trader extends User
 	private Date dateReg;
 	private List<Trade> trades;			//HAS-A relationship. 1:*
 	
-	public Trader(int traderId, String traderName, Date dateReg, List<Trade> trades) 
+	public Trader()
+	{
+		this.setAdmin(0);
+	}
+	
+	public Trader(int traderId, String traderName, Date dateReg, String username, String password, String emailId, long phone, Date dob) 
 	{
 		this.traderId = traderId;
 		this.traderName = traderName;
 		this.dateReg = dateReg;
-		this.trades = trades;
-		this.setAdmin(false);
+		this.setAdmin(0);
+		this.setUsername(username);
+		this.setPassword(password);
+		this.setEmailId(emailId);
+		this.setPhone(phone);
+		this.setDob(dob);
 	}
 	public int getTraderId() 
 	{

@@ -9,11 +9,11 @@ public class User
 	private String emailId;
 	private long phone;
 	private Date dob;
-	private boolean isAdmin;
+	private int isAdmin;
 	
 	public User()
 	{
-		this.isAdmin=true;
+		this.isAdmin=1;
 	}
 	
 	public User(String username, String password, String emailId, long phone, Date dob) 
@@ -24,7 +24,7 @@ public class User
 		this.emailId = emailId;
 		this.phone = phone;
 		this.dob = dob;
-		this.isAdmin=true;
+		this.isAdmin=1;
 	}
 
 	public String getUsername()
@@ -77,13 +77,21 @@ public class User
 		this.dob = dob;
 	}
 	
-	public boolean isAdmin()
+	public int isAdmin()
 	{
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin)
+	public void setAdmin(int isAdmin)
 	{
 		this.isAdmin = isAdmin;
 	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", emailId=" + emailId + ", phone=" + phone
+				+ ", dob=" + dob + ", isAdmin=" + isAdmin + "]";
+	}
+	
+	
 }

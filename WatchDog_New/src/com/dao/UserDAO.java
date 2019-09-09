@@ -10,4 +10,5 @@ public interface UserDAO
 	boolean updatePassword(String username, String password);
 	User findUserByUsername(String username);
 	User deleteUser(String username);
+	void viewLiveMarket();
 }

@@ -13,6 +13,11 @@ public class Trade
 	private float dealPrice;
 	private int firmId;
 	private int brokerId;
+	
+	public Trade()
+	{
+		;
+	}
 
 	public Trade(int tradeId, Trader trader, Time timeStamp, boolean tradeType, int securityId, int qty,
 			float dealPrice, int firmId, int brokerId) 
@@ -88,7 +93,7 @@ public class Trade
 		this.qty = qty;
 	}
 
-	public double getDealPrice()
+	public float getDealPrice()
 	{
 		return dealPrice;
 	}
