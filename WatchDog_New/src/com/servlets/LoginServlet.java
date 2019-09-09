@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 		{
 			request.setAttribute("msg", "Credentials do not match.Try again");
 			
-			RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("login.html");
 			rd.forward(request, response);
 			
 		}
@@ -87,7 +87,6 @@ public class LoginServlet extends HttpServlet {
 			
 			
 		}
-		//return name;
 	}
 
 		

@@ -21,6 +21,7 @@ public class StockDAOImpl implements StockDAO
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("DRIVER LOADED SUCCESSFULLY");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
+			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
 			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
