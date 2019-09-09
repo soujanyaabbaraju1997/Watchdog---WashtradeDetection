@@ -21,7 +21,8 @@ public class TraderDAOImpl implements TraderDAO
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("DRIVER LOADED SUCCESSFULLY");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "admin");
 			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
@@ -43,7 +44,7 @@ public class TraderDAOImpl implements TraderDAO
 		try
 		{
 			ps = conn.prepareStatement(INSERT_TRADER);
-			ps.setInt(1,trader.getTraderId());
+			ps.setString(1,trader.getTraderId());
 			ps.setString(2,trader.getTraderName());
 			ps.setDate(3,trader.getDateReg());
 			ps.setString(4,trader.getUsername());
@@ -73,7 +74,7 @@ public class TraderDAOImpl implements TraderDAO
 	}
 
 	@Override
-	public Trader findTraderById(int traderId) 
+	public Trader findTraderById(String traderId) 
 	{
 		Trader trader = new Trader();
 		String FIND_BY_TRADERID = "select * from users where trader_id=?";
@@ -84,7 +85,7 @@ public class TraderDAOImpl implements TraderDAO
 		try
 		{
 			ps = conn.prepareStatement(FIND_BY_TRADERID);
-			ps.setLong(1, traderId);
+			ps.setString(1, traderId);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next())

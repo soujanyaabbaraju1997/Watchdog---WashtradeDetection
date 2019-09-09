@@ -3,7 +3,7 @@ import java.sql.Date;
 import java.util.List;
 public class Trader extends User
 {
-	private int traderId;
+	private String traderId;
 	private String traderName;
 	private Date dateReg;
 	private List<Trade> trades;			//HAS-A relationship. 1:*
@@ -12,7 +12,7 @@ public class Trader extends User
 		this.setAdmin(0);
 	}
 	
-	public Trader(int traderId, String traderName, Date dateReg, String username, String password, String emailId, long phone, Date dob) 
+	public Trader(String traderId, String traderName, Date dateReg, String username, String password, String emailId, long phone, Date dob) 
 	//public Trader(int traderId, String traderName, Date dateReg, List<Trade> trades) 
 	{
 		super(username, password, emailId, phone, dob);
@@ -26,11 +26,11 @@ public class Trader extends User
 //		this.setPhone(phone);
 //		this.setDob(dob);
 	}
-	public int getTraderId() 
+	public String getTraderId() 
 	{
 		return traderId;
 	}
-	public void setTraderId(int traderId) 
+	public void setTraderId(String traderId) 
 	{
 		this.traderId = traderId;
 	}
@@ -58,5 +58,12 @@ public class Trader extends User
 	{
 		this.trades = trades;
 	}
+
+	@Override
+	public String toString() {
+		return "Trader [traderId=" + traderId + ", traderName=" + traderName + ", dateReg=" + dateReg + ", trades="
+				+ trades + "]";
+	}
+	
 	
 }

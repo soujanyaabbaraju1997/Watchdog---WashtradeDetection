@@ -5,6 +5,6 @@ import com.pojos.Trader;
 public interface TraderDAO 
 {
 	int addTrader(Trader trader);
-	Trader findTraderById(int traderId);
+	Trader findTraderById(String traderId);
 	void ViewLiveMarket();
 }

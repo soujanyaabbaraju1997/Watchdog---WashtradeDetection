@@ -1,8 +1,10 @@
 package com.dao;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Scanner;
 
+import com.pojos.Trade;
 import com.pojos.Trader;
 import com.pojos.User;
 
@@ -156,6 +158,21 @@ public class CheckImplementations
 //		UserDAO udao = new UserDAOImpl();
 //		User user = udao.deleteUser(username);
 //		System.out.println(user);
+		
+		
+//=========================================================================================================================
+//								add trade
+		TradeDAO tdao = new TradeDAOImpl();
+		long millis=System.currentTimeMillis();  
+		java.sql.Time time=new java.sql.Time(millis);
+		TraderDAO trdao = new TraderDAOImpl();
+		Trader t = new Trader();
+		t = trdao.findTraderById("BTP5KFB5");
+		t.toString();
+		Trade trade = new Trade(999999, t, time,"false", 303030, 10, 100.10f, 101111, "JVDEW", 0);
+
+		System.out.println(tdao.addTrade(trade));
+		
 		
 	}
 }

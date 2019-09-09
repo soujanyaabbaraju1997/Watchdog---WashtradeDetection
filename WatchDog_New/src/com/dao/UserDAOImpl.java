@@ -20,8 +20,7 @@ public class UserDAOImpl implements UserDAO
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("DRIVER LOADED SUCCESSFULLY");
-			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "admin");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
 			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)

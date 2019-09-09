@@ -8,22 +8,22 @@ public class Trade
 	private int tradeId;
 	private Trader trader;				//HAS-A relationship. 1:1
 	private Time timeStamp;
-	private boolean tradeType;
+	private String tradeType;
 	private int securityId;
 	private int qty;
 	private float dealPrice;
 	private int firmId;
-	private int brokerId;
+	private String brokerId;
 	private int isWashTrade;
 	public Trade()
 	{
-		;
+		this.isWashTrade=0;
 	}
 
 	
 	
-	public Trade(int tradeId, Trader trader, Time timeStamp, boolean tradeType, int securityId, int qty,
-			float dealPrice, int firmId, int brokerId) 
+	public Trade(int tradeId, Trader trader, Time timeStamp, String tradeType, int securityId, int qty,
+			float dealPrice, int firmId, String brokerId, int isWashTrade) 
 	{
 		
 		this.tradeId = tradeId;
@@ -81,11 +81,11 @@ public class Trade
 		this.timeStamp = timeStamp;
 	}
 
-	public boolean isTradeType() {
+	public String isTradeType() {
 		return tradeType;
 	}
 
-	public void setTradeType(boolean tradeType) 
+	public void setTradeType(String tradeType) 
 	{
 		this.tradeType = tradeType;
 	}
@@ -130,12 +130,12 @@ public class Trade
 		this.firmId = firmId;
 	}
 
-	public int getBrokerId()
+	public String getBrokerId()
 	{
 		return brokerId;
 	}
 
-	public void setBrokerId(int brokerId)
+	public void setBrokerId(String brokerId)
 	{
 		this.brokerId = brokerId;
 	}
