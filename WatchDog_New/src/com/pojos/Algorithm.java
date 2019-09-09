@@ -1,21 +1,9 @@
 package com.pojos;
-
 import java.awt.List;
 import java.sql.Time;
 import java.util.ArrayList;
-
 public class Algorithm {
-	public ArrayList<Trade> GroupingByDate(ArrayList<Trade> list1) {
-		ArrayList<Trade> tempList = new ArrayList<>();
-		for (int i = 0; i < list1.size(); i++) {
-			if(Date)
-		}
-		
-		return list1;
-		
-	}
 	public static void main(String[] args) {
-		ArrayList<Trade> TradeList = new ArrayList<>();
 		Trader td1 = new Trader(1, harish, dateReg, trades)
 		Trade t1 = new Trade(0, td1, timeStamp, tradeType, securityId, qty, dealPrice, firmId, brokerId);
 		ArrayList<Trade> SortedTradeList = new ArrayList<>();//sorted by date first and then reverse alphabet

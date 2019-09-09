@@ -1,13 +1,12 @@
 package com.pojos;
-
 import java.sql.Date;
 import java.util.List;
-
 public class Trader extends User
 {
 	private int traderId;
 	private String traderName;
 	private Date dateReg;
+<<<<<<< Upstream, based on branch 'master' of https://github.com/soujanyaabbaraju1997/Project_Repo.git
 	private List<Trade> trades;			//HAS-A relationship. 1:*
 	
 	public Trader()
@@ -16,6 +15,10 @@ public class Trader extends User
 	}
 	
 	public Trader(int traderId, String traderName, Date dateReg, String username, String password, String emailId, long phone, Date dob) 
+=======
+	private List<Trade> trades;			//HAS-A relationship. 1:*	
+	public Trader(int traderId, String traderName, Date dateReg, List<Trade> trades) 
+>>>>>>> a8ecffc Gaurav init
 	{
 		this.traderId = traderId;
 		this.traderName = traderName;
