@@ -218,7 +218,8 @@ public class UserDAOImpl implements UserDAO
 	}
 
 	@Override
-	public void viewLiveMarket() {
+	public void viewLiveMarket() 
+	{
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,10 +1,13 @@
 package com.dao;
 
-import com.pojos.Trader;
+import java.util.List;
 
-public interface TraderDAO 
+import com.pojos.Trader;
+import com.pojos.User;
+
+public interface TraderDAO
 {
-	int addTrader(Trader trader);
-	Trader findTraderById(String traderId);
-	void ViewLiveMarket();
+	public int addTrader(Trader trader);
+	public List<Trader> findAllTraders();
+	public Trader findByTraderID(String traderId);
 }

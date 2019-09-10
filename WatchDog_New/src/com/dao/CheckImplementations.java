@@ -2,6 +2,7 @@ package com.dao;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 import java.util.Scanner;
 
 import com.pojos.Trade;
@@ -13,6 +14,100 @@ public class CheckImplementations
 
 	public static void main(String[] args) 
 	{
+		//=========================================================================================================================
+		//								find all trades
+		
+//		TradeDAO tdao = new TradeDAOImpl();
+//		List<Trade> list = tdao.findAllTrades();
+//		list.forEach((st)->{
+//			System.out.println(st);
+//		});		
+		
+		//=========================================================================================================================
+		//									find trade by trader id
+		
+//		String traderId = "";
+//		TradeDAO dao = new TradeDAOImpl();
+//		System.out.println("DETAILS:");
+		//Trade user = dao.findByTraderId(traderId);
+		//System.out.println(user.toString());		
+		
+		//=========================================================================================================================
+		//									find trade by trade id
+		
+//		int tradeId = 101010;
+//		TradeDAO dao = new TradeDAOImpl();
+//		System.out.println("DETAILS:");
+//		Trade user = dao.findTradeById(tradeId);
+//		System.out.println(user.toString());
+		
+		
+		//=========================================================================================================================
+		//								ADD TRADES
+		
+		TradeDAO dao = new TradeDAOImpl();
+		Scanner sc = new Scanner(System.in);
+				
+		System.out.println("Enter trade_id: ");
+		int tid = sc.nextInt();
+		System.out.println("Enter trader_id: ");
+		String trid = sc.next();
+		//System.out.println("Enter timestamp: ");
+		Time time = new Time(15, 20, 00);
+		System.out.println("enter type");
+		String type= sc.next();
+		System.out.println("Enter sec id: ");
+		int secid = sc.nextInt();
+		System.out.println("Enter qty: ");
+		int qty = sc.nextInt();
+		System.out.println("Enter deal price: ");
+		Float dp = sc.nextFloat();
+		System.out.println("Enter firm id ");
+		int fid= sc.nextInt();
+		System.out.println("enter broker id");
+		String bid= sc.next();
+		System.out.println("is wash trade?");
+		int wt= sc.nextInt();
+		
+		System.out.println("taken all inputs.");
+		TraderDAO tdao = new TraderDAOImpl();
+		Trader t =  tdao.findByTraderID(trid);
+		Trade trade = new Trade(tid, t, time, type, secid, qty, dp, fid, bid, wt);
+		
+		System.out.println(trade);
+		
+		dao.addTrade(trade);
+		
+		int inserted = dao.addTrade(trade);
+		if(inserted>0)
+		{
+			System.out.println("NEW TRADE IS INSERTED.");
+		}
+		else
+		{
+			System.out.println("TRADE NOT INSERTED.");
+		}
+		
+		
+		//=========================================================================================================================
+		//					find all traders
+		
+//		TraderDAO tdao = new TraderDAOImpl();
+//		List<Trader> list = tdao.findAllTraders();
+//		list.forEach((st)->{
+//			System.out.println(st);
+//		});
+		
+		
+		//=========================================================================================================================
+		//			find trader by tradername
+//		String traderId = "WSYHBBNS";
+//		TraderDAO sdao = new TraderDAOImpl();
+//		System.out.println("DETAILS:");
+//		Trader stu = sdao.findByTraderID(traderId);
+//		
+//		System.out.println(stu.getUsername());
+//		System.out.println(stu.getPassword());
 		
 //		================================================================================================================
 //											add user		
@@ -35,7 +130,7 @@ public class CheckImplementations
 //		System.out.println("Enter date of birth: ");
 //		int dt = sc.nextInt();
 //		Date dob = new Date(yr, mth, dt);
-//		
+////		
 //		User user = new User(username, password, email, phone, dob);
 //		
 //		int inserted = udao.addUser(user);
@@ -47,7 +142,7 @@ public class CheckImplementations
 //		{
 //			System.out.println("ADMIN NOT INSERTED.");
 //		}
-		
+//		
 		
 //		================================================================================================================
 //												add trader	
@@ -57,9 +152,10 @@ public class CheckImplementations
 //	
 //	
 //	System.out.println("Enter trader_id: ");
-//	int tid = sc.nextInt();
+//	String tid = sc.next();
 //	System.out.println("Enter trader_name: ");
 //	String tname = sc.next();
+//	
 //	System.out.println("Enter year of reg: ");
 //	int yrr = sc.nextInt();
 //	System.out.println("Enter month of reg: ");
@@ -67,6 +163,7 @@ public class CheckImplementations
 //	System.out.println("Enter date of reg: ");
 //	int dtr = sc.nextInt();
 //	Date dor = new Date(yrr, mthr, dtr);
+//	
 //	System.out.println("Enter username: ");
 //	String username = sc.next();
 //	System.out.println("Enter password: ");
@@ -75,6 +172,7 @@ public class CheckImplementations
 //	String email = sc.next();
 //	System.out.println("Enter phone: ");
 //	long phone = sc.nextLong();
+//	
 //	System.out.println("Enter year of birth: ");
 //	int yr = sc.nextInt();
 //	System.out.println("Enter month of birth: ");
@@ -82,10 +180,11 @@ public class CheckImplementations
 //	System.out.println("Enter date of birth: ");
 //	int dt = sc.nextInt();
 //	Date dob = new Date(yr, mth, dt);
-//	sc.close();
 //	
+//	//sc.close();
+//	System.out.println("taken all inputs.");
 //	Trader trader = new Trader(tid, tname, dor, username, password, email, phone, dob);
-//	
+//	System.out.println(trader);
 //	int inserted = udao.addTrader(trader);
 //	if(inserted>0)
 //	{
@@ -145,7 +244,7 @@ public class CheckImplementations
 //=========================================================================================================================
 //								find by username
 		
-//		String username = "singhs";
+//		String username = "aaaaa";
 //		UserDAO udao = new UserDAOImpl();
 //		System.out.println("USER DETAILS:");
 //		User user = udao.findUserByUsername(username);
@@ -153,35 +252,19 @@ public class CheckImplementations
 		
 //=====================================================================
 		
-		String traderId = "SOUPBVBV";
-		TraderDAO tdao = new TraderDAOImpl();
-		System.out.println("USER DETAILS:");
-		Trader t = tdao.findTraderById(traderId);
-		System.out.println(t);
+//		String traderId = "OS7HPJJS";
+//		TraderDAO tdao = new TraderDAOImpl();
+//		System.out.println("USER DETAILS:");
+//		Trader t = tdao.findTraderById(traderId);
+//		System.out.println(t);
 		
 //=========================================================================================================================
 //								delete user		
 		
-//		String username = "singhs";
+//		String username = "aaaaa";
 //		UserDAO udao = new UserDAOImpl();
 //		User user = udao.deleteUser(username);
-//		System.out.println(user);
-		
-		
-//=========================================================================================================================
-//								add trade....
-//		TradeDAO tdao = new TradeDAOImpl();
-//		long millis=System.currentTimeMillis();  
-//		java.sql.Time time=new java.sql.Time(millis);
-//		TraderDAO trdao = new TraderDAOImpl();
-//		Trader t = new Trader();
-//		t = trdao.findTraderById("");
-//		System.out.println(t);
-//		//t.toString();
-//		Trade trade = new Trade(999999, t, time,"false", 303030, 10, 100.10f, 101111, "JVDEW", 0);
-//
-//		System.out.println(tdao.addTrade(trade));
-//		
+//		System.out.println(user);	
 		
 	}
 }

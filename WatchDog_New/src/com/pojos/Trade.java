@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Trade 
 {
 	private int tradeId;
-	private Trader trader=new Trader();				//HAS-A relationship. 1:1
+	private Trader trader;				//HAS-A relationship. 1:1
 	private Time timeStamp;
 	private String tradeType;
 	private int securityId;
@@ -17,6 +17,7 @@ public class Trade
 	private int isWashTrade;
 	public Trade()
 	{
+		super();
 		this.isWashTrade=0;
 	}
 
@@ -25,9 +26,11 @@ public class Trade
 	public Trade(int tradeId, Trader trader, Time timeStamp, String tradeType, int securityId, int qty,
 			float dealPrice, int firmId, String brokerId, int isWashTrade) 
 	{
-		
+		super();
 		this.tradeId = tradeId;
 		this.trader = trader;
+		//Student abraham = (Student) deepCopy(john);
+		//this.trader = (Trader) deepCopy(trader);
 		this.timeStamp = timeStamp;
 		this.tradeType = tradeType;
 		this.securityId = securityId;
@@ -38,6 +41,13 @@ public class Trade
 		this.isWashTrade = 0;
 	}
 	
+
+	private Trader deepCopy(Trader trader2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 	public int getIsWashTrade() {
 		return isWashTrade;
@@ -69,6 +79,11 @@ public class Trade
 	public void setTrader(Trader trader)
 	{
 		this.trader = trader;
+//		this.trader.setTraderId(trader.getTraderId());
+//		this.trader.setTraderName(trader.getTraderName());
+//		this.trader.setDateReg(trader.getDateReg());
+//		this.trader.setTrades(trader.getTrades());
+//		this.trader.setDateReg(trader.getDateReg());
 	}
 
 	public Time getTimeStamp()
@@ -138,6 +153,15 @@ public class Trade
 	public void setBrokerId(String brokerId)
 	{
 		this.brokerId = brokerId;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Trade [tradeId=" + tradeId + ", trader=" + trader + ", timeStamp=" + timeStamp + ", tradeType="
+				+ tradeType + ", securityId=" + securityId + ", qty=" + qty + ", dealPrice=" + dealPrice + ", firmId="
+				+ firmId + ", brokerId=" + brokerId + ", isWashTrade=" + isWashTrade + "]";
 	}
 
 	

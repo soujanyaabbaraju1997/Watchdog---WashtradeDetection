@@ -45,7 +45,7 @@ public class TradeDAOImpl implements TradeDAO
 			ps = conn.prepareStatement(INSERT_TRADE);
 			
 			ps.setInt(1,trade.getTradeId());;
-			ps.setObject(2, trade.getTrader().getTraderId());
+			ps.setString(2, trade.getTrader().getTraderId());
 			ps.setTime(3,trade.getTimeStamp());
 			ps.setString(4, trade.isTradeType());
 			ps.setInt(5, trade.getSecurityId());
@@ -83,11 +83,13 @@ public class TradeDAOImpl implements TradeDAO
 			ps = conn.prepareStatement(FIND_TRADE);
 			ps.setInt(1, tradeId);
 			ResultSet rs = ps.executeQuery();
-			
+			TraderDAO tdao = new TraderDAOImpl();
 			while(rs.next())
 			{
 				trade.setTradeId(tradeId);
-				//trade.setTrader(rs.getObject(columnIndex));
+				Trader t = new Trader();
+				t = tdao.findByTraderID(rs.getString(2));
+				trade.setTrader(t);
 				trade.setTimeStamp(rs.getTime(3));
 				trade.setTradeType(rs.getString(4));
 				trade.setSecurityId(rs.getInt(5));
@@ -114,7 +116,7 @@ public class TradeDAOImpl implements TradeDAO
 		
 		Connection conn = openConnection();
 		PreparedStatement ps;
-		
+		TraderDAO tdao = new TraderDAOImpl();
 		try 
 		{
 			ps = conn.prepareStatement(FIND_ALL_TRADES);
@@ -125,7 +127,9 @@ public class TradeDAOImpl implements TradeDAO
 				Trade trade = new Trade();
 				
 				trade.setTradeId(rs.getInt(1));
-				trade.setTrader((Trader)rs.getObject(2));
+				Trader t = new Trader();
+				t = tdao.findByTraderID(rs.getString(2));
+				trade.setTrader(t);
 				trade.setTimeStamp(rs.getTime(3));		
 				trade.setTradeType(rs.getString(4));
 				trade.setSecurityId(rs.getInt(5));

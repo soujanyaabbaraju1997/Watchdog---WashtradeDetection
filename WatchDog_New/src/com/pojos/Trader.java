@@ -10,6 +10,7 @@ public class Trader extends User
 	private List<Trade> trades;			//HAS-A relationship. 1:*
 	public Trader()
 	{
+		super();
 		this.setAdmin(0);
 	}
 	
@@ -21,11 +22,6 @@ public class Trader extends User
 		this.traderName = traderName;
 		this.dateReg = dateReg;
 		this.setAdmin(0);
-//		this.setUsername(username);
-//		this.setPassword(password);
-//		this.setEmailId(emailId);
-//		this.setPhone(phone);
-//		this.setDob(dob);
 	}
 	public String getTraderId() 
 	{
@@ -60,11 +56,5 @@ public class Trader extends User
 		this.trades = trades;
 	}
 
-	@Override
-	public String toString() {
-		return "Trader [traderId=" + traderId + ", traderName=" + traderName + ", dateReg=" + dateReg + ", trades="
-				+ trades + "]";
-	}
-	
 	
 }
