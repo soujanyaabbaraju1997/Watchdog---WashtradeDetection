@@ -1,9 +1,39 @@
-//package com.pojos;
-//import java.awt.List;
-//import java.sql.Time;
-//import java.util.ArrayList;
-//public class Algorithm {
-//	public static void main(String[] args) {
+package com.pojos;
+import java.awt.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
+public class Algorithm {
+	private static Connection openConnection() {
+		Connection conn = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("DRIVER LOADED SUCCESSFULLY");
+			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "admin");
+			System.out.println("CONNECTION OBTAINED");
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println(e);
+		}
+
+		return conn;
+	}
+
+
+	public static void main(String[] args) {
+		
+		Connection connection = openConnection();
+		
+		
+		
+		Map<String, Map<Integer, List<Trade>>> map = people
+			    .collect(Collectors.groupingBy(Person::getName,
+			        Collectors.groupingBy(Person::getAge));
+
 //		Trader td1 = new Trader(1, harish, dateReg, trades)
 //		Trade t1 = new Trade(0, td1, timeStamp, tradeType, securityId, qty, dealPrice, firmId, brokerId);
 //		ArrayList<Trade> SortedTradeList = new ArrayList<>();//sorted by date first and then reverse alphabet
@@ -119,6 +149,6 @@
 //			}
 //		}
 //		
-//		
-//	}
-//}
+		
+	}
+}
