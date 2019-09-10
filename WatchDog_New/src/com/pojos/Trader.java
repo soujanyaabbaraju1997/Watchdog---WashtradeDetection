@@ -14,7 +14,7 @@ public class Trader extends User
 	}
 	
 	public Trader(String traderId, String traderName, Date dateReg, String username, String password, String emailId, long phone, Date dob) 
-	//public Trader(int traderId, String traderName, Date dateReg, List<Trade> trades) 
+	
 	{
 		super(username, password, emailId, phone, dob);
 		this.traderId = traderId;

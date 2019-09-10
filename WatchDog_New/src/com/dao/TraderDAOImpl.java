@@ -80,11 +80,11 @@ public class TraderDAOImpl implements TraderDAO
 		String FIND_BY_TRADERID = "select * from users where trader_id=?";
 		
 		Connection conn = openConnection();
-		PreparedStatement ps;
+		 
 		
 		try
 		{
-			ps = conn.prepareStatement(FIND_BY_TRADERID);
+			PreparedStatement ps = conn.prepareStatement(FIND_BY_TRADERID);
 			ps.setString(1, traderId);
 			ResultSet rs = ps.executeQuery();
 			
@@ -99,6 +99,7 @@ public class TraderDAOImpl implements TraderDAO
 				trader.setPhone(rs.getLong(7));
 				trader.setDob(rs.getDate(8));
 				trader.setAdmin(0);
+				System.out.println(rs.getString(2));
 			}
 			
 		}
@@ -107,6 +108,7 @@ public class TraderDAOImpl implements TraderDAO
 			e.printStackTrace();
 		}
 	
+		System.out.println("in trader function: ");
 		return trader;
 	}
 }

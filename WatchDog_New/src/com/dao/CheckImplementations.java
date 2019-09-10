@@ -151,6 +151,14 @@ public class CheckImplementations
 //		User user = udao.findUserByUsername(username);
 //		System.out.println(user.toString());
 		
+//=====================================================================
+		
+		String traderId = "SOUPBVBV";
+		TraderDAO tdao = new TraderDAOImpl();
+		System.out.println("USER DETAILS:");
+		Trader t = tdao.findTraderById(traderId);
+		System.out.println(t);
+		
 //=========================================================================================================================
 //								delete user		
 		
@@ -162,17 +170,18 @@ public class CheckImplementations
 		
 //=========================================================================================================================
 //								add trade....
-		TradeDAO tdao = new TradeDAOImpl();
-		long millis=System.currentTimeMillis();  
-		java.sql.Time time=new java.sql.Time(millis);
-		TraderDAO trdao = new TraderDAOImpl();
-		Trader t = new Trader();
-		t = trdao.findTraderById("BTP5KFB5");
-		t.toString();
-		Trade trade = new Trade(999999, t, time,"false", 303030, 10, 100.10f, 101111, "JVDEW", 0);
-
-		System.out.println(tdao.addTrade(trade));
-		
+//		TradeDAO tdao = new TradeDAOImpl();
+//		long millis=System.currentTimeMillis();  
+//		java.sql.Time time=new java.sql.Time(millis);
+//		TraderDAO trdao = new TraderDAOImpl();
+//		Trader t = new Trader();
+//		t = trdao.findTraderById("");
+//		System.out.println(t);
+//		//t.toString();
+//		Trade trade = new Trade(999999, t, time,"false", 303030, 10, 100.10f, 101111, "JVDEW", 0);
+//
+//		System.out.println(tdao.addTrade(trade));
+//		
 		
 	}
 }

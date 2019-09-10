@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Trade 
 {
 	private int tradeId;
-	private Trader trader;				//HAS-A relationship. 1:1
+	private Trader trader=new Trader();				//HAS-A relationship. 1:1
 	private Time timeStamp;
 	private String tradeType;
 	private int securityId;
