@@ -106,6 +106,7 @@ public class Algorithm {
 	
 				System.out.println("MAP: " + map.keySet());
 				brokers.addAll(map.keySet()) ;
+				System.out.println(brokers);
 				for(String broker : brokers)
 				{
 					System.out.println("for Broker: " + broker);
