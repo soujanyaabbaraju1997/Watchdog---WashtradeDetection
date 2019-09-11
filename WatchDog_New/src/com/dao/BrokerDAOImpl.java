@@ -59,9 +59,9 @@ public class BrokerDAOImpl implements BrokerDAO {
 	}
 
 	@Override
-	public List<Broker> findAllBrokers()
+	public List<String> findAllBrokers()
 	{
-		List<Broker> brokers = new ArrayList<Broker>();
+		List<String> brokers = null;
 		String FIND_ALL_BROKERS = "select * from brokers";
 		
 		Connection conn = openConnection();
@@ -74,8 +74,7 @@ public class BrokerDAOImpl implements BrokerDAO {
 			while(rs.next())
 			{
 				String brokerName = rs.getString(1);
-				Broker broker = new Broker(brokerName);
-				brokers.add(broker);			
+				brokers.add(brokerName);			
 			}
 			System.out.println("List Size = "+brokers.size());
 		} 

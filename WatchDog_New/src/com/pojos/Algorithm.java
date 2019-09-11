@@ -98,17 +98,17 @@ public class Algorithm {
 			List<Trade> trades =  tdao.findByTraderId(trader) ;
 			if(trades.size() != 0)
 			{
-				List<Broker> brokers = bdao.findAllBrokers() ;
+				List<String> brokers = bdao.findAllBrokers() ;
 				List<Firm> firms = fdao.findAllFirms() ;
 				System.out.println(trades);
 				
 				Map<String, Map< Integer , List<Trade>>> map = trades.stream().collect(Collectors.groupingBy(Trade::getBrokerId,Collectors.groupingBy(Trade::getFirmId)));
 	
-				System.out.println("MAP: " + map.values());
-				
-				for(Broker broker : brokers)
+				System.out.println("MAP: " + map.keySet());
+				brokers.addAll(map.keySet()) ;
+				for(String broker : brokers)
 				{
-					System.out.println("for Broker: " + broker.getBrokerName());
+					System.out.println("for Broker: " + broker);
 					
 					for(Firm firm : firms)
 					{		
