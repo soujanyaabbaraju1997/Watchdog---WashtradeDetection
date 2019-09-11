@@ -61,6 +61,18 @@ public class TraderDAOImpl extends User implements TraderDAO
 		{
 			e.printStackTrace();
 		}
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return rows_inserted;
 	}
 	@Override
@@ -98,7 +110,12 @@ public class TraderDAOImpl extends User implements TraderDAO
 			e.printStackTrace();
 		}
 		
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return traders;
 	}
 	
@@ -135,7 +152,12 @@ public class TraderDAOImpl extends User implements TraderDAO
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return traders;
 	}
@@ -145,8 +167,9 @@ public class TraderDAOImpl extends User implements TraderDAO
 	{
 		Trader trader = new Trader();
 		String FIND_BY_TRADER_ID = "select * from users where trader_id=?";
+		Connection conn = openConnection();
 		
-		try(Connection conn = openConnection();
+		try(
 				PreparedStatement ps = conn.prepareStatement(FIND_BY_TRADER_ID);){
 			ps.setFetchSize(1000);
 			ps.setString(1, traderId);
@@ -167,6 +190,12 @@ public class TraderDAOImpl extends User implements TraderDAO
 		}
 		catch (SQLException e)
 		{
+			e.printStackTrace();
+		}
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -60,13 +60,19 @@ public class TradeDAOImpl implements TradeDAO
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.close();			
+			//conn.close();			
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}	
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return rows_inserted;	
 		
 	}
@@ -107,7 +113,12 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return trade;
 	}
 
@@ -120,8 +131,9 @@ public class TradeDAOImpl implements TradeDAO
 		//copy path	
 		TraderDAO dao = new TraderDAOImpl();
 		List<Trader> traderlist = dao.findAllTraders();
+		Connection conn = openConnection();
 		
-		try(Connection conn = openConnection();
+		try(
 				PreparedStatement ps = conn.prepareStatement(FIND_ALL_TRADES);){
 			ps.setFetchSize(1000);
 			ResultSet rs = ps.executeQuery();
@@ -176,7 +188,12 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tradelist;
 	}
 
@@ -218,7 +235,12 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tradeslist;		
 	}
 	
