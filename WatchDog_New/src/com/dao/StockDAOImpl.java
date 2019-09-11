@@ -66,7 +66,7 @@ public class StockDAOImpl implements StockDAO
 	@Override
 	public Stock findStock(int firmId, int securityId)
 	{
-		Stock stock = new Stock();
+		Stock stock = new Stock(-1,-1,-1f,-1f,-1f);
 		String FIND_STOCK = "select * from stocks where firm_id=? and security_id=?";
 		
 		Connection conn = openConnection();
@@ -131,7 +131,7 @@ public class StockDAOImpl implements StockDAO
 		}
 		else
 		{
-			stock = new Stock();
+			stock = new Stock(-1,-1,-1f,-1f,-1f);
 			return stock;
 		}	
 	}
