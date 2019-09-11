@@ -77,7 +77,6 @@ public class Algorithm {
 	public static void main(String[] args)
 	{
 		
-		
 		TraderDAO dao = new TraderDAOImpl();
 		TradeDAO tdao = new TradeDAOImpl();
 		BrokerDAO bdao = new BrokerDAOImpl();
