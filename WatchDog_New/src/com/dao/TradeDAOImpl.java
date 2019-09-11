@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+
 import com.pojos.Trade;
 import com.pojos.Trader;
 //
@@ -57,13 +60,19 @@ public class TradeDAOImpl implements TradeDAO
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.close();			
+			//conn.close();			
 		}
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}	
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return rows_inserted;	
 		
 	}
@@ -104,7 +113,12 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return trade;
 	}
 
@@ -114,14 +128,13 @@ public class TradeDAOImpl implements TradeDAO
 		List<Trade> tradelist = new ArrayList<Trade>();
 		String FIND_ALL_TRADES = "select * from trades";
 		
+		//copy path	
+		TraderDAO dao = new TraderDAOImpl();
+		List<Trader> traderlist = dao.findAllTraders();
 		Connection conn = openConnection();
-		PreparedStatement ps;
 		
-		TraderDAO tdao = new TraderDAOImpl();
-		
-		try 
-		{
-			ps = conn.prepareStatement(FIND_ALL_TRADES);
+		try(
+				PreparedStatement ps = conn.prepareStatement(FIND_ALL_TRADES);){
 			ps.setFetchSize(1000);
 			ResultSet rs = ps.executeQuery();
 			
@@ -130,8 +143,28 @@ public class TradeDAOImpl implements TradeDAO
 				System.out.println(rs);
 				Trade trade = new Trade();
 				
-				trade.setTradeId(rs.getInt(1));
-				Trader t =  tdao.findByTraderID(rs.getString(2));
+				Optional<Trader> matchingObject = traderlist.stream().filter
+						(p -> 
+						{
+							try 
+							{
+								return p.getTraderId().equals(rs.getString(2));
+							}
+							catch (SQLException e) 
+							{
+								e.printStackTrace();
+							}
+							return false;
+						}).findFirst();
+				
+				Trader t = matchingObject.orElse(null);
+				System.out.println(t);
+//				trade.setTradeId(rs.getInt(1));
+//				Trader t = traderlist.               
+//				Trader t =  tdao.findByTraderID(rs.getString(2));
+//				String traderId=rs.getString(2);
+//				List<Trader> traders=new ArrayList<>();
+//				Trader trader=traders.stream().filter(traderId);
 				System.out.println("TRADER OBJECT"+t);
 				trade.setTrader(new Trader(t.getTraderId(), t.getTraderName(), t.getDateReg(), t.getUsername(), t.getPassword(), t.getEmailId(), t.getPhone(), t.getDob()));
 				trade.setTimeStamp(rs.getTimestamp(3));		
@@ -155,7 +188,12 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return tradelist;
 	}
 
@@ -196,9 +234,21 @@ public class TradeDAOImpl implements TradeDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+			//
 		}
-		
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block.
+			e.printStackTrace();
+		}
 		return tradeslist;		
+		//
+	}
+	
+	public static Predicate<Trader> findTrader(String traderId)
+	{
+	    return p -> p.getTraderId().equals(traderId);
 	}
 	
 }

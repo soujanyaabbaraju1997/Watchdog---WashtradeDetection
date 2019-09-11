@@ -21,11 +21,11 @@ public class CheckImplementations
 		//=========================================================================================================================
 		//								find all trades
 //		
-		TradeDAO tdao = new TradeDAOImpl();
-		List<Trade> list = tdao.findAllTrades();
-		list.forEach((st)->{
-			System.out.println(st);
-		});		
+//		TradeDAO tdao = new TradeDAOImpl();
+//		List<Trade> list = tdao.findAllTrades();
+//		list.forEach((st)->{
+//			System.out.println(st);
+//		});		
 //		
 		//=========================================================================================================================
 		//									find trades by trader id
@@ -115,36 +115,36 @@ public class CheckImplementations
 //		================================================================================================================
 //											add user		
 
-//		UserDAO udao = new UserDAOImpl();
-//		Scanner sc = new Scanner(System.in);
+		UserDAO udao = new UserDAOImpl();
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter username: ");
+		String username = sc.next();
+		System.out.println("Enter password: ");
+		String password = sc.next();
+		System.out.println("Enter email id: ");
+		String email = sc.next();
+		System.out.println("Enter phone: ");
+		long phone = sc.nextLong();
+		System.out.println("Enter year of birth: ");
+		int yr = sc.nextInt();
+		System.out.println("Enter month of birth: ");
+		int mth = sc.nextInt();
+		System.out.println("Enter date of birth: ");
+		int dt = sc.nextInt();
+		Date dob = new Date(yr, mth, dt);
 //		
-//		System.out.println("Enter username: ");
-//		String username = sc.next();
-//		System.out.println("Enter password: ");
-//		String password = sc.next();
-//		System.out.println("Enter email id: ");
-//		String email = sc.next();
-//		System.out.println("Enter phone: ");
-//		long phone = sc.nextLong();
-//		System.out.println("Enter year of birth: ");
-//		int yr = sc.nextInt();
-//		System.out.println("Enter month of birth: ");
-//		int mth = sc.nextInt();
-//		System.out.println("Enter date of birth: ");
-//		int dt = sc.nextInt();
-//		Date dob = new Date(yr, mth, dt);
-////		
-//		User user = new User(username, password, email, phone, dob);
-//		
-//		int inserted = udao.addUser(user);
-//		if(inserted>0)
-//		{
-//			System.out.println("NEW ADMIN IS INSERTED.");
-//		}
-//		else
-//		{
-//			System.out.println("ADMIN NOT INSERTED.");
-//		}
+		User user = new User(username, password, email, phone, dob);
+		
+		int inserted = udao.addUser(user);
+		if(inserted>0)
+		{
+			System.out.println("NEW ADMIN IS INSERTED.");
+		}
+		else
+		{
+			System.out.println("ADMIN NOT INSERTED.");
+		}
 //		
 		
 //		================================================================================================================

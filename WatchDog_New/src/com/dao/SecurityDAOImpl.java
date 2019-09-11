@@ -9,11 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pojos.Broker;
 import com.pojos.Firm;
+import com.pojos.Security;
 
-public class BrokerDAOImpl implements BrokerDAO {
-
+public class SecurityDAOImpl implements SecurityDAO{
+	
 	Connection openConnection()
 	{
 		
@@ -32,24 +32,27 @@ public class BrokerDAOImpl implements BrokerDAO {
 		
 		return conn;
 	}
-	
+
+
+
 	@Override
-	public int addBroker(Broker broker) 
-	{
+	public int addSecurity(Security security) {
+		// TODO Auto-generated method stub
+		
 		int rows_inserted = 0;
 		Connection conn = openConnection();
-		String INSERT_BROKER = "insert into brokers values(?)";
+		String INSERT_SECURITY = "insert into securities values(?,?)";
 		PreparedStatement ps;
 		try
 		{
-			ps = conn.prepareStatement(INSERT_BROKER);
+			ps = conn.prepareStatement(INSERT_SECURITY);
 			
-			ps.setString(1,broker.getBrokerName());
+			ps.setInt(1,security.getSecurityId());
+			ps.setString(2,security.getSecurityName());
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.setAutoCommit(true);
-			//conn.close();			
+			conn.setAutoCommit(true);		
 		}
 		catch (SQLException e) 
 		{
@@ -57,28 +60,33 @@ public class BrokerDAOImpl implements BrokerDAO {
 		}	
 		
 		return rows_inserted;
+
+	
+
 	}
 
 	@Override
-	public List<String> findAllBrokers()
-	{
-		List<String> brokers = new ArrayList<>();
-		String FIND_ALL_BROKERS = "select * from brokers";
+	public List<Security> findAllSecurity() {
+		// TODO Auto-generated method stub
+		List<Security> securities = new ArrayList<Security>();
+		String FIND_ALL_SECURITIES = "select * from securities";
 		
 		Connection conn = openConnection();
 		Statement stmt;
 		try 
 		{
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(FIND_ALL_BROKERS);
+			ResultSet rs = stmt.executeQuery(FIND_ALL_SECURITIES);
 			
 			while(rs.next())
 			{
-				String brokerName = rs.getString(1);
-
-				brokers.add(brokerName);			
+				int SecurityId=rs.getInt(1);
+				String SecurityName = rs.getString(2);
+				Security security= new Security(SecurityId,SecurityName);
+				securities.add(security);
+//			
 			}
-			System.out.println("List Size = "+brokers.size());
+			System.out.println("List Size = "+securities.size());
 			conn.setAutoCommit(true);
 		} 
 		catch (SQLException e) 
@@ -88,7 +96,10 @@ public class BrokerDAOImpl implements BrokerDAO {
 		}
 		
 		
-		return brokers;
+		return securities;
+	
+	
+	
 	}
 
 }

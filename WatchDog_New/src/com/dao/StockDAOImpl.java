@@ -53,7 +53,8 @@ public class StockDAOImpl implements StockDAO
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.close();			
+			//conn.close();	
+			conn.setAutoCommit(true);
 		}
 		catch (SQLException e) 
 		{
@@ -66,7 +67,7 @@ public class StockDAOImpl implements StockDAO
 	@Override
 	public Stock findStock(int firmId, int securityId)
 	{
-		Stock stock = new Stock();
+		Stock stock = new Stock(-1,-1,-1f,-1f,-1f);
 		String FIND_STOCK = "select * from stocks where firm_id=? and security_id=?";
 		
 		Connection conn = openConnection();
@@ -91,6 +92,8 @@ public class StockDAOImpl implements StockDAO
 				stock.setLowestPrice(lowestPrice);
 				stock.setLtp(ltp);
 			}
+			
+			conn.setAutoCommit(true);
 
 		}
 		catch (SQLException e)
@@ -122,18 +125,23 @@ public class StockDAOImpl implements StockDAO
 				ps.setInt(1, firmId);
 				ps.setInt(2, securityId);
 				ps.executeQuery();
+				conn.setAutoCommit(true);
 			}
 			catch (SQLException e)
 			{
 				e.printStackTrace();
 			}		
+			
 			return stock;
+			
 		}
 		else
 		{
-			stock = new Stock();
+			stock = new Stock(-1,-1,-1f,-1f,-1f);
 			return stock;
 		}	
+		
+		
 	}
 
 	
@@ -142,7 +150,7 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateHighPrice(int firmId, int securityId)
 	{
 		boolean isUpdated = false;
-		
+		Connection conn = openConnection();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new highest price: ");
 		float highestPrice = sc.nextFloat();
@@ -151,12 +159,13 @@ public class StockDAOImpl implements StockDAO
 		
 		try
 		{
-			PreparedStatement ps = openConnection().prepareStatement(UPDATE_STOCK);
+			PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);
 			ps.setFloat(1, highestPrice);
 			ps.setInt(2, firmId);
 			ps.setInt(3, securityId);
 			
 			int rows = ps.executeUpdate();
+			conn.setAutoCommit(true);
 			if(rows>0)
 				isUpdated = true;
 			else
@@ -175,7 +184,7 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateLowPrice(int firmId, int securityId) 
 	{
 		boolean isUpdated = false;
-		
+		Connection conn = openConnection();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new lowest price: ");
 		float lowestPrice = sc.nextFloat();
@@ -184,12 +193,13 @@ public class StockDAOImpl implements StockDAO
 		
 		try
 		{
-			PreparedStatement ps = openConnection().prepareStatement(UPDATE_STOCK);
+			PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);
 			ps.setFloat(1, lowestPrice);
 			ps.setInt(2, firmId);
 			ps.setInt(3, securityId);
 			
 			int rows = ps.executeUpdate();
+			conn.setAutoCommit(true);
 			if(rows>0)
 				isUpdated = true;
 			else
@@ -208,7 +218,7 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateLTP(int firmId, int securityId) 
 	{
 		boolean isUpdated = false;
-		
+		Connection conn = openConnection();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new LTP: ");
 		float ltp = sc.nextFloat();
@@ -217,12 +227,13 @@ public class StockDAOImpl implements StockDAO
 		
 		try
 		{
-			PreparedStatement ps = openConnection().prepareStatement(UPDATE_STOCK);
+			PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);
 			ps.setFloat(1, ltp);
 			ps.setInt(2, firmId);
 			ps.setInt(3, securityId);
 			
 			int rows = ps.executeUpdate();
+			conn.setAutoCommit(true);
 			if(rows>0)
 				isUpdated = true;
 			else
