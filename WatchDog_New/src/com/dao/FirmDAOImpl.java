@@ -66,7 +66,7 @@ public class FirmDAOImpl implements FirmDAO{
 		// TODO Auto-generated method stub
 		List<Firm> firms = new ArrayList<Firm>();
 		String FIND_ALL_FIRMS = "select * from firms";
-		
+	
 
 		try(Connection conn = openConnection();Statement stmt = conn.createStatement();) 
 		{

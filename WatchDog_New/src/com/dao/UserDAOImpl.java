@@ -203,7 +203,7 @@ public class UserDAOImpl implements UserDAO
 		User user = null;
 		
 		user = findUserByUsername(username);
-		
+	
 		if(user!=null)
 		{
 			try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(DELETE_USER);)

@@ -36,7 +36,7 @@ public class Algorithm {
 	public static int sumofSubset(Set<Trade> set)
 	{
 		int sum = 0 ;
-		
+	
 		for(Trade t : set)
 		{
 			String type = t.isTradeType() ;

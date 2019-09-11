@@ -30,7 +30,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 		{
 			System.out.println(e);
 		}
-		
+	
 		return conn;
 	}	
 	@Override

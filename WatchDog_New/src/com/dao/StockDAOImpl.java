@@ -205,7 +205,7 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateLTP(int firmId, int securityId) 
 	{
 		boolean isUpdated = false;
-		
+	
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new LTP: ");
 		float ltp = sc.nextFloat();

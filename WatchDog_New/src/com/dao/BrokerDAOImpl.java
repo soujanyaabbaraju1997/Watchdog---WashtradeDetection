@@ -14,7 +14,6 @@ public class BrokerDAOImpl implements BrokerDAO {
 
 	Connection openConnection()
 	{
-		
 		Connection conn = null;
 		try
 		{
