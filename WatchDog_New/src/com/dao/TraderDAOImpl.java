@@ -21,9 +21,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 		try
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("DRIVER LOADED SUCCESSFULLY");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
-			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
 		{
@@ -50,9 +48,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 			ps.setLong(7, trader.getPhone());
 			ps.setDate(8, trader.getDob());
 			ps.setInt(9, trader.isAdmin());
-			rows_inserted = ps.executeUpdate();
-			System.out.println("Rows : "+rows_inserted);
-			
+			rows_inserted = ps.executeUpdate();			
 		}
 		catch (SQLException e) 
 		{
@@ -75,7 +71,6 @@ public class TraderDAOImpl extends User implements TraderDAO
 				String traderId = rs.getString(1);
 				traders.add(traderId);
 			}
-			System.out.println("List Size = "+traders.size());
 		} 
 		catch (SQLException e) 
 		{
@@ -111,7 +106,6 @@ public class TraderDAOImpl extends User implements TraderDAO
 				Trader trader = new Trader(traderId, traderName, dateRed, username, password, emailId, phone, dob);
 				traders.add(trader);
 			}
-			System.out.println("List Size = "+traders.size());
 		} 
 		catch (SQLException e) 
 		{
@@ -133,9 +127,8 @@ public class TraderDAOImpl extends User implements TraderDAO
 	{
 		Trader trader = new Trader();
 		String FIND_BY_TRADER_ID = "select * from users where trader_id=?";
-		Connection conn = openConnection();
 		
-		try(
+		try(Connection conn = openConnection();
 			PreparedStatement ps = conn.prepareStatement(FIND_BY_TRADER_ID);){
 			ps.setFetchSize(1000);
 			ps.setString(1, traderId);
@@ -156,12 +149,6 @@ public class TraderDAOImpl extends User implements TraderDAO
 		}
 		catch (SQLException e)
 		{
-			e.printStackTrace();
-		}
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -19,10 +19,8 @@ public class StockDAOImpl implements StockDAO
 		try
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("DRIVER LOADED SUCCESSFULLY");
+
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
-			//conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "hr", "hr");
-			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
 		{
@@ -48,9 +46,6 @@ public class StockDAOImpl implements StockDAO
 			ps.setFloat(5, stock.getLtp());
 		
 			rows_inserted = ps.executeUpdate();
-			
-			System.out.println("Rows : "+rows_inserted);
-			//conn.close();	
 			conn.setAutoCommit(true);
 		}
 		catch (SQLException e) 

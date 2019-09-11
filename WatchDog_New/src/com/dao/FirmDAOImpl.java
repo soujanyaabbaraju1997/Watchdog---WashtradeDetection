@@ -20,9 +20,9 @@ public class FirmDAOImpl implements FirmDAO{
 		try
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("DRIVER LOADED SUCCESSFULLY");
+//			System.out.println("DRIVER LOADED SUCCESSFULLY");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
-			System.out.println("CONNECTION OBTAINED");
+//			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
 		{
@@ -80,7 +80,6 @@ public class FirmDAOImpl implements FirmDAO{
 				firms.add(firm);
 //		
 			}
-			System.out.println("List Size = "+firms.size());
 			conn.setAutoCommit(true);
 		} 
 		catch (SQLException e) 

@@ -21,9 +21,7 @@ public class TradeDAOImpl implements TradeDAO
 		try
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			System.out.println("DRIVER LOADED SUCCESSFULLY");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "group8", "trade");
-			System.out.println("CONNECTION OBTAINED");
 		}
 		catch(ClassNotFoundException | SQLException e)
 		{
@@ -52,9 +50,7 @@ public class TradeDAOImpl implements TradeDAO
 			ps.setString(9, trade.getBrokerId());
 			ps.setInt(10, trade.getIsWashTrade());
 			rows_inserted = ps.executeUpdate();
-			
-			System.out.println("Rows : "+rows_inserted);
-			//conn.close();			
+	
 		}
 		catch (SQLException e) 
 		{
@@ -135,13 +131,7 @@ public class TradeDAOImpl implements TradeDAO
 				trade.setBrokerId(rs.getString(9));
 				
 				tradelist.add(index, trade);
-				index++ ;
-				
-		
-//				System.out.println("List Size = "+tradelist.size());
-//				System.out.println(trade);
-//				System.out.println("TRADE ADDED" );
-//				System.out.println("\n\n");	
+				index++ ;	
 			}
 			System.out.println("TradeList: " + tradelist +"\n");
 		}
@@ -178,7 +168,6 @@ public class TradeDAOImpl implements TradeDAO
 				Trade trade = new Trade();
 				trade.setTradeId(rs.getInt(1));
 				Trader t =  tdao.findByTraderID(rs.getString(2));
-				System.out.println("TRADER OBJECT"+t);
 				trade.setTrader(new Trader(t.getTraderId(), t.getTraderName(), t.getDateReg(), t.getUsername(), t.getPassword(), t.getEmailId(), t.getPhone(), t.getDob()));
 				trade.setTimeStamp(rs.getTimestamp(3));
 				trade.setTradeType(rs.getString(4));
