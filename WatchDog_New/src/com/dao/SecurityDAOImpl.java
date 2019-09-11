@@ -41,7 +41,7 @@ public class SecurityDAOImpl implements SecurityDAO{
 		
 		int rows_inserted = 0;
 		Connection conn = openConnection();
-		String INSERT_SECURITY = "insert into securities values(?,?)";
+		String INSERT_SECURITY = "insert into securities values(?,?,?)";
 		PreparedStatement ps;
 		try
 		{
@@ -49,6 +49,8 @@ public class SecurityDAOImpl implements SecurityDAO{
 			
 			ps.setInt(1,security.getSecurityId());
 			ps.setString(2,security.getSecurityName());
+			ps.setInt(3, security.getLotSize());
+			
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
@@ -82,7 +84,8 @@ public class SecurityDAOImpl implements SecurityDAO{
 			{
 				int SecurityId=rs.getInt(1);
 				String SecurityName = rs.getString(2);
-				Security security= new Security(SecurityId,SecurityName);
+				int lotSize = rs.getInt(3);
+				Security security= new Security(SecurityId,SecurityName, lotSize);
 				securities.add(security);
 //			
 			}
