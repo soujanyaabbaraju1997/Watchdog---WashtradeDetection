@@ -67,7 +67,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 	public List<String> findAllTraders()
 	{
 		List<String> traders = new ArrayList<String>();
-		String FIND_ALL_TRADERS = "select * from users where isAdmin=0";
+		String FIND_ALL_TRADERS = "select * from users where is_Admin=0";
 		
 		Connection conn = openConnection();
 		Statement stmt;

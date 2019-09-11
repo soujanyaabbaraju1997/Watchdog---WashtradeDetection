@@ -4,6 +4,11 @@ import java.sql.Date;
 import java.util.List;
 public class Trader extends User
 {
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return traderId ;
+	}
 	private String traderId;
 	private String traderName;
 	private Date dateReg;

@@ -1,6 +1,7 @@
 package com.dao;
 //
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.pojos.Trade;
 
