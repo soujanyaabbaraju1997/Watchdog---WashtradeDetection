@@ -1,6 +1,8 @@
 package com.pojos;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,64 +21,58 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 public class Algorithm {
+
 	
-	private static List<List<Trade>> answer = new ArrayList<List<Trade>>() ;
-	
-	public static void powerSet(List<Trade> list, int index, List<Trade> curr) //index = -1
-		{ 
-		  int n = list.size(); 
-		
-		  // base case 
-		  if (index == n) 
-		  {
-			  answer.add(list);
-			  return ; 
-		  }
-		
-		  // First print current subset 
-		  answer.add(curr) ;
-		
-		  // Try appending remaining characters 
-		  // to current subset 
-		  for (int i = index + 1; i < n; i++) { 
-		
-		      curr.add(list.get(i)); 
-		      powerSet(list, i, curr); 
-		
-		      // Once all subsets beginning with 
-		      // initial "curr" are printed, remove 
-		      // last character to consider a different 
-		      // prefix of subsets. 
-		      curr.remove(curr.size() - 1); 
-		  } 
-		  return ; 
-		}	
-	public static int sumofSubset(List<Trade> list)
+	public static <T> Set<Set<T>> powerSet(Set<T> originalSet) {
+	    Set<Set<T>> sets = new HashSet<Set<T>>();
+	    if (originalSet.isEmpty()) {
+	        sets.add(new HashSet<T>());
+	        return sets;
+	    }
+	    List<T> list = new ArrayList<T>(originalSet);
+	    T head = list.get(0);
+	    Set<T> rest = new HashSet<T>(list.subList(1, list.size())); 
+	    for (Set<T> set : powerSet(rest)) {
+	        Set<T> newSet = new HashSet<T>();
+	        newSet.add(head);
+	        newSet.addAll(set);
+	        sets.add(newSet);
+	        sets.add(set);
+	    }       
+	    return sets;
+	}  	
+	public static int sumofSubset(Set<Trade> set)
 	{
 		int sum = 0 ;
 		
-		for(Trade t : list)
+		for(Trade t : set)
 		{
-			sum += t.getQty() ;
+			String type = t.isTradeType() ;
+			if(type.equals("buy"))
+				sum += t.getQty() ;
+			else
+				sum -= t.getQty() ;
 		}
 		return sum;
 	}
 	
-	public static float profit(List<Trade> list)
+	public static float profit(Set<Trade> set)
 	{
-		float sell = 0 ;
-		float buy = 0 ;
+		float sell = 0.0f ;
+		float buy = 0.0f ;
 		
-		for(Trade t : list)
+		for(Trade t : set)
 		{
-			int type ;
-			if(t.isTradeType() == "buy")
+			String type =  t.isTradeType();
+			if(type.equals("buy"))
 				buy += (t.getQty() * t.getDealPrice()) ;
 			else
 				sell += (t.getQty() * t.getDealPrice()) ;
 		}
-		return (float)((float)(sell - buy)/(float)buy) ;
+		return (float)((sell - buy)/buy) ;
 	}
 	public static void main(String[] args)
 	{
@@ -89,45 +85,45 @@ public class Algorithm {
 		
 		List<String> traders = dao.findAllTraders();
 		List<Trade> washTrades = new ArrayList<>() ;
-			
+
 		String trader = "SOUJ1997";
-		
-//		for(String trader : traders)
+//		traders.stream().forEach((trader)->
 //		{
 			System.out.println("Trader : " + trader);
 			List<Trade> trades =  tdao.findByTraderId(trader) ;
 			if(trades.size() != 0)
 			{
-				List<String> brokers = bdao.findAllBrokers() ;
-				List<Firm> firms = fdao.findAllFirms() ;
 				System.out.println(trades);
 				
 				Map<String, Map< Integer , List<Trade>>> map = trades.stream().collect(Collectors.groupingBy(Trade::getBrokerId,Collectors.groupingBy(Trade::getFirmId)));
 	
 				System.out.println("MAP: " + map.keySet());
-				System.out.println(map.entrySet());
-				System.out.println(brokers);
 				
-				
-				map.forEach((firm,broker)->{
-					System.out.println("foreach: " + firm + broker);
-					List<Trade> Total = new ArrayList<>();
-					Total.addAll(map.get(broker).get(firm)) ;
-					System.out.println("Total trader T-B-F : " + Total);
-					if(Total.size()!=0)
-					{
-						List<Trade> Equity = new ArrayList<>() ;
-						List<Trade> Future = new ArrayList<>() ;
-						List<Trade> OptionPut = new ArrayList<>() ;
-						List<Trade> OptionCall = new ArrayList<>() ;
+				for (Map.Entry<String, Map< Integer , List<Trade>>> eachBrokerTrade : map.entrySet()) 
+				{
+				    String broker = eachBrokerTrade.getKey();
+				    // ...
+				    for (Map.Entry<Integer, List<Trade>> eachFirmTrade : eachBrokerTrade.getValue().entrySet()) 
+				    {
+				        int firm = eachFirmTrade.getKey();
+				        List<Trade> Total = eachFirmTrade.getValue();
+							
+						Set<Trade> Equity = new HashSet<>() ;
+						Set<Trade> Future = new HashSet<>() ;
+						Set<Trade> OptionPut = new HashSet<>() ;
+						Set<Trade> OptionCall = new HashSet<>() ;
 					
+						
+						System.out.println(Total);
 						// now we separate the types of securities into separate lists
 						
-						for(Trade row : Total)
+						Total.stream().forEach((row)->
 						{
+							System.out.println("each row: "+ row);
 							if(row.getSecurityId() == 7890) //equity
 							{
-								if(row.isTradeType()=="buy") //if it is buy)
+								String type = row.isTradeType() ;
+								if(type.equals("buy")) //if it is buy)
 								{
 									Future.add(row) ;
 								}
@@ -145,52 +141,61 @@ public class Algorithm {
 							{
 								OptionCall.add(row);
 							}
-						}
+						});
 						
-						List<List<Trade>> securities = new ArrayList<List<Trade>>() ;
-						securities.add(Equity) ;
-						securities.add(Future) ;
-						securities.add(OptionPut) ;
-						securities.add(OptionCall) ;
+						Map<String, Set<Trade>> securities = new HashMap<String, Set<Trade>>() ;
+						securities.put("Equity", Equity);
+						securities.put("Future", Future);
+						securities.put("OptionPut", OptionPut);
+						securities.put("OptionCall", OptionCall);
 						
 						//now we see the intrinsic wash trades for each security and eq buy future sell
 						
 						
-						for(List<Trade> security : securities)
+						securities.forEach((security,groupedBySecurityTrades)->
 						{
-							List<Trade> x = new ArrayList<>() ;
-							answer.clear(); ;
-							powerSet(security, -1, x ) ;
-							
-							for(List<Trade> subset : answer) // for all the subsets of a security
-							{
-								if(sumofSubset(subset) == 0)
+//							groupedBySecurityTrades.stream().forEach((row)->{System.out.println( security + " " + row);}) ;
+							Set<Set<Trade>> answer1  = powerSet(groupedBySecurityTrades) ;
+							Set<Set<Trade>> answer = new HashSet<Set<Trade>>() ;
+							answer1.forEach((s)->{
+								if(s.size()>1)
 								{
-									if(profit(subset) <= 0.005)
+									answer.add(s);
+								}
+							});
+//							if(answer.size()> 0)System.out.println("power set: " + answer);
+							for(Set<Trade> subset : answer) // for all the subsets of a security
+							{
+								int sumOfSubset = sumofSubset(subset) ;
+								if(sumOfSubset == 0 && subset.size()>1)
+								{
+									System.out.println("SUBSET SIZE: "+ subset.size());
+									System.out.println("sumOfSubset : "+ sumOfSubset + "\nsubset: " + subset);
+									float prof = profit(subset) ;
+									System.out.println("ProfitOfSubset" + prof);
+									if( prof <= 0.005)
 									{
 										for(Trade t : subset)
 										{
 											t.setIsWashTrade(1);
-											System.out.println("WashTrades :\n" + t);
+											System.out.println("WashTrades : " + t);
 											washTrades.add(t) ;
 										}
 									}
 								}
-								//profit = (-ves*MKTPR) + (+ves*MKTPR)
+								else
+								{
+									Map<Set<Trade>, Integer> sumMapping ;
+								}
 							}
-						}
-					}
-				});
-				
-				
-				for(String broker : brokers)
-				{
-					System.out.println("for Broker: " + broker);
-					
-					for(Firm firm : firms)
-					{		
-						
-						System.out.println("for Firm: " + firm.getFirmName());
+						});
+						// end of detection
+				    }
+				}
+			}
+//		});
+	}
+}
 						
 						//for each set of trader, broker and firm we get the list of total trades 
 						
@@ -261,11 +266,11 @@ public class Algorithm {
 //									//profit = (-ves*MKTPR) + (+ves*MKTPR)
 //								}
 //							}
-						}			
-					}
-				}
+//						}			
+//					}
+//				}
 //			}
-		}
+//		}
 		
 		
 		
@@ -385,4 +390,4 @@ public class Algorithm {
 //		}
 //		
 //
-}
+
