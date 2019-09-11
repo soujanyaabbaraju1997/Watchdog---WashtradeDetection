@@ -55,12 +55,13 @@ public class RegisterServlet extends HttpServlet {
 		
 		long phone= Long.parseLong(request.getParameter("phone"));
 		System.out.println(request.getParameter("phone"));
-		//Date dob = java.sql.Date.valueOf(request.getParameter("dob")) ;
+		Date dob = java.sql.Date.valueOf(request.getParameter("dob")) ;
 		//System.out.println(request.getParameter("dob"));
 		System.out.println(request.getParameter("dob"));
 		
 		String traderId = username.substring(1, 3).toUpperCase()+randomstring.getAlphaNumericString(5);
-		//java.sql.Date dateReg = new java.sql.Date(Calendar.getInstance().getTime());
+		java.sql.Date dateReg = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		System.out.println(dateReg);
 		
 		
 		System.out.println(request.getParameter("traderName"));
