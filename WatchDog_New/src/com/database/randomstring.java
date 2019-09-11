@@ -2,7 +2,7 @@ package com.database;
 
 public class randomstring {
 
-	 static String getAlphaNumericString(int n) 
+	 public static String getAlphaNumericString(int n) 
 	    { 
 	  
 	        // chose a Character random from this String 
