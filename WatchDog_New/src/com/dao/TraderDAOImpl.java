@@ -170,7 +170,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 		Connection conn = openConnection();
 		
 		try(
-				PreparedStatement ps = conn.prepareStatement(FIND_BY_TRADER_ID);){
+			PreparedStatement ps = conn.prepareStatement(FIND_BY_TRADER_ID);){
 			ps.setFetchSize(1000);
 			ps.setString(1, traderId);
 			ResultSet rs = ps.executeQuery();

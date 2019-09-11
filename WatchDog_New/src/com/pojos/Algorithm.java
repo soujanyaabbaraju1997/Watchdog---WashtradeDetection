@@ -85,9 +85,8 @@ public class Algorithm {
 		List<String> traders = dao.findAllTraderIds();
 		List<Trade> washTrades = new ArrayList<>() ;
 
-		String trader = "SOUJ1997";
-//		traders.stream().forEach((trader)->
-//		{
+		traders.stream().forEach((trader)->
+		{
 			System.out.println("Trader : " + trader);
 			List<Trade> trades =  tdao.findByTraderId(trader) ;
 			if(trades.size() != 0)
@@ -192,7 +191,7 @@ public class Algorithm {
 				    }
 				}
 			}
-//		});
+		});
 	}
 }
 						
