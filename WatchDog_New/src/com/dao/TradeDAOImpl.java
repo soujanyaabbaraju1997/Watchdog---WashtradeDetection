@@ -242,6 +242,7 @@ public class TradeDAOImpl implements TradeDAO
 			e.printStackTrace();
 		}
 		return tradeslist;		
+		//
 	}
 	
 	public static Predicate<Trader> findTrader(String traderId)

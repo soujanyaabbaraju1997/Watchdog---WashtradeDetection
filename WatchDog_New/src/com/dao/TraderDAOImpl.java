@@ -149,7 +149,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 		} 
 		catch (SQLException e) 
 		{
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block//
 			e.printStackTrace();
 		}
 		try {
