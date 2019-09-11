@@ -155,7 +155,7 @@ public class StockDAOImpl implements StockDAO
 		System.out.println("Enter new highest price: ");
 		float highestPrice = sc.nextFloat();
 		
-		String UPDATE_STOCK = "update users set highest_price=? where firm_id=? and security_id=?";
+		String UPDATE_STOCK = "update stocks set highest_price=? where firm_id=? and security_id=?";
 		
 		try
 		{
@@ -189,7 +189,7 @@ public class StockDAOImpl implements StockDAO
 		System.out.println("Enter new lowest price: ");
 		float lowestPrice = sc.nextFloat();
 		
-		String UPDATE_STOCK = "update users set lowest_price=? where firm_id=? and security_id=?";
+		String UPDATE_STOCK = "update stocks set lowest_price=? where firm_id=? and security_id=?";
 		
 		try
 		{
@@ -223,7 +223,7 @@ public class StockDAOImpl implements StockDAO
 		System.out.println("Enter new LTP: ");
 		float ltp = sc.nextFloat();
 		
-		String UPDATE_STOCK = "update users set ltp=?  where firm_id=? and security_id=?";
+		String UPDATE_STOCK = "update stocks set ltp=?  where firm_id=? and security_id=?";
 		
 		try
 		{
