@@ -122,7 +122,7 @@ public class TradeDAOImpl implements TradeDAO
 		try 
 		{
 			ps = conn.prepareStatement(FIND_ALL_TRADES);
-			ps.setFetchSize(850);
+			ps.setFetchSize(1000);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next())
