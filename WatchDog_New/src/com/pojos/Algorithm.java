@@ -87,7 +87,7 @@ public class Algorithm {
 		BrokerDAO bdao = new BrokerDAOImpl();
 		FirmDAO fdao = new FirmDAOImpl();
 		
-		List<String> traders = dao.findAllTraders();
+		List<String> traders = dao.findAllTraderIds();
 		List<Trade> washTrades = new ArrayList<>() ;
 			
 		String trader = "SOUJ1997";
