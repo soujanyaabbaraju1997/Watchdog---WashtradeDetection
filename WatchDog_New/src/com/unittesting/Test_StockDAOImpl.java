@@ -89,16 +89,16 @@ class Test_StockDAOImpl {
 	void testUpdateHighPrice() {
 		//fail("Not yet implemented");
 		
-//		StockDAOImpl dao = new StockDAOImpl();
-//		boolean actual;
+		StockDAOImpl dao = new StockDAOImpl();
+		boolean actual;
 		
 		// Negative test cases
 //		actual = dao.updateHighPrice(100, 1204);
 //		assertEquals(false, actual);
 		
 		// Positive test case 	
-//		actual = dao.updateHighPrice(101, 7890);
-//		assertEquals(true, actual);
+		actual = dao.updateHighPrice(101, 7890);
+		assertEquals(true, actual);
 	}
 
 	@Test
