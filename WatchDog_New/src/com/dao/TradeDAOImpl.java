@@ -5,10 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -40,14 +38,10 @@ public class TradeDAOImpl implements TradeDAO
 	public int addTrade(Trade trade) 
 	{
 		int rows_inserted = 0;
-		Connection conn = openConnection();
 		String INSERT_TRADE = "insert into trades values(?,?,?,?,?,?,?,?,?,?)";
-		PreparedStatement ps;
 			
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_TRADE);)
 		{
-			ps = conn.prepareStatement(INSERT_TRADE);
-			
 			ps.setInt(1,trade.getTradeId());;
 			ps.setString(2, trade.getTrader().getTraderId());
 			ps.setTimestamp(3,trade.getTimeStamp());
@@ -67,12 +61,6 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}	
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		return rows_inserted;	
 		
@@ -85,12 +73,8 @@ public class TradeDAOImpl implements TradeDAO
 		
 		String FIND_TRADE = "select * from trades where trade_id=?";
 		
-		Connection conn = openConnection();
-		PreparedStatement ps;
-		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(FIND_TRADE);)
 		{
-			ps = conn.prepareStatement(FIND_TRADE);
 			ps.setInt(1, tradeId);
 			ResultSet rs = ps.executeQuery();
 			TraderDAO tdao = new TraderDAOImpl();
@@ -114,12 +98,6 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return trade;
 	}
 
@@ -130,13 +108,10 @@ public class TradeDAOImpl implements TradeDAO
 		String FIND_ALL_TRADES = "select * from trades";
 		
 		TraderDAO dao = new TraderDAOImpl();
-		List<Trader> traderlist = dao.findAllTraders();
+		List<Trader> traderlist = dao.findAllTraders();		
 		
-		Connection conn = openConnection();
-		
-		
-		try {
-			PreparedStatement ps = conn.prepareStatement(FIND_ALL_TRADES);
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(FIND_ALL_TRADES);) 
+		{
 			ps.setFetchSize(1000);
 			ResultSet rs = ps.executeQuery();
 			int index = 0 ;
@@ -175,12 +150,6 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 		}
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return tradelist;
 }
 
@@ -198,12 +167,10 @@ public class TradeDAOImpl implements TradeDAO
 		List<Trade> tradeslist = new ArrayList<Trade>();
 		String FIND_TRADE = "select * from trades where trader=?";
 		
-		Connection conn = openConnection();
-		PreparedStatement ps;
+
 		TraderDAO tdao = new TraderDAOImpl();
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(FIND_TRADE);)
 		{
-			ps = conn.prepareStatement(FIND_TRADE);
 			ps.setString(1, traderId);
 			ResultSet rs = ps.executeQuery();
 			
@@ -229,12 +196,6 @@ public class TradeDAOImpl implements TradeDAO
 		{
 			e.printStackTrace();
 			//
-		}
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block.
-			e.printStackTrace();
 		}
 		return tradeslist;		
 		//

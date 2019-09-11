@@ -35,15 +35,12 @@ public class UserDAOImpl implements UserDAO
 	public int addUser(User user)
 	{
 		int rows_inserted = 0;
-		Connection conn = openConnection();
+
 		String IS_TAKEN = "select username from users where username = ?";
-		String INSERT_USER = "insert into users values(NULL, NULL, NULL, ?, ?, ?, ?, ?, ?)";
-		PreparedStatement ps, ps1;
+		String INSERT_USER = "insert into users values(NULL, NULL, NULL, ?, ?, ?, ?, ?, ?)";		
 		
-		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps1 = conn.prepareStatement(IS_TAKEN);)
 		{
-			ps1 = conn.prepareStatement(IS_TAKEN);
 			ps1.setString(1, user.getUsername());
 			ResultSet rs=ps1.executeQuery();
 			System.out.println(rs);
@@ -59,10 +56,8 @@ public class UserDAOImpl implements UserDAO
 			 }
 			 else
 			 {
-					try
-					{
-						ps = conn.prepareStatement(INSERT_USER);
-						
+					try(PreparedStatement ps = conn.prepareStatement(INSERT_USER);)
+					{						
 						ps.setString(1,user.getUsername());
 						ps.setString(2, user.getPassword());
 						ps.setString(3, user.getEmailId());
@@ -87,14 +82,6 @@ public class UserDAOImpl implements UserDAO
 		{
 			e.printStackTrace();
 		}	
-		try
-		{
-			conn.setAutoCommit(true);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}	
 		return rows_inserted;			 
 
 	}
@@ -103,13 +90,11 @@ public class UserDAOImpl implements UserDAO
 	public boolean updateEmailId(String username, String email) 
 	{
 		boolean isUpdated = false;
-		Connection conn = openConnection();
+		
 		String UPDATE_EMAILID = "update users set email_id=? where username=?";
 		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_EMAILID);)
 		{
-			
-			PreparedStatement ps = conn.prepareStatement(UPDATE_EMAILID);
 			ps.setString(1, email);
 			ps.setString(2, username);
 			
@@ -123,14 +108,6 @@ public class UserDAOImpl implements UserDAO
 		{
 			System.out.println(e);
 		}
-		try
-		{
-			conn.setAutoCommit(true);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}	
 		return isUpdated;
 		
 	}
@@ -139,12 +116,10 @@ public class UserDAOImpl implements UserDAO
 	public boolean updatePhone(String username, long phone) 
 	{
 		boolean isUpdated = false;
-		Connection conn = openConnection();
 		String UPDATE_PHONE = "update users set phone=? where username=?";
 		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_PHONE);)
 		{
-			PreparedStatement ps = conn.prepareStatement(UPDATE_PHONE);
 			ps.setLong(1, phone);
 			ps.setString(2, username);
 			
@@ -158,15 +133,6 @@ public class UserDAOImpl implements UserDAO
 		{
 			System.out.println(e);
 		}
-		
-		try
-		{
-			conn.setAutoCommit(true);
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}	
 		return isUpdated;
 	}
 
@@ -174,12 +140,10 @@ public class UserDAOImpl implements UserDAO
 	public boolean updatePassword(String username, String password) 
 	{
 		boolean isUpdated = false;
-		Connection conn = openConnection();
 		String UPDATE_PASSWORD = "update users set password=? where username=?";
 		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_PASSWORD);)
 		{
-			PreparedStatement ps = conn.prepareStatement(UPDATE_PASSWORD);
 			ps.setString(1, password);
 			ps.setString(2, username);
 			
@@ -194,13 +158,6 @@ public class UserDAOImpl implements UserDAO
 			System.out.println(e);
 		}
 		
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		return isUpdated;
 	}
 
@@ -210,12 +167,8 @@ public class UserDAOImpl implements UserDAO
 		User user = new User();
 		String FIND_BY_USERNAME = "select * from users where username=?";
 		
-		Connection conn = openConnection();
-		PreparedStatement ps;
-		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(FIND_BY_USERNAME);)
 		{
-			ps = conn.prepareStatement(FIND_BY_USERNAME);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			
@@ -239,33 +192,22 @@ public class UserDAOImpl implements UserDAO
 		{
 			e.printStackTrace();
 		}
-		
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return user;
 	}
 
 	@Override
 	public User deleteUser(String username) 
 	{
-	String DELETE_USER = "delete from users where username=?";
-		
-		Connection conn = openConnection();
-		PreparedStatement ps;
-		
+		String DELETE_USER = "delete from users where username=?";		
 		User user = null;
 		
 		user = findUserByUsername(username);
 		
 		if(user!=null)
 		{
-			try
+			try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(DELETE_USER);)
 			{
-				ps = conn.prepareStatement(DELETE_USER);
 				ps.setString(1, username);
 				ps.executeQuery();
 			}
@@ -273,26 +215,12 @@ public class UserDAOImpl implements UserDAO
 			{
 				e.printStackTrace();
 			}		
-			
-			try {
-				conn.setAutoCommit(true);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			return user;
 		}
 		else
 		{
 			user = new User();
-			try {
-				conn.setAutoCommit(true);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			return user;
-			
 		}
 	}
 

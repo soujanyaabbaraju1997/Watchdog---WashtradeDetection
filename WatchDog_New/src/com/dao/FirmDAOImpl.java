@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.pojos.Firm;
 
 public class FirmDAOImpl implements FirmDAO{
@@ -38,19 +37,18 @@ public class FirmDAOImpl implements FirmDAO{
 	public int addfirm(Firm firm) {
 		// TODO Auto-generated method stub
 		int rows_inserted = 0;
-		Connection conn = openConnection();
+		
 		String INSERT_FIRM = "insert into firms values(?,?)";
-		PreparedStatement ps;
-		try
+		
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_FIRM);)
 		{
-			ps = conn.prepareStatement(INSERT_FIRM);
 			
 			ps.setInt(1,firm.getFirmId());
 			ps.setString(2, firm.getFirmName());
 			rows_inserted = ps.executeUpdate();
 			
-			System.out.println("Rows : "+rows_inserted);
-			conn.setAutoCommit(true);
+//			System.out.println("Rows : "+rows_inserted);
+//			conn.setAutoCommit(true);
 			//conn.close();			
 		}
 		catch (SQLException e) 
@@ -69,11 +67,9 @@ public class FirmDAOImpl implements FirmDAO{
 		List<Firm> firms = new ArrayList<Firm>();
 		String FIND_ALL_FIRMS = "select * from firms";
 		
-		Connection conn = openConnection();
-		Statement stmt;
-		try 
+
+		try(Connection conn = openConnection();Statement stmt = conn.createStatement();) 
 		{
-			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(FIND_ALL_FIRMS);
 			
 			while(rs.next())

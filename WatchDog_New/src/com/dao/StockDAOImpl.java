@@ -36,14 +36,11 @@ public class StockDAOImpl implements StockDAO
 	public int addRecord(Stock stock)
 	{
 		int rows_inserted = 0;
-		Connection conn = openConnection();
+		
 		String INSERT_STOCK = "insert into stocks values(?,?,?,?,?)";
-		PreparedStatement ps;
 			
-		try
-		{
-			ps = conn.prepareStatement(INSERT_STOCK);
-			
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_STOCK);)
+		{			
 			ps.setInt(1,stock.getFirmId());
 			ps.setInt(2, stock.getSecurityId());
 			ps.setFloat(3,stock.getHighestPrice());
@@ -69,13 +66,9 @@ public class StockDAOImpl implements StockDAO
 	{
 		Stock stock = new Stock(-1,-1,-1f,-1f,-1f);
 		String FIND_STOCK = "select * from stocks where firm_id=? and security_id=?";
-		
-		Connection conn = openConnection();
-		PreparedStatement ps;
-		
-		try
+			
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(FIND_STOCK);)
 		{
-			ps = conn.prepareStatement(FIND_STOCK);
 			ps.setInt(1, firmId);
 			ps.setInt(2, securityId);
 			ResultSet rs = ps.executeQuery();
@@ -108,10 +101,7 @@ public class StockDAOImpl implements StockDAO
 	@Override
 	public Stock deleteStock(int firmId, int securityId) 
 	{
-	String DELETE_STOCK = "delete from stocks where firm_id=? and security_id=?";
-		
-		Connection conn = openConnection();
-		PreparedStatement ps;
+		String DELETE_STOCK = "delete from stocks where firm_id=? and security_id=?";
 		
 		Stock stock = null;
 		
@@ -119,9 +109,8 @@ public class StockDAOImpl implements StockDAO
 		
 		if(stock!=null)
 		{
-			try
+			try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(DELETE_STOCK);)
 			{
-				ps = conn.prepareStatement(DELETE_STOCK);
 				ps.setInt(1, firmId);
 				ps.setInt(2, securityId);
 				ps.executeQuery();
@@ -150,16 +139,15 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateHighPrice(int firmId, int securityId)
 	{
 		boolean isUpdated = false;
-		Connection conn = openConnection();
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new highest price: ");
 		float highestPrice = sc.nextFloat();
 		
 		String UPDATE_STOCK = "update stocks set highest_price=? where firm_id=? and security_id=?";
 		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);)
 		{
-			PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);
 			ps.setFloat(1, highestPrice);
 			ps.setInt(2, firmId);
 			ps.setInt(3, securityId);
@@ -184,16 +172,15 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateLowPrice(int firmId, int securityId) 
 	{
 		boolean isUpdated = false;
-		Connection conn = openConnection();
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new lowest price: ");
 		float lowestPrice = sc.nextFloat();
 		
 		String UPDATE_STOCK = "update stocks set lowest_price=? where firm_id=? and security_id=?";
 		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);)
 		{
-			PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);
 			ps.setFloat(1, lowestPrice);
 			ps.setInt(2, firmId);
 			ps.setInt(3, securityId);
@@ -218,16 +205,15 @@ public class StockDAOImpl implements StockDAO
 	public boolean updateLTP(int firmId, int securityId) 
 	{
 		boolean isUpdated = false;
-		Connection conn = openConnection();
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter new LTP: ");
 		float ltp = sc.nextFloat();
 		
 		String UPDATE_STOCK = "update stocks set ltp=?  where firm_id=? and security_id=?";
 		
-		try
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);)
 		{
-			PreparedStatement ps = conn.prepareStatement(UPDATE_STOCK);
 			ps.setFloat(1, ltp);
 			ps.setInt(2, firmId);
 			ps.setInt(3, securityId);

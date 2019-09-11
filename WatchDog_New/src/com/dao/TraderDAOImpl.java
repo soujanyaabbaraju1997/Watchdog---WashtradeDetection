@@ -37,13 +37,11 @@ public class TraderDAOImpl extends User implements TraderDAO
 	public int addTrader(Trader trader) 
 	{
 		int rows_inserted = 0;
-		Connection conn = openConnection();
-		String INSERT_TRADER = "insert into users values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		PreparedStatement ps;
 		
-		try
+		String INSERT_TRADER = "insert into users values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_TRADER);)
 		{
-			ps = conn.prepareStatement(INSERT_TRADER);
 			ps.setString(1, trader.getTraderId());
 			ps.setString(2, trader.getTraderName());
 			ps.setDate(3, trader.getDateReg());
@@ -61,18 +59,6 @@ public class TraderDAOImpl extends User implements TraderDAO
 		{
 			e.printStackTrace();
 		}
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return rows_inserted;
 	}
 	@Override
@@ -80,39 +66,20 @@ public class TraderDAOImpl extends User implements TraderDAO
 	{
 		List<String> traders = new ArrayList<String>();
 		String FIND_ALL_TRADERS = "select * from users where is_admin=0";
-		
-		Connection conn = openConnection();
-		Statement stmt;
-		try 
+
+		try(Connection conn = openConnection();Statement stmt = conn.createStatement();) 
 		{
-			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(FIND_ALL_TRADERS);
 			
 			while(rs.next())
 			{
 				String traderId = rs.getString(1);
-//				String traderName = rs.getString(2);
-//				Date dateRed = rs.getDate(3);
-//				String username = rs.getString(4);
-//				String password = rs.getString(5);
-//				String emailId = rs.getString(6);
-//				long phone = rs.getLong(7);
-//				Date dob = rs.getDate(8);
-				
-//				Trader trader = new Trader(traderId, traderName, dateRed, username, password, emailId, phone, dob);
 				traders.add(traderId);
 			}
 			System.out.println("List Size = "+traders.size());
 		} 
 		catch (SQLException e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			conn.setAutoCommit(true);
-		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

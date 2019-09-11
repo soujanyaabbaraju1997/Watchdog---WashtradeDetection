@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.pojos.Firm;
 import com.pojos.Security;
 
 public class SecurityDAOImpl implements SecurityDAO{
@@ -40,13 +38,11 @@ public class SecurityDAOImpl implements SecurityDAO{
 		// TODO Auto-generated method stub
 		
 		int rows_inserted = 0;
-		Connection conn = openConnection();
+
 		String INSERT_SECURITY = "insert into securities values(?,?,?)";
-		PreparedStatement ps;
-		try
-		{
-			ps = conn.prepareStatement(INSERT_SECURITY);
-			
+		
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_SECURITY);)
+		{			
 			ps.setInt(1,security.getSecurityId());
 			ps.setString(2,security.getSecurityName());
 			ps.setInt(3, security.getLotSize());
@@ -73,11 +69,8 @@ public class SecurityDAOImpl implements SecurityDAO{
 		List<Security> securities = new ArrayList<Security>();
 		String FIND_ALL_SECURITIES = "select * from securities";
 		
-		Connection conn = openConnection();
-		Statement stmt;
-		try 
+		try(Connection conn = openConnection();Statement stmt = conn.createStatement();) 
 		{
-			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(FIND_ALL_SECURITIES);
 			
 			while(rs.next())
@@ -97,12 +90,8 @@ public class SecurityDAOImpl implements SecurityDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		return securities;
-	
-	
-	
+
 	}
 
 }
