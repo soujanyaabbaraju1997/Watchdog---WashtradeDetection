@@ -21,7 +21,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 public class Algorithm {
 	
-	private static List<List<Trade>> answer = null ;
+	private static List<List<Trade>> answer = new ArrayList<List<Trade>>() ;
 	
 	public static void powerSet(List<Trade> list, int index, List<Trade> curr) //index = -1
 		{ 
@@ -88,7 +88,7 @@ public class Algorithm {
 		FirmDAO fdao = new FirmDAOImpl();
 		
 		List<String> traders = dao.findAllTraders();
-		List<Trade> washTrades = null ;
+		List<Trade> washTrades = new ArrayList<>() ;
 			
 		String trader = "SOUJ1997";
 		
@@ -105,8 +105,84 @@ public class Algorithm {
 				Map<String, Map< Integer , List<Trade>>> map = trades.stream().collect(Collectors.groupingBy(Trade::getBrokerId,Collectors.groupingBy(Trade::getFirmId)));
 	
 				System.out.println("MAP: " + map.keySet());
-				brokers.addAll(map.keySet()) ;
+				System.out.println(map.entrySet());
 				System.out.println(brokers);
+				
+				
+				map.forEach((firm,broker)->{
+					System.out.println("foreach: " + firm + broker);
+					List<Trade> Total = new ArrayList<>();
+					Total.addAll(map.get(broker).get(firm)) ;
+					System.out.println("Total trader T-B-F : " + Total);
+					if(Total.size()!=0)
+					{
+						List<Trade> Equity = new ArrayList<>() ;
+						List<Trade> Future = new ArrayList<>() ;
+						List<Trade> OptionPut = new ArrayList<>() ;
+						List<Trade> OptionCall = new ArrayList<>() ;
+					
+						// now we separate the types of securities into separate lists
+						
+						for(Trade row : Total)
+						{
+							if(row.getSecurityId() == 7890) //equity
+							{
+								if(row.isTradeType()=="buy") //if it is buy)
+								{
+									Future.add(row) ;
+								}
+								Equity.add(row);
+							}
+							else if(row.getSecurityId() == 9811) //futures
+							{
+								Future.add(row);
+							}
+							else if(row.getSecurityId() == 1204) //optionput
+							{
+								OptionPut.add(row);
+							}
+							else if(row.getSecurityId() == 3030) //optioncall
+							{
+								OptionCall.add(row);
+							}
+						}
+						
+						List<List<Trade>> securities = new ArrayList<List<Trade>>() ;
+						securities.add(Equity) ;
+						securities.add(Future) ;
+						securities.add(OptionPut) ;
+						securities.add(OptionCall) ;
+						
+						//now we see the intrinsic wash trades for each security and eq buy future sell
+						
+						
+						for(List<Trade> security : securities)
+						{
+							List<Trade> x = new ArrayList<>() ;
+							answer.clear(); ;
+							powerSet(security, -1, x ) ;
+							
+							for(List<Trade> subset : answer) // for all the subsets of a security
+							{
+								if(sumofSubset(subset) == 0)
+								{
+									if(profit(subset) <= 0.005)
+									{
+										for(Trade t : subset)
+										{
+											t.setIsWashTrade(1);
+											System.out.println("WashTrades :\n" + t);
+											washTrades.add(t) ;
+										}
+									}
+								}
+								//profit = (-ves*MKTPR) + (+ves*MKTPR)
+							}
+						}
+					}
+				});
+				
+				
 				for(String broker : brokers)
 				{
 					System.out.println("for Broker: " + broker);
@@ -118,73 +194,73 @@ public class Algorithm {
 						
 						//for each set of trader, broker and firm we get the list of total trades 
 						
-						List<Trade> Total = map.get(broker).get(firm) ;
-						System.out.println("Total trader T-B-F : " + Total);
-						if(Total.size()!=0)
-						{
-							List<Trade> Equity = null ;
-							List<Trade> Future = null ;
-							List<Trade> OptionPut = null ;
-							List<Trade> OptionCall = null ;
-						
-							// now we separate the types of securities into separate lists
-							
-							for(Trade row : Total)
-							{
-								if(row.getSecurityId() == 7890) //equity
-								{
-									if(row.isTradeType()=="buy") //if it is buy)
-									{
-										Future.add(row) ;
-									}
-									Equity.add(row);
-								}
-								else if(row.getSecurityId() == 9811) //futures
-								{
-									Future.add(row);
-								}
-								else if(row.getSecurityId() == 1204) //optionput
-								{
-									OptionPut.add(row);
-								}
-								else if(row.getSecurityId() == 3030) //optioncall
-								{
-									OptionCall.add(row);
-								}
-							}
-							
-							List<List<Trade>> securities = null ;
-							securities.add(Equity) ;
-							securities.add(Future) ;
-							securities.add(OptionPut) ;
-							securities.add(OptionCall) ;
-							
-							//now we see the intrinsic wash trades for each security and eq buy future sell
-							
-							
-							for(List<Trade> security : securities)
-							{
-								List<Trade> x = null ;
-								answer = null ;
-								powerSet(security, -1, x ) ;
-								
-								for(List<Trade> subset : answer) // for all the subsets of a security
-								{
-									if(sumofSubset(subset) == 0)
-									{
-										if(profit(subset) <= 0.005)
-										{
-											for(Trade t : subset)
-											{
-												t.setIsWashTrade(1);
-												System.out.println("WashTrades :\n" + t);
-												washTrades.add(t) ;
-											}
-										}
-									}
-									//profit = (-ves*MKTPR) + (+ves*MKTPR)
-								}
-							}
+//						List<Trade> Total = map.get(broker).get(firm) ;
+//						System.out.println("Total trader T-B-F : " + Total);
+//						if(Total.size()!=0)
+//						{
+//							List<Trade> Equity = new ArrayList<>() ;
+//							List<Trade> Future = new ArrayList<>() ;
+//							List<Trade> OptionPut = new ArrayList<>() ;
+//							List<Trade> OptionCall = new ArrayList<>() ;
+//						
+//							// now we separate the types of securities into separate lists
+//							
+//							for(Trade row : Total)
+//							{
+//								if(row.getSecurityId() == 7890) //equity
+//								{
+//									if(row.isTradeType()=="buy") //if it is buy)
+//									{
+//										Future.add(row) ;
+//									}
+//									Equity.add(row);
+//								}
+//								else if(row.getSecurityId() == 9811) //futures
+//								{
+//									Future.add(row);
+//								}
+//								else if(row.getSecurityId() == 1204) //optionput
+//								{
+//									OptionPut.add(row);
+//								}
+//								else if(row.getSecurityId() == 3030) //optioncall
+//								{
+//									OptionCall.add(row);
+//								}
+//							}
+//							
+//							List<List<Trade>> securities = new ArrayList<List<Trade>>() ;
+//							securities.add(Equity) ;
+//							securities.add(Future) ;
+//							securities.add(OptionPut) ;
+//							securities.add(OptionCall) ;
+//							
+//							//now we see the intrinsic wash trades for each security and eq buy future sell
+//							
+//							
+//							for(List<Trade> security : securities)
+//							{
+//								List<Trade> x = new ArrayList<>() ;
+//								answer.clear(); ;
+//								powerSet(security, -1, x ) ;
+//								
+//								for(List<Trade> subset : answer) // for all the subsets of a security
+//								{
+//									if(sumofSubset(subset) == 0)
+//									{
+//										if(profit(subset) <= 0.005)
+//										{
+//											for(Trade t : subset)
+//											{
+//												t.setIsWashTrade(1);
+//												System.out.println("WashTrades :\n" + t);
+//												washTrades.add(t) ;
+//											}
+//										}
+//									}
+//									//profit = (-ves*MKTPR) + (+ves*MKTPR)
+//								}
+//							}
 						}			
 					}
 				}
@@ -308,6 +384,5 @@ public class Algorithm {
 //			}
 //		}
 //		
-//		
-	}
+//
 }
