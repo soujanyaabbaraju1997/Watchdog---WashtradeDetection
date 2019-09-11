@@ -64,7 +64,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 		return rows_inserted;
 	}
 	@Override
-	public List<String> findAllTraders()
+	public List<String> findAllTraderIds()
 	{
 		List<String> traders = new ArrayList<String>();
 		String FIND_ALL_TRADERS = "select * from users where is_Admin=0";
@@ -101,18 +101,54 @@ public class TraderDAOImpl extends User implements TraderDAO
 		
 		return traders;
 	}
+	
+	public List<Trader> findAllTraders()
+	{
+		List<Trader> traders = new ArrayList<Trader>();
+		String FIND_ALL_TRADERS = "select * from users where isAdmin=0";
+		
+		Connection conn = openConnection();
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(FIND_ALL_TRADERS);
+			
+			while(rs.next())
+			{
+				String traderId = rs.getString(1);
+				String traderName = rs.getString(2);
+				Date dateRed = rs.getDate(3);
+				String username = rs.getString(4);
+				String password = rs.getString(5);
+				String emailId = rs.getString(6);
+				long phone = rs.getLong(7);
+				Date dob = rs.getDate(8);
+				
+				Trader trader = new Trader(traderId, traderName, dateRed, username, password, emailId, phone, dob);
+				traders.add(trader);
+			}
+			System.out.println("List Size = "+traders.size());
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return traders;
+	}
+	
 	@Override
 	public Trader findByTraderID(String traderId) 
 	{
 		Trader trader = new Trader();
 		String FIND_BY_TRADER_ID = "select * from users where trader_id=?";
 		
-		Connection conn = openConnection();
-		PreparedStatement ps;
-		
-		try
-		{
-			ps = conn.prepareStatement(FIND_BY_TRADER_ID);
+		try(Connection conn = openConnection();
+				PreparedStatement ps = conn.prepareStatement(FIND_BY_TRADER_ID);){
+			ps.setFetchSize(1000);
 			ps.setString(1, traderId);
 			ResultSet rs = ps.executeQuery();
 			
