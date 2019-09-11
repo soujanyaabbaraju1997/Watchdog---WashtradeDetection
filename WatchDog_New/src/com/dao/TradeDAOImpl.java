@@ -234,11 +234,12 @@ public class TradeDAOImpl implements TradeDAO
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+			//
 		}
 		try {
 			conn.setAutoCommit(true);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block.
 			e.printStackTrace();
 		}
 		return tradeslist;		
