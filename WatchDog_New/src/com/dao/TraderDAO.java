@@ -8,6 +8,6 @@ import com.pojos.User;
 public interface TraderDAO
 {
 	public int addTrader(Trader trader);
-	public List<Trader> findAllTraders();
+	public List<Trader> findAllTraders();			//string - list of trader ids
 	public Trader findByTraderID(String traderId);
 }

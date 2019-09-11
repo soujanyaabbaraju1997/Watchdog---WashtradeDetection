@@ -46,7 +46,7 @@ public class TradeDAOImpl implements TradeDAO
 			
 			ps.setInt(1,trade.getTradeId());;
 			ps.setString(2, trade.getTrader().getTraderId());
-			ps.setTime(3,trade.getTimeStamp());
+			ps.setTimestamp(3,trade.getTimeStamp());
 			ps.setString(4, trade.isTradeType());
 			ps.setInt(5, trade.getSecurityId());
 			ps.setInt(6, trade.getQty());
@@ -90,7 +90,7 @@ public class TradeDAOImpl implements TradeDAO
 				Trader t = new Trader();
 				t = tdao.findByTraderID(rs.getString(2));
 				trade.setTrader(t);
-				trade.setTimeStamp(rs.getTime(3));
+				trade.setTimeStamp(rs.getTimestamp(3));
 				trade.setTradeType(rs.getString(4));
 				trade.setSecurityId(rs.getInt(5));
 				trade.setQty(rs.getInt(6));
@@ -116,31 +116,39 @@ public class TradeDAOImpl implements TradeDAO
 		
 		Connection conn = openConnection();
 		PreparedStatement ps;
+		
 		TraderDAO tdao = new TraderDAOImpl();
+		
 		try 
 		{
 			ps = conn.prepareStatement(FIND_ALL_TRADES);
+			ps.setFetchSize(850);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next())
 			{
+				System.out.println(rs);
 				Trade trade = new Trade();
 				
 				trade.setTradeId(rs.getInt(1));
-				Trader t = new Trader();
-				t = tdao.findByTraderID(rs.getString(2));
-				trade.setTrader(t);
-				trade.setTimeStamp(rs.getTime(3));		
+				Trader t =  tdao.findByTraderID(rs.getString(2));
+				System.out.println("TRADER OBJECT"+t);
+				trade.setTrader(new Trader(t.getTraderId(), t.getTraderName(), t.getDateReg(), t.getUsername(), t.getPassword(), t.getEmailId(), t.getPhone(), t.getDob()));
+				trade.setTimeStamp(rs.getTimestamp(3));		
 				trade.setTradeType(rs.getString(4));
 				trade.setSecurityId(rs.getInt(5));
 				trade.setQty(rs.getInt(6));
 				trade.setDealPrice(rs.getFloat(7));
 				trade.setFirmId(rs.getInt(8));
 				trade.setBrokerId(rs.getString(9));
-				tradelist.add(trade);				
+				tradelist.add(trade);	
+				System.out.println("List Size = "+tradelist.size());
+				System.out.println(trade);
+				System.out.println("TRADE ADDED" );
+				System.out.println("\n\n");
 			}
 			
-			System.out.println("List Size = "+tradelist.size());
+			//System.out.println("List Size = "+tradelist.size());
 	
 		} 
 		catch (SQLException e)
@@ -160,7 +168,7 @@ public class TradeDAOImpl implements TradeDAO
 		
 		Connection conn = openConnection();
 		PreparedStatement ps;
-		
+		TraderDAO tdao = new TraderDAOImpl();
 		try
 		{
 			ps = conn.prepareStatement(FIND_TRADE);
@@ -171,8 +179,10 @@ public class TradeDAOImpl implements TradeDAO
 			{
 				Trade trade = new Trade();
 				trade.setTradeId(rs.getInt(1));
-				trade.setTrader((Trader)rs.getObject(2));
-				trade.setTimeStamp(rs.getTime(3));
+				Trader t =  tdao.findByTraderID(rs.getString(2));
+				System.out.println("TRADER OBJECT"+t);
+				trade.setTrader(new Trader(t.getTraderId(), t.getTraderName(), t.getDateReg(), t.getUsername(), t.getPassword(), t.getEmailId(), t.getPhone(), t.getDob()));
+				trade.setTimeStamp(rs.getTimestamp(3));
 				trade.setTradeType(rs.getString(4));
 				trade.setSecurityId(rs.getInt(5));
 				trade.setQty(rs.getInt(6));

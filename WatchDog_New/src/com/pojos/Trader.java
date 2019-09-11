@@ -11,6 +11,9 @@ public class Trader extends User
 	public Trader()
 	{
 		super();
+		this.traderId = "DEFAULT";
+		this.traderName = "DEFAULT";
+		this.dateReg = new Date(1000, 01, 02) ;
 		this.setAdmin(0);
 	}
 	

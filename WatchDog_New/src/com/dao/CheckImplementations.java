@@ -2,6 +2,7 @@ package com.dao;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,21 +16,24 @@ public class CheckImplementations
 	public static void main(String[] args) 
 	{
 		//=========================================================================================================================
-		//								find all trades
-		
-//		TradeDAO tdao = new TradeDAOImpl();
-//		List<Trade> list = tdao.findAllTrades();
-//		list.forEach((st)->{
-//			System.out.println(st);
-//		});		
+		//					
 		
 		//=========================================================================================================================
-		//									find trade by trader id
+		//								find all trades
+//		
+		TradeDAO tdao = new TradeDAOImpl();
+		List<Trade> list = tdao.findAllTrades();
+		list.forEach((st)->{
+			System.out.println(st);
+		});		
+//		
+		//=========================================================================================================================
+		//									find trades by trader id
 		
 //		String traderId = "";
 //		TradeDAO dao = new TradeDAOImpl();
 //		System.out.println("DETAILS:");
-		//Trade user = dao.findByTraderId(traderId);
+//		List<Trade> list = dao.findByTraderId("JHZ6EH2A");
 		//System.out.println(user.toString());		
 		
 		//=========================================================================================================================
@@ -45,48 +49,47 @@ public class CheckImplementations
 		//=========================================================================================================================
 		//								ADD TRADES
 		
-		TradeDAO dao = new TradeDAOImpl();
-		Scanner sc = new Scanner(System.in);
-				
-		System.out.println("Enter trade_id: ");
-		int tid = sc.nextInt();
-		System.out.println("Enter trader_id: ");
-		String trid = sc.next();
-		//System.out.println("Enter timestamp: ");
-		Time time = new Time(15, 20, 00);
-		System.out.println("enter type");
-		String type= sc.next();
-		System.out.println("Enter sec id: ");
-		int secid = sc.nextInt();
-		System.out.println("Enter qty: ");
-		int qty = sc.nextInt();
-		System.out.println("Enter deal price: ");
-		Float dp = sc.nextFloat();
-		System.out.println("Enter firm id ");
-		int fid= sc.nextInt();
-		System.out.println("enter broker id");
-		String bid= sc.next();
-		System.out.println("is wash trade?");
-		int wt= sc.nextInt();
-		
-		System.out.println("taken all inputs.");
-		TraderDAO tdao = new TraderDAOImpl();
-		Trader t =  tdao.findByTraderID(trid);
-		Trade trade = new Trade(tid, t, time, type, secid, qty, dp, fid, bid, wt);
-		
-		System.out.println(trade);
-		
-		dao.addTrade(trade);
-		
-		int inserted = dao.addTrade(trade);
-		if(inserted>0)
-		{
-			System.out.println("NEW TRADE IS INSERTED.");
-		}
-		else
-		{
-			System.out.println("TRADE NOT INSERTED.");
-		}
+//		TradeDAO dao = new TradeDAOImpl();
+//		Scanner sc = new Scanner(System.in);
+//				
+//		System.out.println("Enter trade_id: ");
+//		int tid = sc.nextInt();
+//		System.out.println("Enter trader_id: ");
+//		String trid = sc.next();
+//		//System.out.println("Enter timestamp: ");
+//		//Time time = new Time(15, 20, 00);
+//		Timestamp time= new Timestamp(1999, 3, 12, 7, 10, 0, 0);
+//		System.out.println("enter type");
+//		String type= sc.next();
+//		System.out.println("Enter sec id: ");
+//		int secid = sc.nextInt();
+//		System.out.println("Enter qty: ");
+//		int qty = sc.nextInt();
+//		System.out.println("Enter deal price: ");
+//		Float dp = sc.nextFloat();
+//		System.out.println("Enter firm id ");
+//		int fid= sc.nextInt();
+//		System.out.println("enter broker id");
+//		String bid= sc.next();
+//		System.out.println("is wash trade?");
+//		int wt= sc.nextInt();
+//		
+//		System.out.println("taken all inputs.");
+//		TraderDAO tdao = new TraderDAOImpl();
+//		Trader t =  tdao.findByTraderID(trid);
+//		Trade trade = new Trade(tid, t, time, type, secid, qty, dp, fid, bid, wt);
+//		
+//		System.out.println(trade);
+//	
+//		int inserted = dao.addTrade(trade);
+//		if(inserted>0)
+//		{
+//			System.out.println("NEW TRADE IS INSERTED.");
+//		}
+//		else
+//		{
+//			System.out.println("TRADE NOT INSERTED.");
+//		}
 		
 		
 		//=========================================================================================================================

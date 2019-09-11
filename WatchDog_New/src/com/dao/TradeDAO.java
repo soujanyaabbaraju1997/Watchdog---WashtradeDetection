@@ -11,3 +11,12 @@ public interface TradeDAO
 	public List<Trade> findAllTrades();
 	public List<Trade> findByTraderId(String traderId);
 }
+
+
+/*
+ * set fetch size
+ * ps.setfetchsize 850
+ * ojdbc driver.
+ * 
+ * */
+ 

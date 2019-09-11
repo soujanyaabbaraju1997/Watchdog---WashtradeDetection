@@ -13,6 +13,11 @@ public class User
 	
 	public User()
 	{
+		this.username = "DEFAULT";
+		this.password = "DEFAULT";
+		this.emailId = "DEFAULT";
+		this.phone = 000000000;
+		this.dob = new Date(1000, 01, 01);
 		this.isAdmin=1;
 	}
 	

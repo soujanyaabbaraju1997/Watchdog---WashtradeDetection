@@ -1,13 +1,14 @@
 package com.pojos;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 //
 public class Trade 
 {
 	private int tradeId;
 	private Trader trader;				//HAS-A relationship. 1:1
-	private Time timeStamp;
+	private Timestamp timeStamp;
 	private String tradeType;
 	private int securityId;
 	private int qty;
@@ -23,14 +24,12 @@ public class Trade
 
 	
 	
-	public Trade(int tradeId, Trader trader, Time timeStamp, String tradeType, int securityId, int qty,
+	public Trade(int tradeId, Trader trader, Timestamp timeStamp, String tradeType, int securityId, int qty,
 			float dealPrice, int firmId, String brokerId, int isWashTrade) 
 	{
 		super();
 		this.tradeId = tradeId;
 		this.trader = trader;
-		//Student abraham = (Student) deepCopy(john);
-		//this.trader = (Trader) deepCopy(trader);
 		this.timeStamp = timeStamp;
 		this.tradeType = tradeType;
 		this.securityId = securityId;
@@ -86,12 +85,12 @@ public class Trade
 //		this.trader.setDateReg(trader.getDateReg());
 	}
 
-	public Time getTimeStamp()
+	public Timestamp getTimeStamp()
 	{
 		return timeStamp;
 	}
 
-	public void setTimeStamp(Time timeStamp)
+	public void setTimeStamp(Timestamp timeStamp)
 	{
 		this.timeStamp = timeStamp;
 	}
