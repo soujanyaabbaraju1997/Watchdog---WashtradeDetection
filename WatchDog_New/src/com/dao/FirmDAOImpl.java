@@ -78,7 +78,7 @@ public class FirmDAOImpl implements FirmDAO{
 				String firmName = rs.getString(2);
 				Firm firm= new Firm(firmId,firmName);
 				firms.add(firm);
-//			
+//		
 			}
 			System.out.println("List Size = "+firms.size());
 			conn.setAutoCommit(true);

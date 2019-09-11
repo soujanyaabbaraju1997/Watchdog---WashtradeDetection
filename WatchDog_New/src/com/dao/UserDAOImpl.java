@@ -228,7 +228,7 @@ public class UserDAOImpl implements UserDAO
 	public void viewLiveMarket() 
 	{
 		// TODO Auto-generated method stub
-		
+	
 	}
 
 }

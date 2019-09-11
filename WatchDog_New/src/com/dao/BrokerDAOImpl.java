@@ -26,7 +26,6 @@ public class BrokerDAOImpl implements BrokerDAO {
 		{
 			System.out.println(e);
 		}
-		
 		return conn;
 	}
 	

@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import com.pojos.Trade;
 import com.pojos.Trader;
-//
+
 public class TradeDAOImpl implements TradeDAO
 {
 	Connection openConnection()

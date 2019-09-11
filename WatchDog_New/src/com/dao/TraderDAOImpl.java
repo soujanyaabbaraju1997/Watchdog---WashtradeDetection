@@ -17,7 +17,6 @@ public class TraderDAOImpl extends User implements TraderDAO
 {
 	Connection openConnection()
 	{
-		
 		Connection conn = null;
 		try
 		{
