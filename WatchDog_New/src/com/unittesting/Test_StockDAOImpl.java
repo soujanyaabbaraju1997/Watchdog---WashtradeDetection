@@ -89,23 +89,23 @@ class Test_StockDAOImpl {
 	void testUpdateHighPrice() {
 		//fail("Not yet implemented");
 		
-		StockDAOImpl dao = new StockDAOImpl();
-		boolean actual;
-		
-		// Negative test cases
+//		StockDAOImpl dao = new StockDAOImpl();
+//		boolean actual;
+//		
+//		// Negative test cases
 //		actual = dao.updateHighPrice(100, 1204);
 //		assertEquals(false, actual);
-		
-		// Positive test case 	
-		actual = dao.updateHighPrice(101, 7890);
-		assertEquals(true, actual);
+//		
+//		// Positive test case 	
+//		actual = dao.updateHighPrice(101, 7890);
+//		assertEquals(true, actual);
 	}
 
 	@Test
 	void testUpdateLowPrice() {
 		//fail("Not yet implemented");
 		
-//
+
 //		StockDAOImpl dao = new StockDAOImpl();
 //		boolean actual;
 //		
@@ -121,17 +121,17 @@ class Test_StockDAOImpl {
 	@Test
 	void testUpdateLTP() {
 		//fail("Not yet implemented");
-//		
+		
 //		StockDAOImpl dao = new StockDAOImpl();
 //		boolean actual;
 //		
 //		// Negative test cases
 //		actual = dao.updateLTP(107, 1204);
-//		assertEquals(0, actual);
+//		assertEquals(false, actual);
 //		
 //		// Positive test case 	
 //		actual = dao.updateLTP(101, 3030);
-//		assertEquals(1, actual);
+//		assertEquals(true, actual);
 	}
 
 }

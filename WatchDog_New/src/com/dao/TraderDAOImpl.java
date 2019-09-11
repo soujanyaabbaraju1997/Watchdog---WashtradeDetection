@@ -79,7 +79,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 	public List<String> findAllTraderIds()
 	{
 		List<String> traders = new ArrayList<String>();
-		String FIND_ALL_TRADERS = "select * from users where is_Admin=0";
+		String FIND_ALL_TRADERS = "select * from users where is_admin=0";
 		
 		Connection conn = openConnection();
 		Statement stmt;
@@ -122,7 +122,7 @@ public class TraderDAOImpl extends User implements TraderDAO
 	public List<Trader> findAllTraders()
 	{
 		List<Trader> traders = new ArrayList<Trader>();
-		String FIND_ALL_TRADERS = "select * from users where isAdmin=0";
+		String FIND_ALL_TRADERS = "select * from users where is_admin=0";
 		
 		Connection conn = openConnection();
 		Statement stmt;

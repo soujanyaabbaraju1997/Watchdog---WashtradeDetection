@@ -158,7 +158,8 @@ public class Trade
 
 	@Override
 	public String toString() {
-		return  ""+ tradeId ;
+		return tradeId + "\t" + trader + "\t"+ brokerId + "\t"+ firmId + "\t"
+				+ tradeType + "\t" + securityId + "\t" + qty + "\t" + dealPrice + "\n" ;
 	}
 
 	
