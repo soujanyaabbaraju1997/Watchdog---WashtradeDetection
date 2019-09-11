@@ -2,6 +2,7 @@ package com.pojos;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.dao.BrokerDAO;
 import com.dao.BrokerDAOImpl;
@@ -91,10 +92,10 @@ public class Algorithm {
 			
 		for(String trader : traders)
 		{
-			List<Trade> trades = tdao.findByTraderId(trader) ;
+			Stream<Trade> trades =  (Stream<Trade>) tdao.findByTraderId(trader) ;
 			List<Broker> brokers = bdao.findAllBrokers() ;
 			List<Firm> firms = fdao.findAllFirms() ;
-			Map<String, Map<String, List<Trade>>> map = trades.collect(Collectors.groupingBy(Trade::getBrokerId,Collectors.groupingBy(Trade::getFirmId));
+			Map<String, Map< Integer , List<Trade>>> map = trades.collect(Collectors.groupingBy(Trade::getBrokerId,Collectors.groupingBy(Trade::getFirmId)));
 
 			for(Broker broker : brokers)
 			{
