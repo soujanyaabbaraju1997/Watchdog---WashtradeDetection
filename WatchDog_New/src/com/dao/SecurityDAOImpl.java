@@ -52,7 +52,7 @@ public class SecurityDAOImpl implements SecurityDAO{
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.close();			
+			conn.setAutoCommit(true);		
 		}
 		catch (SQLException e) 
 		{
@@ -87,6 +87,7 @@ public class SecurityDAOImpl implements SecurityDAO{
 //			
 			}
 			System.out.println("List Size = "+securities.size());
+			conn.setAutoCommit(true);
 		} 
 		catch (SQLException e) 
 		{

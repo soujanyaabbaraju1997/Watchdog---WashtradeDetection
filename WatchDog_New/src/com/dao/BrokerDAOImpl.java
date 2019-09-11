@@ -48,7 +48,8 @@ public class BrokerDAOImpl implements BrokerDAO {
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.close();			
+			conn.setAutoCommit(true);
+			//conn.close();			
 		}
 		catch (SQLException e) 
 		{
@@ -78,6 +79,7 @@ public class BrokerDAOImpl implements BrokerDAO {
 				brokers.add(brokerName);			
 			}
 			System.out.println("List Size = "+brokers.size());
+			conn.setAutoCommit(true);
 		} 
 		catch (SQLException e) 
 		{

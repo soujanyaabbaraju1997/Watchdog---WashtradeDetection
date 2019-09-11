@@ -50,7 +50,8 @@ public class FirmDAOImpl implements FirmDAO{
 			rows_inserted = ps.executeUpdate();
 			
 			System.out.println("Rows : "+rows_inserted);
-			conn.close();			
+			conn.setAutoCommit(true);
+			//conn.close();			
 		}
 		catch (SQLException e) 
 		{
@@ -84,6 +85,7 @@ public class FirmDAOImpl implements FirmDAO{
 //			
 			}
 			System.out.println("List Size = "+firms.size());
+			conn.setAutoCommit(true);
 		} 
 		catch (SQLException e) 
 		{

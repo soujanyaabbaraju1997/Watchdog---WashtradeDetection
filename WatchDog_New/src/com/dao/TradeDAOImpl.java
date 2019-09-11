@@ -117,7 +117,7 @@ public class TradeDAOImpl implements TradeDAO
 		List<Trade> tradelist = new ArrayList<Trade>();
 		String FIND_ALL_TRADES = "select * from trades";
 		
-			
+		//copy path	
 		TraderDAO dao = new TraderDAOImpl();
 		List<Trader> traderlist = dao.findAllTraders();
 		
