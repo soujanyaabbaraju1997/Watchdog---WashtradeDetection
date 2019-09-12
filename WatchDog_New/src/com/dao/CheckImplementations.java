@@ -18,9 +18,9 @@ public class CheckImplementations
 	{
 		//=========================================================================================================================
 		//								add stock
-		StockDAO dao = new StockDAOImpl();
-		Stock stock = new Stock (102, 7000, 100, 50, 90);
-		System.out.println(dao.addRecord(stock));
+//		StockDAO dao = new StockDAOImpl();
+//		Stock stock = new Stock (102, 7000, 100, 50, 90);
+//		System.out.println(dao.addRecord(stock));
 		
 		//=========================================================================================================================
 		//								find all trades

@@ -47,8 +47,8 @@ public class StockDAOImpl implements StockDAO
 			ps2.setInt(1, stock.getSecurityId());
 			ResultSet rs2=ps2.executeQuery();
 			
-			String firmNonExist= "Firm doesn't exist. Invalid entry.";
-			String securityNonExist= "Security doesn't exist. Invalid entry.";
+			String firmNonExist= "Firm doesn't exist. ";
+			String securityNonExist= "Security doesn't exist. ";
 			
 			System.out.println(rs1);
 			System.out.println(rs2);
