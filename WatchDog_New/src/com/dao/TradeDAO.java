@@ -13,7 +13,7 @@ public interface TradeDAO
 	public List<Trade> findByTraderId(String traderId);
 	public List<Trade> findWashTrades();
 	public void setWashTrade(Trade trade);
-	
+	public int getLastTradeID();
 }
 //
 

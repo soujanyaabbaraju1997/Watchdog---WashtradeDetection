@@ -177,7 +177,8 @@ public class TradeDAOImpl implements TradeDAO {
 	}
 
 	@Override
-	public List<Trade> findByTraderId(String traderId) {
+	public List<Trade> findByTraderId(String traderId)
+	{
 
 		List<Trade> tradeslist = new ArrayList<Trade>();
 		String FIND_TRADE = "select * from trades where trader=?";
@@ -192,7 +193,7 @@ public class TradeDAOImpl implements TradeDAO {
 				trade.setTradeId(rs.getInt(1));
 				Trader t = tdao.findByTraderID(rs.getString(2));
 				trade.setTrader(new Trader(t.getTraderId(), t.getTraderName(), t.getDateReg(), t.getUsername(),
-						t.getPassword(), t.getEmailId(), t.getPhone(), t.getDob()));
+				t.getPassword(), t.getEmailId(), t.getPhone(), t.getDob()));
 				trade.setTimeStamp(rs.getTimestamp(3));
 				trade.setTradeType(rs.getString(4));
 				trade.setSecurityId(rs.getInt(5));
@@ -235,6 +236,25 @@ public class TradeDAOImpl implements TradeDAO {
 
 	public static Predicate<Trader> findTrader(String traderId) {
 		return p -> p.getTraderId().equals(traderId);
+	}
+
+	@Override
+	public int getLastTradeID() 
+	{
+		int lastTrade=0;
+		String LAST_TRADE = "select max(trade_id) from trades";
+		Connection conn = openConnection();
+		
+		try(PreparedStatement ps = conn.prepareStatement(LAST_TRADE))
+		{
+			ResultSet rs = ps.executeQuery();
+			lastTrade = rs.getInt(1);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return lastTrade;
 	}
 
 }
