@@ -88,5 +88,20 @@ class Test_tradersDAOImpl {
 		
 		
 	}
+	@Test
+	void testFindByUsername() {
+		TraderDAOImpl dao= new TraderDAOImpl();
+		
+		//Positive		
+		Trader trader=new Trader();
+		trader = dao.findByUsername("Soujanya");
+		assertEquals("Soujanya", trader.getUsername());
+		
+		//Negative
+		Trader trader1=new Trader();
+		trader1 = dao.findByTraderID("BLAHHHH");
+		assertEquals("DEFAULT", trader1.getUsername());
+		
+	}
 
 }
