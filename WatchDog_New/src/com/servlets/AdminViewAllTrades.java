@@ -40,6 +40,7 @@ public class AdminViewAllTrades extends HttpServlet {
 		List<Trade> allTrades = new ArrayList<Trade>();
 		
 		allTrades = tdao.findAllTrades();
+		System.out.println(allTrades.size());
 		request.setAttribute("data", allTrades);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("display.jsp");
 		dispatcher.forward(request, response);
