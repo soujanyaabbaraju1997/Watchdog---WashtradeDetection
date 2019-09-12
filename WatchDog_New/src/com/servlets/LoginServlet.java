@@ -73,14 +73,14 @@ public class LoginServlet extends HttpServlet {
 			httpsession.setAttribute("username", name);		
 			if(isadmin==1)
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("admin.html");
+				RequestDispatcher rd=request.getRequestDispatcher("admin-index.html");
 				rd.forward(request, response);
 					//
 				
 			}
 			else
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("trader.html");
+				RequestDispatcher rd=request.getRequestDispatcher("user-index.html");
 				rd.forward(request, response);
 
 			}

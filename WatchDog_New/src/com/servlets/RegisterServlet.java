@@ -55,9 +55,16 @@ public class RegisterServlet extends HttpServlet {
 		
 		long phone= Long.parseLong(request.getParameter("phone"));
 		System.out.println(request.getParameter("phone"));
-		Date dob = java.sql.Date.valueOf(request.getParameter("dob")) ;
-		//System.out.println(request.getParameter("dob"));
-		System.out.println(request.getParameter("dob"));
+		
+
+		String dobstring = request.getParameter("dob");
+		int dob_yr = Integer.parseInt(dobstring.substring(6,10));
+		System.out.println(dob_yr);
+		int dob_mth = Integer.parseInt(dobstring.substring(0,2));
+		System.out.println(dob_mth);
+		int dob_dt = Integer.parseInt(dobstring.substring(3,5));
+		System.out.println(dob_dt);
+		Date dob = new Date(dob_yr, dob_mth, dob_dt);
 		
 		String traderId = username.substring(1, 3).toUpperCase()+randomstring.getAlphaNumericString(5);
 		java.sql.Date dateReg = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -68,41 +75,51 @@ public class RegisterServlet extends HttpServlet {
 		System.out.println(phone);
 		//System.out.println(dateReg);
 	
+		/*sfgwiue
+ewjy@kjure.ejry
+ksudfyes
+123
+123
+989898898
+09/09/2001
+2019-09-12
+sfgwiue
+989898898*/
 		
 //		
-//		if(password.equals(confirmPassword))
-//		{
-//			Trader trader = new Trader(traderId, traderName, dateReg, username, password, emailId, phone, dob);
-//			TraderDAO dao = new TraderDAOImpl();
-//			int inserted = dao.addTrader(trader);
-//			
-//			if(inserted==0)
-//			{
-//				request.setAttribute("msg", "Something Went Wrong. Please try again");
-//				
-//				RequestDispatcher rd=request.getRequestDispatcher("register.html");
-//				rd.forward(request, response);
-//				
-//			}
-//			else
-//			{
-//				HttpSession httpsession =request.getSession();
-//				System.out.println(httpsession.getId()+": "
-//						+httpsession.getCreationTime());	
-//				RequestDispatcher rd=request.getRequestDispatcher("login.html");
-//				rd.forward(request, response);
-//				
-//			}
-//			
-//		}
-//		else
-//		{
-//			request.setAttribute("msg", "Passwords do not match.");
-//			
-//			RequestDispatcher rd=request.getRequestDispatcher("register.html");
-//			rd.forward(request, response);
-//		}
-//		
+		if(password.equals(confirmPassword))
+		{
+			Trader trader = new Trader(traderId, traderName, dateReg, username, password, emailId, phone, dob);
+			TraderDAO dao = new TraderDAOImpl();
+			int inserted = dao.addTrader(trader);
+			
+			if(inserted==0)
+			{
+				request.setAttribute("msg", "Something Went Wrong. Please try again");
+				
+				RequestDispatcher rd=request.getRequestDispatcher("register.html");
+				rd.forward(request, response);
+				
+			}
+			else
+			{
+				HttpSession httpsession =request.getSession();
+				System.out.println(httpsession.getId()+": "
+						+httpsession.getCreationTime());	
+				RequestDispatcher rd=request.getRequestDispatcher("login.html");
+				rd.forward(request, response);
+				
+			}
+			
+		}
+		else
+		{
+			request.setAttribute("msg", "Passwords do not match.");
+			
+			RequestDispatcher rd=request.getRequestDispatcher("register.html");
+			rd.forward(request, response);
+		}
+		
 	}
 //		
 	
