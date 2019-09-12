@@ -1,10 +1,8 @@
-	package com.servlets;
+package com.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,21 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dao.TradeDAO;
 import com.dao.TradeDAOImpl;
-import com.pojos.Algorithm;
 import com.pojos.Trade;
 
 /**
- * Servlet implementation class ViewAllWashTrades
+ * Servlet implementation class ViewAllWashTradeSet
  */
-@WebServlet("/viewAllWashTrades")
-public class ViewAllWashTrades extends HttpServlet {
+@WebServlet("/viewallwashtradeset")
+public class ViewAllWashTradeSet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAllWashTrades() 
-    {
+    public ViewAllWashTradeSet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,17 +33,23 @@ public class ViewAllWashTrades extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		//TradeDAO tdao = new TradeDAOImpl();
-		Algorithm algorithm= new Algorithm();
-	    Set<Set<Trade>> washTradeSet = new HashSet<Set<Trade>>();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		TradeDAO tdao = new TradeDAOImpl();
+		List<Trade> washTrades = new ArrayList<Trade>();
 		
-		washTradeSet = algorithm.RunAlgo();
+		washTrades = tdao.findWashTrades();
 		
 		//CHANGE THE NAME OF THE VARIABLE AND DELETE COMMENT
-		request.setAttribute("data",washTradeSet);
+		request.setAttribute("data",washTrades);
 		
 		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
 		RequestDispatcher dispatcher = request.getRequestDispatcher("page.html");
