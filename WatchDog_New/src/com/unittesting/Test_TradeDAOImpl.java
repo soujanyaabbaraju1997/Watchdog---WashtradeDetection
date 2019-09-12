@@ -67,17 +67,17 @@ class Test_TradeDAOImpl {
 		
 	}
 
-	@Test
-	void testFindAllTrades() {
-		//fail("Not yet implemented");
-		
+//	@Test
+//	void testFindAllTrades() {
+//		//fail("Not yet implemented");
+//		
 //		TradeDAOImpl dao= new TradeDAOImpl();
 //		List<Trade> tradelist = new ArrayList<Trade>();
 //		tradelist=dao.findAllTrades();
 //		
-//		System.out.println(tradelist.size());
+//		//System.out.println(tradelist.size());
 //		assertEquals(43, tradelist.size());
-	}
+//	}
 	
 	@Test
 	void testFindByTraderId() {

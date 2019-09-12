@@ -119,14 +119,15 @@ public class TradeDAOImpl implements TradeDAO {
 				tradelist.add(index, trade);
 				index++;
 			}
-			System.out.println("TradeList: " + tradelist + "\n");
+			//System.out.println("TradeList: " + tradelist + "\n");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return tradelist;
 	}
+
 	@Override
-	public List<Trade> findWashTrades(){
+	public List<Trade> findWashTrades() {
 		// TODO Auto-generated method stub
 		List<Trade> tradelist = new ArrayList<Trade>();
 		String FIND_ALL_TRADES = "select * from trades where is_washtrade=1";
@@ -169,14 +170,11 @@ public class TradeDAOImpl implements TradeDAO {
 
 	}
 
-//
-	@Override
 
 	static public List<Trader> filterTraders(List<Trader> t, Predicate<Trader> predicate) {
 
 		return t.stream().filter(predicate).collect(Collectors.toList());
 	}
-	
 
 	@Override
 	public List<Trade> findByTraderId(String traderId) {
