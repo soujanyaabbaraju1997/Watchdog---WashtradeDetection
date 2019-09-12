@@ -188,6 +188,38 @@ public class TradeDAOImpl implements TradeDAO
 		return tradeslist;		
 		//
 	}
+public void setWashTrade(Trade trade)
+	{
+		
+		//List<Trade> tradeslist = new ArrayList<Trade>();
+		//String FIND_TRADE = "select * from trades where trader=?";
+		String UPDATE_WASHTRADE = "update trades set is_washtrade=1 where  trade_id=?";
+
+		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(UPDATE_WASHTRADE);)
+		{
+			ps.setInt(1, trade.getTradeId());
+			int updated=ps.executeUpdate();
+			if(updated>0)
+			{
+				System.out.println("Wash trade found");
+			}
+			else
+			{
+				System.out.println("Not a wash trade");
+
+			}
+			
+			
+
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+			
+		
+	}
+
 	
 	public static Predicate<Trader> findTrader(String traderId)
 	{

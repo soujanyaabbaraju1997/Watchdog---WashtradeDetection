@@ -184,7 +184,7 @@ public class Algorithm {
 										System.out.println("WashTradesVolume: "+ volume(subset));
 										for(Trade t : subset)
 										{
-											t.setIsWashTrade(1);
+											tdao.setWashTrade(t);
 											System.out.println(t);
 											
 										}
@@ -206,7 +206,7 @@ public class Algorithm {
 							if(!security.equals("Equity"))
 								sumMappingAllSecurities.put(security, sumMappingSecurityWise);
 						});
-						// end of detection
+				//		// end of detection
 
 						
 						sumMappingAllSecurities.get("Future").forEach((subset1,sum1)->
@@ -231,6 +231,7 @@ public class Algorithm {
 											System.out.println("WashTradesVolume: "+ volume(tripletWashTrade));
 											tripletWashTrade.stream().forEach((trade)->
 											{
+												tdao.setWashTrade(trade);
 												System.out.println(trade);
 											});
 											

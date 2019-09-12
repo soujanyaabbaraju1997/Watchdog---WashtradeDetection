@@ -11,6 +11,7 @@ public interface TradeDAO
 	public Trade findTradeById(int tradeId);
 	public List<Trade> findAllTrades();
 	public List<Trade> findByTraderId(String traderId);
+	public void setWashTrade(Trade trade);
 }
 
 
