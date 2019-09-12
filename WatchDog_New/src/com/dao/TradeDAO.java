@@ -13,7 +13,7 @@ public interface TradeDAO
 	public List<Trade> findByTraderId(String traderId);
 	public void setWashTrade(Trade trade);
 }
-
+//
 
 /*
  * set fetch size

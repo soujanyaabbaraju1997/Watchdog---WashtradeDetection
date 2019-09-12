@@ -141,7 +141,7 @@ public class TradeDAOImpl implements TradeDAO
 		}
 		return tradelist;
 }
-
+//
    static public List<Trader> filterTraders(List<Trader> t, Predicate<Trader> predicate){
 		
 		return t.stream().filter(predicate).collect(Collectors.toList());

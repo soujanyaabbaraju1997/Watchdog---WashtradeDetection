@@ -206,7 +206,7 @@ public class Algorithm {
 							if(!security.equals("Equity"))
 								sumMappingAllSecurities.put(security, sumMappingSecurityWise);
 						});
-				//		// end of detection
+					// end of detection
 
 						
 						sumMappingAllSecurities.get("Future").forEach((subset1,sum1)->
