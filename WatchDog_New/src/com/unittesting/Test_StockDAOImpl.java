@@ -29,9 +29,9 @@ class Test_StockDAOImpl {
 	void testAddRecord() {
 		//fail("Not yet implemented");
 		
-//		StockDAOImpl dao = new StockDAOImpl();
-//		
-//		// Negative test cases
+		StockDAOImpl dao = new StockDAOImpl();
+		
+		// Negative test cases
 //		Stock stock = new Stock(101, 1204, 134.5f, 123f, 130.56f);
 //		int actual1 = dao.addRecord(stock);
 //		assertEquals(0, actual1);
@@ -39,7 +39,7 @@ class Test_StockDAOImpl {
 //		Stock stock2 = new Stock(103, 7890, 192.34f, 189.76f, 190.234f);
 //		int actual2 = dao.addRecord(stock2);
 //		assertEquals(0, actual2);
-		
+//		
 		// Positive test case - (delete the record & run)
 		
 //		Stock stock3 = new Stock(101, 9811, 190.5377f, 187.1276f, 189.32272752278766f);
@@ -70,8 +70,8 @@ class Test_StockDAOImpl {
 	void testDeleteStock() {
 		//fail("Not yet implemented");
 		
-//		StockDAOImpl dao = new StockDAOImpl();
-//		Stock stock = new Stock();
+		StockDAOImpl dao = new StockDAOImpl();
+		Stock stock = new Stock();
 //		
 //		// Negative test cases
 //		stock = dao.deleteStock(100, 3030);
@@ -89,11 +89,15 @@ class Test_StockDAOImpl {
 	void testUpdateHighPrice() {
 		//fail("Not yet implemented");
 		
-//		StockDAOImpl dao = new StockDAOImpl();
-//		boolean actual;
-//		
-//		// Negative test cases
+		StockDAOImpl dao = new StockDAOImpl();
+		boolean actual;
+		
+		// Negative test cases
 //		actual = dao.updateHighPrice(100, 1204);
+//		assertEquals(false, actual);
+		
+		// add price out of range
+//		actual = dao.updateHighPrice(101, 7890);
 //		assertEquals(false, actual);
 //		
 //		// Positive test case 	

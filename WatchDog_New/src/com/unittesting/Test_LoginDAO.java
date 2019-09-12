@@ -39,11 +39,9 @@ class Test_LoginDAO {
 		String actual4 = dao.dologin("Gaurav", "admin8");
 		assertEquals("Gaurav", actual4);
 		
-		String actual5 = dao.dologin("Pamela", "dvknxxkb");
-		assertEquals("Pamela", actual5);
+		String actual5 = dao.dologin("Bankrupt", "deutsche");
+		assertEquals("Bankrupt", actual5);
 		
-		String actual6 = dao.dologin("Autumn", "wvppyffk");
-		assertEquals("Autumn", actual6);
 		
 	}
 

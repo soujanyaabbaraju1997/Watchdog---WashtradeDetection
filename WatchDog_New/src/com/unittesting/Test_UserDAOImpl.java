@@ -25,24 +25,25 @@ class Test_UserDAOImpl {
 	void tearDown() throws Exception {
 	}
 
-//	@Test
-//	void testAddUser() {
-//		//fail("Not yet implemented");
-//	Date date= new Date(2019, 02, 19);
-//		User user=new User("dhksnvsk","iiioii","mjyothi",994055994,date);
+	@Test
+	void testAddUser() {
+		//fail("Not yet implemented");
+	    
+//		//Positive
+//		Date date= new Date(2019, 02, 19);
+//		User user=new User("GUHAHIP","iiioii","mjyothi",994055994,date);
 //		UserDAOImpl dao=new UserDAOImpl();
-//		int actual=dao.addUser(user);
-//		
+//		int actual=dao.addUser(user);		
 //		assertEquals(1, actual);
 //		
+//		//Negative
 //		Date date1= new Date(2019, 02, 19);
-//		User user1=new User("Soujanya00","iiioii","mjyothi",994055994,date1);
+//		User user1=new User("Soujanya","iiioii","mjyothi",994055994,date1);
 //		UserDAOImpl dao1=new UserDAOImpl();
-//		int actual1=dao1.addUser(user1);
-//		
+//		int actual1=dao1.addUser(user1);		
 //		assertEquals(0, actual1);
-//		
-//	}
+		
+	}
 	
 	
 	
@@ -63,68 +64,87 @@ class Test_UserDAOImpl {
 //		
 //	}
 //
-//	@Test
-//	void testUpdatePhone() {
-////		fail("Not yet implemented");
-//	UserDAOImpl dao=new UserDAOImpl();
-//	boolean actual=dao.updatePhone("Soujanya",988779899);
-//	assertEquals(true, actual);
-//	UserDAOImpl dao1=new UserDAOImpl();
-//	boolean actual1=dao1.updatePhone("iiii",888888888);
-//	assertEquals(false, actual1);
-//	
-//	}
-//
-//	@Test
-//	void testUpdatePassword() {
-//		//fail("Not yet implemented");
+	@Test
+	void testUpdatePhone() {
+//		fail("Not yet implemented");
+		
+		//Positive
 //		UserDAOImpl dao=new UserDAOImpl();
-//		boolean actual=dao.updatePassword("Rupashi", "uckoff");
+//		boolean actual=dao.updatePhone("Soujanya",9027759991l);
 //		assertEquals(true, actual);
 //		
+//		//Negative
+//		UserDAOImpl dao1=new UserDAOImpl();
+//		boolean actual1=dao1.updatePhone("iiii",888888888l);
+//		assertEquals(false, actual1);
+	
+	}
+
+	@Test
+	void testUpdatePassword() {
+		//fail("Not yet implemented");
+		
+		//Positive
+//		UserDAOImpl dao=new UserDAOImpl();
+//		boolean actual=dao.updatePassword("Rupashi", "hjkl");
+//		assertEquals(true, actual);
+//		
+//		//Negative
 //		UserDAOImpl dao1=new UserDAOImpl();
 //		boolean actual1=dao1.updatePassword("iiii", "hdgkjwe");
 //		assertEquals(false, actual1);
-//		
-//		
-//	}
-//
+		
+		
+	}
+
 	@Test
 	void testFindUserByUsername() {
+		//fail("Not yet implemented");
+//		
+//		UserDAOImpl dao=new UserDAOImpl();
+//		
+//		//Positive 
+//		User user = new User();
+//		User actual=new User();
+//	    java.sql.Date myDate = new java.sql.Date(75,1,19);
+//		user.setAdmin(1);
+//		user.setDob(myDate);		
+//		user.setUsername("Soujanya");
+//		user.setPassword("admin1");
+//		user.setPhone(9027759991l);
+//		user.setEmailId("hhays78@hotma1l.us");
+//		
+//	    actual=dao.findUserByUsername("Soujanya");
+//		assertEquals(user.getUsername(), actual.getUsername());
+//		assertEquals(user.getPassword(), actual.getPassword());
+//		assertEquals(user.getEmailId(), actual.getEmailId());
+//		assertEquals(user.getPhone(), actual.getPhone());
+//		assertEquals(user.getDob(), actual.getDob());
+//		
+//		//negative
+//		actual=dao.findUserByUsername("iiii");
+//		assertEquals("DEFAULT", actual.getUsername());
+//		assertEquals("DEFAULT", actual.getPassword());
+//		assertEquals("DEFAULT", actual.getEmailId());
+//		assertEquals(0, actual.getPhone());
+		
+	}
+	
+
+	@Test
+	void testDeleteUser() {
 		//fail("Not yet implemented");
 		UserDAOImpl dao=new UserDAOImpl();
 		User user = new User();
 		User actual=new User();
-	    java.sql.Date myDate = new java.sql.Date(75,1,19);
+		
+		
+			java.sql.Date myDate = new java.sql.Date(75,1,19);
+			user.setDob(myDate);
+		
 		user.setAdmin(1);
-		user.setDob(myDate);
-		System.out.println(user.getDob());
-		user.setUsername("Soujanya");
-		user.setPassword("admin1");
-		user.setPhone(9027759991l);
-		user.setEmailId("hhays78@hotma1l.us");
-	    actual=dao.findUserByUsername("Soujanya");
-		assertEquals(user.getUsername(), actual.getUsername());
-		assertEquals(user.getPassword(), actual.getPassword());
-		assertEquals(user.getEmailId(), actual.getEmailId());
-		assertEquals(user.getPhone(), actual.getPhone());
-		assertEquals(user.getDob(), actual.getDob());
-	}
-//
-//	@Test
-//	void testDeleteUser() {
-//		//fail("Not yet implemented");
-//		UserDAOImpl dao=new UserDAOImpl();
-//		User user = new User();
-//		User actual=new User();
-//		
-//		
-//			java.sql.Date myDate = new java.sql.Date(75,1,19);
-//			user.setDob(myDate);
-//		
-//		user.setAdmin(1);
-//		
-//		//System.out.println(user.getDob());
+		
+		//Positive
 //		user.setUsername("Soujanya");
 //		user.setPassword("admin1");
 //		user.setPhone(988779899);
@@ -137,17 +157,13 @@ class Test_UserDAOImpl {
 //		assertEquals(user.getDob(), actual.getDob());
 		
 		//negative test case
-//		user.setUsername("iiiiii");
-//		user.setPassword("admin1");
-//		user.setPhone(988779899);
-//		user.setEmailId("hhays78@hotma1l.us");
-//		actual=dao.deleteUser("Soujanya");
+//		actual=dao.deleteUser("iiiiii");
 //		assertEquals("DEFAULT", actual.getUsername());
 //		assertEquals("DEFAULT", actual.getPassword());
 //		assertEquals("DEFAULT", actual.getEmailId());
 //		assertEquals(000000000,actual.getPhone());
-	  //  assertEquals(2900-02-01, actual.getDob());
+	
 		
-//	}
+	}
 
 }

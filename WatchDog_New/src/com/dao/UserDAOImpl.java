@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.database.randomstring;
 import com.pojos.User;
 //
 public class UserDAOImpl implements UserDAO
@@ -37,11 +38,12 @@ public class UserDAOImpl implements UserDAO
 		int rows_inserted = 0;
 
 		String IS_TAKEN = "select username from users where username = ?";
-		String INSERT_USER = "insert into users values(NULL, NULL, NULL, ?, ?, ?, ?, ?, ?)";		
+		String INSERT_USER = "insert into users values(?, NULL, NULL, ?, ?, ?, ?, ?, ?)";		
 		
 		try(Connection conn = openConnection();PreparedStatement ps1 = conn.prepareStatement(IS_TAKEN);)
 		{
 			ps1.setString(1, user.getUsername());
+						
 			ResultSet rs=ps1.executeQuery();
 			System.out.println(rs);
 			 int i=0;
@@ -58,12 +60,14 @@ public class UserDAOImpl implements UserDAO
 			 {
 					try(PreparedStatement ps = conn.prepareStatement(INSERT_USER);)
 					{						
-						ps.setString(1,user.getUsername());
-						ps.setString(2, user.getPassword());
-						ps.setString(3, user.getEmailId());
-						ps.setLong(4, user.getPhone());
-						ps.setDate(5, user.getDob());
-						ps.setInt(6, 1);
+						String traderId = user.getUsername().substring(0, 3).toUpperCase()+randomstring.getAlphaNumericString(5);
+						ps.setString(1, traderId);
+						ps.setString(2,user.getUsername());
+						ps.setString(3, user.getPassword());
+						ps.setString(4, user.getEmailId());
+						ps.setLong(5, user.getPhone());
+						ps.setDate(6, user.getDob());
+						ps.setInt(7, 1);
 						
 						rows_inserted = ps.executeUpdate();
 						

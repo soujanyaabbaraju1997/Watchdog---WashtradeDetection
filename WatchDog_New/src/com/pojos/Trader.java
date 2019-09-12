@@ -4,11 +4,8 @@ import java.sql.Date;
 import java.util.List;
 public class Trader extends User
 {
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return traderId ;
-	}
+	
+	
 	private String traderId;
 	private String traderName;
 	private Date dateReg;
@@ -31,6 +28,21 @@ public class Trader extends User
 		this.dateReg = dateReg;
 		this.setAdmin(0);
 	}
+	
+//	@Override
+//	public String toString() {
+//		// TODO Auto-generated method stub
+//		return traderId ;
+//	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Trader [traderId=" + traderId + ", traderName=" + traderName + ", dateReg=" + dateReg + ", trades="
+				+ trades + "]";
+	}
+	
 	public String getTraderId() 
 	{
 		return traderId;
