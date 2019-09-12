@@ -39,6 +39,8 @@ public class UserViewAllTrades extends HttpServlet {
 		List<Trade> allTrades = new ArrayList<Trade>();
 		String traderId=request.getParameter("traderId");
 		allTrades = tdao.findByTraderId(traderId);
+		
+		//VERIFY THE NAME OF REQUEST ATTRIBUTE.
 		request.setAttribute("data", allTrades);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
 		dispatcher.forward(request, response);
