@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Scanner;
 
+import com.pojos.Stock;
 import com.pojos.Trade;
 import com.pojos.Trader;
 import com.pojos.User;
@@ -16,7 +17,10 @@ public class CheckImplementations
 	public static void main(String[] args) 
 	{
 		//=========================================================================================================================
-		//					
+		//								add stock
+		StockDAO dao = new StockDAOImpl();
+		Stock stock = new Stock (102, 7000, 100, 50, 90);
+		System.out.println(dao.addRecord(stock));
 		
 		//=========================================================================================================================
 		//								find all trades
@@ -115,36 +119,36 @@ public class CheckImplementations
 //		================================================================================================================
 //											add user		
 
-		UserDAO udao = new UserDAOImpl();
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("Enter username: ");
-		String username = sc.next();
-		System.out.println("Enter password: ");
-		String password = sc.next();
-		System.out.println("Enter email id: ");
-		String email = sc.next();
-		System.out.println("Enter phone: ");
-		long phone = sc.nextLong();
-		System.out.println("Enter year of birth: ");
-		int yr = sc.nextInt();
-		System.out.println("Enter month of birth: ");
-		int mth = sc.nextInt();
-		System.out.println("Enter date of birth: ");
-		int dt = sc.nextInt();
-		Date dob = new Date(yr, mth, dt);
+//		UserDAO udao = new UserDAOImpl();
+//		Scanner sc = new Scanner(System.in);
 //		
-		User user = new User(username, password, email, phone, dob);
-		
-		int inserted = udao.addUser(user);
-		if(inserted>0)
-		{
-			System.out.println("NEW ADMIN IS INSERTED.");
-		}
-		else
-		{
-			System.out.println("ADMIN NOT INSERTED.");
-		}
+//		System.out.println("Enter username: ");
+//		String username = sc.next();
+//		System.out.println("Enter password: ");
+//		String password = sc.next();
+//		System.out.println("Enter email id: ");
+//		String email = sc.next();
+//		System.out.println("Enter phone: ");
+//		long phone = sc.nextLong();
+//		System.out.println("Enter year of birth: ");
+//		int yr = sc.nextInt();
+//		System.out.println("Enter month of birth: ");
+//		int mth = sc.nextInt();
+//		System.out.println("Enter date of birth: ");
+//		int dt = sc.nextInt();
+//		Date dob = new Date(yr, mth, dt);
+////		
+//		User user = new User(username, password, email, phone, dob);
+//		
+//		int inserted = udao.addUser(user);
+//		if(inserted>0)
+//		{
+//			System.out.println("NEW ADMIN IS INSERTED.");
+//		}
+//		else
+//		{
+//			System.out.println("ADMIN NOT INSERTED.");
+//		}
 //		
 		
 //		================================================================================================================

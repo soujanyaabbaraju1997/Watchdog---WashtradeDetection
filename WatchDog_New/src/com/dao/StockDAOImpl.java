@@ -36,24 +36,72 @@ public class StockDAOImpl implements StockDAO
 		int rows_inserted = 0;
 		
 		String INSERT_STOCK = "insert into stocks values(?,?,?,?,?)";
-			
-		try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_STOCK);)
-		{			
-			ps.setInt(1,stock.getFirmId());
-			ps.setInt(2, stock.getSecurityId());
-			ps.setFloat(3,stock.getHighestPrice());
-			ps.setFloat(4, stock.getLowestPrice());
-			ps.setFloat(5, stock.getLtp());
+		String FIRM_ID_EXISTENCE = "select firm_id from firms where firm_id = ?";
+		String SECURITY_ID_EXISTENCE = "select security_id from securities where security_id = ?";
+		String LP_DP_HP = "Deal price error";
 		
-			rows_inserted = ps.executeUpdate();
-			conn.setAutoCommit(true);
-		}
-		catch (SQLException e) 
+		try(Connection conn1 = openConnection();PreparedStatement ps1 = conn1.prepareStatement(FIRM_ID_EXISTENCE);PreparedStatement ps2 = conn1.prepareStatement(SECURITY_ID_EXISTENCE))
 		{
+			ps1.setInt(1, stock.getFirmId());
+			ResultSet rs1=ps1.executeQuery();
+			ps2.setInt(1, stock.getSecurityId());
+			ResultSet rs2=ps2.executeQuery();
+			
+			String firmNonExist= "Firm doesn't exist. Invalid entry.";
+			String securityNonExist= "Security doesn't exist. Invalid entry.";
+			
+			System.out.println(rs1);
+			System.out.println(rs2);
+			int i=0, j=0;
+			
+			 while(rs1.next())
+			 {
+				 i++;
+			 }
+			 while(rs2.next())
+			 {
+				 j++;
+			 }
+			 if(i==0 || j==0)
+			 {
+				 System.out.println(securityNonExist + "OR" + firmNonExist);
+				 
+			 }
+			 
+			 else
+			 {
+				 if(stock.getLtp()<stock.getHighestPrice() && stock.getLtp()>stock.getLowestPrice())
+				 {
+
+						try(Connection conn = openConnection();PreparedStatement ps = conn.prepareStatement(INSERT_STOCK);)
+						{			
+							ps.setInt(1,stock.getFirmId());
+							ps.setInt(2, stock.getSecurityId());
+							ps.setFloat(3,stock.getHighestPrice());
+							ps.setFloat(4, stock.getLowestPrice());
+							ps.setFloat(5, stock.getLtp());
+						
+							rows_inserted = ps.executeUpdate();
+							conn.setAutoCommit(true);
+						}
+						catch (SQLException e) 
+						{
+							e.printStackTrace();
+						}	
+				 }
+				 else
+				 {	
+					System.out.println(LP_DP_HP);
+				 }
+			 }
+		} 
+		catch (SQLException e)
+		{
+
 			e.printStackTrace();
-		}	
-		
-		return rows_inserted;		
+		}
+			
+		 return rows_inserted;	
 	}
 	
 	@Override

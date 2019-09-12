@@ -74,17 +74,6 @@ public class RegisterServlet extends HttpServlet {
 		System.out.println(request.getParameter("traderName"));
 		System.out.println(phone);
 		//System.out.println(dateReg);
-	
-		/*sfgwiue
-ewjy@kjure.ejry
-ksudfyes
-123
-123
-989898898
-09/09/2001
-2019-09-12
-sfgwiue
-989898898*/
 		
 //		
 		if(password.equals(confirmPassword))

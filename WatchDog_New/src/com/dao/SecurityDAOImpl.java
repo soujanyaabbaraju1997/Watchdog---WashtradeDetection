@@ -59,8 +59,6 @@ public class SecurityDAOImpl implements SecurityDAO{
 		
 		return rows_inserted;
 
-	
-
 	}
 
 	@Override
