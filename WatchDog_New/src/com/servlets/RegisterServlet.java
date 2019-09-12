@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
 		System.out.println(dob_dt);
 		Date dob = new Date(dob_yr, dob_mth, dob_dt);
 		
-		String traderId = username.substring(1, 3).toUpperCase()+randomstring.getAlphaNumericString(5);
+		String traderId = username.substring(0, 3).toUpperCase()+randomstring.getAlphaNumericString(5);
 		java.sql.Date dateReg = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		System.out.println(dateReg);
 		
