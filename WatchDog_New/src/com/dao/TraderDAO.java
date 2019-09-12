@@ -11,4 +11,5 @@ public interface TraderDAO
 	public List<String> findAllTraderIds();			//string - list of trader ids
 	public List<Trader> findAllTraders();
 	public Trader findByTraderID(String traderId);
+	public Trader findByUsername(String username);
 }

@@ -154,5 +154,39 @@ public class TraderDAOImpl extends User implements TraderDAO
 		
 		return trader;
 	}
+	@Override
+	public Trader findByUsername(String username) 
+	{
+		Trader trader = new Trader();
+		String FIND_BY_USERNAME = "select * from users where username=?";
+		
+		try(Connection conn = openConnection();
+			PreparedStatement ps = conn.prepareStatement(FIND_BY_USERNAME);){
+			ps.setFetchSize(1000);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				trader.setTraderId(rs.getString(1));
+				trader.setTraderName(rs.getString(2));
+				trader.setDateReg(rs.getDate(3));
+				trader.setUsername(username);
+				trader.setPassword(rs.getString(5));
+				trader.setEmailId(rs.getString(6));
+				trader.setPhone(rs.getLong(7));
+				trader.setDob(rs.getDate(8));
+			}
+
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return trader;
+	}
+
+
 
 }
