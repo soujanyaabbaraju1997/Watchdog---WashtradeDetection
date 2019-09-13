@@ -177,16 +177,19 @@
                 	<div class="col-lg-12">
                         <div class="card shadow-lg" style="border-radius: 10px;">
                             <div class="card-body">
+                                <h5 class="card-title">Facebook - Apple - Walmart</h5>
+                                <h6 class="card-subtitle">check out daily market prices</h6>
 								<div class="steamline m-t-40">
 								    <div class="ml-auto">
-										<div class = "row">
-										<div class="radio col-lg-6" style="text-align: center;">
-                                            <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Type</h4>
+										<div class = "Container"><form name="form13" action="addTrade" method="get">
+                                            <div class="radio col-lg-6" style="text-align: center;">
                                                 <label><input type="radio" name="tradeType" value="buy" checked><h5>Buy</h5></label>
                                            		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                               <label><input type="radio" name="tradeType" value="sell"><h5>Sell</h5></label>
                                             </div>
+                                        </div>
+										<div class = "row">
 											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Firm</h4>
 												<select class="custom-select b-0 col-lg-7" id = "firmDropDown" name="firmId">
@@ -212,7 +215,7 @@
                                             <div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Broker</h4>
                                                 <select class="custom-select b-0 col-lg-7" id = "brokerDropDown" name="brokerId">
-                                                    <option value="1" selected="">5Paisa</option>
+                                                    <option value="5Paisa" selected="">5Paisa</option>
                                                     <option value="Angel Broking">Angel Broking</option>
                                                     <option value="Fyers">Fyers</option>
                                                     <option value="ICICI Direct">ICICI Direct</option>
@@ -269,7 +272,7 @@
                                         </thead>
                                         
 											<%
-												List<Trade> trade = (List<Trade>) request.getAttribute("listOfTradesForUser");
+												List<Trade> trade = (List<Trade>) request.getAttribute("data");
 												
 												for (Trade t : trade) {
 											%>
@@ -326,7 +329,7 @@
 											%>
 										</table>
                                         </div>
-                                
+                               
                                 
                             </div>
                             

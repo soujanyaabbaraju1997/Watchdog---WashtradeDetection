@@ -74,14 +74,14 @@ public class LoginServlet extends HttpServlet {
 			httpsession.setAttribute("username", name);		
 			if(isadmin==1)
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("admin-index.html");
+				RequestDispatcher rd=request.getRequestDispatcher("display.jsp");
 				rd.forward(request, response);
 					//
 				
 			}
 			else
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("user-index.html");
+				RequestDispatcher rd=request.getRequestDispatcher("user-index.jsp");
 				rd.forward(request, response);
 
 			}

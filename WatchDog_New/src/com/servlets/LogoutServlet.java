@@ -42,6 +42,7 @@ public class LogoutServlet extends HttpServlet {
 		System.out.println(session1.getAttribute("username"));
 		session1.invalidate();
 		
+		
 		HttpSession session2=request.getSession();
 		System.out.println(session2.getAttribute("username")+"id: "+session2.getId());
 		RequestDispatcher rd =request.getRequestDispatcher("index.html");

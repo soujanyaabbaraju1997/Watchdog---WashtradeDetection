@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.pojos.Trade"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -21,13 +22,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!------ Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.jpg">
     <title>WATCHDOG - Wash Trade Detection Software</title>
     <!-- This page CSS -->
     <!-- chartist CSS -->
-    <link href="../assets/node_modules/morrisjs/morris.css" rel="stylesheet">
+    <link href="assets/node_modules/morrisjs/morris.css" rel="stylesheet">
     <!--c3 plugins CSS -->
-    <link href="../assets/node_modules/c3-master/c3.min.css" rel="stylesheet">
+    <link href="assets/node_modules/c3-master/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet">
     <!-- Dashboard 1 Page CSS -->
@@ -68,16 +69,16 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
-                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                            <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                         <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                          <!-- Light Logo text -->    
-                         <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                         <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -103,7 +104,7 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("username") %></a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -120,7 +121,7 @@
         <!-- ============================================================== -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
-                <span><img src="../assets/images/logo-icon.png" alt="elegant admin template"></span>
+                <span><img src="assets/images/logo-icon.png" alt="elegant admin template"></span>
                 <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
                 <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
             </div>
@@ -129,10 +130,10 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="admin-index.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="userViewAllTrades" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a></li>
+                        
+                        <li> <a class="waves-effect waves-dark" href="adminViewAllTrades" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a></li>
                         <li> <a class="waves-effect waves-dark" href="viewAllWashTrades" aria-expanded="false"><i class="fa fa-bookmark-o"></i><span class="hide-menu"></span>Wash Trades</a></li>
-                        <li> <a class="waves-effect waves-dark" href="admin-profile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
+                        
                         <div class="text-center m-t-30">
                             <a href="#" class="btn waves-effect waves-light btn-success hidden-md-down"> Logout</a>
                         </div>
@@ -178,7 +179,7 @@
                 <!-- ============================================================== -->
                 
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="card oh">
                             <div class="card-body">
                                 <div class="d-flex m-b-30 align-items-center no-block">
@@ -190,19 +191,21 @@
                                         <table class ="table">
                                         <thead>
                                         <tr>
-                                        <th>one</th>
-                                        <th>one</th>
-                                        <th>one</th>
-                                        <th><%
-                                        List<Trade> trade1 = (List<Trade>) request.getAttribute("data");
-                                        out.println(trade1.size());
-                                        %></th>
+                                        <th>Trade ID</th>
+                                        <th>Trader Name</th>
+                                        <th>Time Stamp</th>
+                                        <th>Buy or Sell</th>
+                                        <th>Security</th>
+                                        <th>Quantity</th>
+                                        <th>Deal Price</th>
+                                        <th>Firm</th>
+                                        <th>Broker</th>
                                         </tr>
                                         </thead>
                                         
 											<%
 												List<Trade> trade = (List<Trade>) request.getAttribute("data");
-									
+												
 												for (Trade t : trade) {
 											%>
 											<%-- Arranging data in tabular form 
@@ -227,63 +230,10 @@
 										</table>
                                         </div>
                                         
-                               <div class="card-body bg-light">
-                                <div class="row text-center m-b-20">
-                                    <div class="col-lg-4 col-md-4 m-t-20">
-                                        <h2 class="m-b-0 font-light">256.80$</h2><span class="text-muted">Highest Price</span>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 m-t-20">
-                                        <h2 class="m-b-0 font-light">259.20$</h2><span class="text-muted">Market Price</span>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 m-t-20">
-                                        <h2 class="m-b-0 font-light">2000k</h2><span class="text-muted">Total Volume</span>
-                                    </div>
-                                </div>
-                            </div>
+                               
                         </div>
                     </div>
                     
-                    <div class="col-lg-4">
-                        <div class="card shadow-lg" style="border-radius: 10px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Facebook - Apple - Walmart</h5>
-                                <h6 class="card-subtitle">check out daily market prices</h6>
-								<div class="steamline m-t-40">
-								    <div class="ml-auto">
-										
-										<div class = "row">
-											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
-                                                <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Timeframe</h4>
-												<select onchange="functionTime(this)" class="custom-select b-0 col-lg-7" id = "timeDropDown">
-													<option value="1" selected="">Seconds</option>
-													<option value="2">Minutes</option>
-													<option value="3">Hours</option>
-													<option value="4">Days</option>
-												</select>
-											</div>
-										</div>
-                                        <script type="text/javascript">
-                                            function functionTime(timeDropDown){
-                                                var selectedValue = timeDropDown.options[timeDropDown.selectedIndex].value;
-                                                var dateInput = document.getElementById("dateInput");
-                                                dateInput.disabled = selectedValue == 4?true:false;
-                                                if(!dateInput.disabled){
-                                                    dateInput.focus();
-                                                }
-                                            }
-                                        </script>
-										<div class = "row">
-											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
-                                                <h4 style="padding-top: 7px;padding-left: 30px;" class ="col-lg-5">Date</h4>
-											     <input type="date" id = "dateInput" class = "custom-select b-0 col-lg-7"></input>									
-                                             </div>
-										</div>
-                                    </div>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- ============================================================== -->
                 <!-- News -->
                 <!-- ============================================================== -->
@@ -321,10 +271,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/node_modules/popper/popper.min.js"></script>
+    <script src="assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -337,12 +287,12 @@
     <!-- This page plugins -->
     <!-- ============================================================== -->
     <!--morris JavaScript -->
-    <script src="../assets/node_modules/raphael/raphael-min.js"></script>
-    <script src="../assets/node_modules/morrisjs/morris.min.js"></script>
-    <script src="../assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="assets/node_modules/raphael/raphael-min.js"></script>
+    <script src="assets/node_modules/morrisjs/morris.min.js"></script>
+    <script src="assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
     <!--c3 JavaScript -->
-    <script src="../assets/node_modules/d3/d3.min.js"></script>
-    <script src="../assets/node_modules/c3-master/c3.min.js"></script>
+    <script src="assets/node_modules/d3/d3.min.js"></script>
+    <script src="assets/node_modules/c3-master/c3.min.js"></script>
     <!-- Chart JS -->
     <script src="dist/js/dashboard1.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

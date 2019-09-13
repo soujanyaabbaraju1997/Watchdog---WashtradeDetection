@@ -1,6 +1,6 @@
 	<%@page import="com.pojos.Trade"%>
 	<%@page import="java.util.Set"%>
-	
+	<%@page import="com.pojos.Algorithm"%>
 	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<!DOCTYPE html>
@@ -15,7 +15,7 @@
 	<meta name="author" content="">
 	<!-- Favicon icon -->
 	<link rel="icon" type="image/jpg" sizes="16x16"
-	href="../assets/images/favicon.jpg">
+	href="assets/images/favicon.jpg">
 	<title>WATCHDOG - Wash Trade Detection Software</title>
 	<!-- Custom CSS -->
 	<link href="dist/css/style.css" rel="stylesheet">
@@ -25,68 +25,6 @@
 	    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	
-	<script>
-	    window.onload = function () {
-	
-	    var chart = new CanvasJS.Chart("chartContainer", {
-	    animationEnabled: false,  
-	    title:{
-	    text: "Wash Trades"
-	    },
-	    axisY: {
-	    title: "Quantity",
-	    valueFormatString: "#0,,.",
-	    suffix: "",
-	
-	    },
-	    data: [
-	    {
-	    showInLegend: true,
-	    ValueFormatString: "#,### Units",
-	    xValueFormatString: "YYYY",
-	    type: "spline",
-	    dataPoints: [
-	    {x: new Date(2002, 0), y: 2506000},
-	    {x: new Date(2003, 0), y: 6944000},
-	    {x: new Date(2004, 0), y: 3386000},
-	    {x: new Date(2005, 0), y: 2821000},
-	    {x: new Date(2006, 0), y: 6026000},
-	    {x: new Date(2007, 0), y: 2394000},
-	    {x: new Date(2008, 0), y: 1872000},
-	    {x: new Date(2009, 0), y: 2140000},
-	    {x: new Date(2010, 0), y: 7289000},
-	    {x: new Date(2011, 0), y: 4830000},
-	    {x: new Date(2012, 0), y: 2009000},
-	    {x: new Date(2013, 0), y: 2840000},
-	    {x: new Date(2014, 0), y: 3386000},
-	    {x: new Date(2015, 0), y: 1613000},
-	    {x: new Date(2016, 0), y: 2821000},
-	    {x: new Date(2017, 0), y: 2000000}
-	    ]
-	    },  {
-	    type: "column",
-	    name: "Wash Trades",
-	    xValueFormatString: "YYYY",
-	    yValueFormatString: "#,### Units",
-	            borderWidth: 1,
-	    <!-- type: "error", -->
-	    <!-- name: "Wash Trade ", -->
-	    <!-- toolTipContent: "<b>{name}:</b> {y[0]} - {y[1]} ", -->
-	    dataPoints: [
-	    {x: new Date(2003, 0), y: 6944000},
-	    {x: new Date(2005, 0), y: 2821000},
-	    {x: new Date(2007, 0), y: 2394000},
-	    {x: new Date(2011, 0), y: 4830000},
-	    {x: new Date(2013, 0), y: 2840000},
-	    ]
-	    }
-	    ]
-	    });
-	    chart.render();
-	
-	    }
-	</script>
 	
 	</head>
 	
@@ -117,15 +55,15 @@
 	<div class="navbar-header">
 	<a class="navbar-brand" href="admin-index.html"> <!-- Logo icon -->
 	<b> <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-	<!-- Dark Logo icon --> <img src="../assets/images/logo-icon.png"
+	<!-- Dark Logo icon --> <img src="assets/images/logo-icon.png"
 	alt="homepage" class="dark-logo" /> <!-- Light Logo icon --> <img
-	src="../assets/images/logo-light-icon.png" alt="homepage"
+	src="assets/images/logo-light-icon.png" alt="homepage"
 	class="light-logo" />
 	</b> <!--End Logo icon --> <!-- Logo text -->
 	<span> <!-- dark Logo text --> <img
-	src="../assets/images/logo-text.png" alt="homepage"
+	src="assets/images/logo-text.png" alt="homepage"
 	class="dark-logo" /> <!-- Light Logo text --> <img
-	src="../assets/images/logo-light-text.png" class="light-logo"
+	src="assets/images/logo-light-text.png" class="light-logo"
 	alt="homepage" /></span>
 	</a>
 	</div>
@@ -154,11 +92,9 @@
 	<!-- ============================================================== -->
 	<!-- User profile and search -->
 	<!-- ============================================================== -->
-	<li class="nav-item dropdown"><a
-	class="nav-link dropdown-toggle text-muted waves-effect waves-dark"
-	href="" data-toggle="dropdown" aria-haspopup="true"
-	aria-expanded="false"><img src="../assets/images/users/1.jpg"
-	alt="user" class="img-circle" width="30"></a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%=session.getAttribute("username") %></a>
+                        </li>
 	<!-- ============================================================== -->
 	<!-- User profile and search -->
 	<!-- ============================================================== -->
@@ -174,7 +110,7 @@
 	<!-- ============================================================== -->
 	<aside class="left-sidebar">
 	<div class="d-flex no-block nav-text-box align-items-center">
-	<span><img src="../assets/images/logo-icon.png"
+	<span><img src="assets/images/logo-icon.png"
 	alt="elegant admin template"></span> <a
 	class="waves-effect waves-dark ml-auto hidden-sm-down"
 	href="javascript:void(0)"><i class="ti-menu"></i></a> <a
@@ -186,20 +122,16 @@
 	<!-- Sidebar navigation-->
 	<nav class="sidebar-nav">
 	<ul id="sidebarnav">
+	
 	<li><a class="waves-effect waves-dark"
-	href="admin-index.html" aria-expanded="false"><i
-	class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-	<li><a class="waves-effect waves-dark"
-	href="userViewAllTrades" aria-expanded="false"><i
+	href="adminViewAllTrades" aria-expanded="false"><i
 	class="fa fa-table"></i><span class="hide-menu"></span>Trading
 	Data</a></li>
 	<li><a class="waves-effect waves-dark"
 	href="viewAllWashTrades" aria-expanded="false"><i
 	class="fa fa-bookmark-o"></i><span class="hide-menu"></span>Wash
 	Trades</a></li>
-	<li><a class="waves-effect waves-dark"
-	href="admin-profile.html" aria-expanded="false"><i
-	class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
+	
 	<div class="text-center m-t-30">
 	<form name="form12" action="logout" method="post">
 	<button type="submit" class="btn btn-primary">Logout</button>
@@ -253,35 +185,59 @@
 	
 	<div class="row">
 	<!-- column -->
-	<div class="col-6">
+	<div class="col-12">
 	<div class="card" style="border-radius: 10px;">
 	<div class="card-body">
 	<div class="table-responsive" style="overflow: hidden;">
-	<div class="row">
+	
+	
+	<%
+		Set<Set<Trade>> trade =  (Set<Set<Trade>>)request.getAttribute("data");
+		for(Set<Trade> set:trade)
+		{
+			float prof = Algorithm.profit(set);
+	    	int total = Algorithm.volume(set);
+			double roundOff = Math.round(prof * 10000.0) / 10000.0; 
+			
+	%>
+	   <div class="row">
 	<div class="col-lg-6 row" style="padding-bottom: 10px;">
 	<h4 style="padding-top: 7px;" class="col-lg-5">Trader</h4>
-	<input type="text" id="" class="custom-select b-0 col-lg-6"
+	<input type="text" value=<%=set.iterator().next().getTrader().getTraderName()%> id="" class="custom-select b-0 col-lg-6"
 	disabled></input>
 	</div>
 	<div class="col-lg-6 row" style="padding-bottom: 10px;">
 	<h4 style="padding-top: 7px;" class="col-lg-5">Broker</h4>
-	<input type="text" id="" class="custom-select b-0 col-lg-6"
+	<input type="text" value =<%=set.iterator().next().getBrokerId() %> id="" class="custom-select b-0 col-lg-6"
 	disabled></input>
 	</div>
 	</div>
-	
-	<%
-	                                       
-	                                        //java.util.HashSet.Set
-	                                        Set<Set<Trade>> trade =  (Set<Set<Trade>>)request.getAttribute("data");
-	                                       
-	for(Set<Trade> set:trade)
-	{
-	%>
+    <div class="row">
+	<div class="col-lg-6 row" style="padding-bottom: 10px;">
+	<h4 style="padding-top: 7px;" class="col-lg-5">Profit</h4>
+	<input type="float" value= <%=roundOff%> id="" class="custom-select b-0 col-lg-6"
+	disabled></input>
+	</div>
+	<div class="col-lg-6 row" style="padding-bottom: 10px;">
+	<h4 style="padding-top: 7px;" class="col-lg-5">Volume</h4>
+	<input type="int" value= <%=total%> id="" class="custom-select b-0 col-lg-6"
+	disabled></input>
+	</div>
+	</div>
+
 	<table class="table">
-	<%
-	for (Trade t : set) {
-	%>
+	<tr>
+        <th>Trade ID</th>
+        <th>Trader</th>
+        <th>Time Stamp</th>
+        <th>Buy or Sell</th>
+        <th>Security</th>
+        <th>Quantity</th>
+        <th>Deal Price</th>
+        <th>Firm</th>
+        <th>Broker</th>
+    </tr>
+    <%for (Trade t : set) { %>
 	<%-- Arranging data in tabular form
 	       --%>
 	<tr>
@@ -290,7 +246,26 @@
 	<td><%=t.getTrader().getTraderName()%></td>
 	<td><%=t.getTimeStamp()%></td>
 	<td><%=t.isTradeType()%></td>
-	<td><%=t.getSecurityId()%></td>
+	<%
+		String sec = new String() ;
+		if(t.getSecurityId()==7890)
+		{
+			sec = "EQUITY" ;
+		}
+		else if(t.getSecurityId()==1204)
+		{
+			sec = "PUT OPTION" ;
+		}
+		else if(t.getSecurityId()==3030)
+		{
+			sec = "CALL OPTION" ;
+		}
+		else if(t.getSecurityId()==9811)
+		{
+			sec = "FUTURE" ;
+		}
+	%>
+	<td><%=sec%></td>
 	<td><%=t.getQty()%></td>
 	<td><%=t.getDealPrice()%></td>
 	<td><%=t.getFirmId()%></td>
@@ -307,20 +282,6 @@
 	
 	<%-- Arranging data in tabular form
 	       --%>
-	
-	
-	<div class="row">
-	<div class="col-lg-6 row" style="padding-bottom: 10px;">
-	<h4 style="padding-top: 7px;" class="col-lg-5">Profit</h4>
-	<input type="text" id="" class="custom-select b-0 col-lg-6"
-	disabled></input>
-	</div>
-	<div class="col-lg-6 row" style="padding-bottom: 10px;">
-	<h4 style="padding-top: 7px;" class="col-lg-5">Count</h4>
-	<input type="text" id="" class="custom-select b-0 col-lg-6"
-	disabled></input>
-	</div>
-	</div>
 	</div>
 	</div>
 	</div>
@@ -355,10 +316,10 @@
 	<!-- ============================================================== -->
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
-	<script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+	<script src="assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 	<!-- Bootstrap tether Core JavaScript -->
-	<script src="../assets/node_modules/popper/popper.min.js"></script>
-	<script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="assets/node_modules/popper/popper.min.js"></script>
+	<script src="assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- slimscrollbar scrollbar JavaScript -->
 	<script src="dist/js/perfect-scrollbar.jquery.min.js"></script>
 	<!--Wave Effects -->
@@ -367,8 +328,8 @@
 	<script src="dist/js/sidebarmenu.js"></script>
 	<!--stickey kit -->
 	<script
-	src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-	<script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+	src="assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<script src="assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
 	<!--Custom JavaScript -->
 	<script src="dist/js/custom.min.js"></script>
 	

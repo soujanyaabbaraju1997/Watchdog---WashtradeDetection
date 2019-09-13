@@ -54,7 +54,7 @@ public class ViewTradesForTraderId extends HttpServlet {
 		request.setAttribute("data",tradelist);
 		
 		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user.jsp");
 		dispatcher.forward(request, response);
 
 	}

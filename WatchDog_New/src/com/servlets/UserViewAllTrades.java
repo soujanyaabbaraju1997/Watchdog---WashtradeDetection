@@ -10,15 +10,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.dao.LoginDAO;
 import com.dao.TradeDAO;
 import com.dao.TradeDAOImpl;
+import com.dao.UserDAO;
+import com.dao.UserDAOImpl;
 import com.pojos.Trade;
 
 /**
  * Servlet implementation class UserViewAllTrades
  */
-@WebServlet("/userViewAllTrades")
+@WebServlet("/UserViewAllTrades")
 public class UserViewAllTrades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,16 +37,15 @@ public class UserViewAllTrades extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		TradeDAO tdao = new TradeDAOImpl(); 
 		List<Trade> allTrades = new ArrayList<Trade>();
-		String traderId=request.getParameter("traderId");
-		allTrades = tdao.findByTraderId(traderId);
 		
-		//VERIFY THE NAME OF REQUEST ATTRIBUTE.
-		request.setAttribute("data", allTrades);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("display.jsp");
+		allTrades = tdao.findAllTrades();
+		System.out.println(allTrades.size());
+		request.setAttribute("listOfTradesForUser", allTrades);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.jsp");
 		dispatcher.forward(request, response);
 	}
 
