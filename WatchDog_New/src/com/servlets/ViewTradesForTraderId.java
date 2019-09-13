@@ -39,27 +39,7 @@ public class ViewTradesForTraderId extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		HttpSession httpsession =request.getSession();
-		String name;
-		name=(String) httpsession.getAttribute("username");
-		System.out.println(name);
-		TraderDAOImpl tdao = new TraderDAOImpl();
-		TradeDAOImpl tradedao = new TradeDAOImpl();
-		Trader t = new Trader();
-		t=tdao.findByUsername(name);
-		System.out.println(t);
-		List <Trade> tradelist= new ArrayList<Trade>();
-		tradelist=tradedao.findByTraderId(t.getTraderId());
-		
-		
-		request.setAttribute("data",tradelist);
-		System.out.println(tradelist.size());
-		
-		
-		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.jsp");
-		dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -68,7 +48,22 @@ public class ViewTradesForTraderId extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		HttpSession httpsession =request.getSession();
+		String name;
+		name=(String) httpsession.getAttribute("username");
+		TraderDAOImpl tdao = new TraderDAOImpl();
+		TradeDAOImpl tradedao = new TradeDAOImpl();
+		Trader t = new Trader();
+		t=tdao.findByUsername(name);
+		List <Trade> tradelist= new ArrayList<Trade>();
+		tradelist=tradedao.findByTraderId(t.getTraderId());
 		
+		
+		request.setAttribute("data",tradelist);
+		
+		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
+		dispatcher.forward(request, response);
 
 		
 		//doGet(request, response);
