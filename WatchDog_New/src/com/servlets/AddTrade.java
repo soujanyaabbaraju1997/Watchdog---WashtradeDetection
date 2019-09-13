@@ -60,7 +60,7 @@ public class AddTrade extends HttpServlet {
 		
 		float dealPrice = Float.parseFloat(request.getParameter("dealPrice"));
 		System.out.println(dealPrice);
-		
+		//
 		Date date= new Date();
 		long time = date.getTime();
 		Timestamp timeStamp = new Timestamp(time);
