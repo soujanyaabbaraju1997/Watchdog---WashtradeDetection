@@ -65,6 +65,7 @@ public class AddTrade extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
 		dispatcher.forward(request, response);
 		
+		
 	}
 
 }
