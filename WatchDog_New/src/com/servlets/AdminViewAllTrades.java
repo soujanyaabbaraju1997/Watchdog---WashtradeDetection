@@ -28,7 +28,7 @@ public class AdminViewAllTrades extends HttpServlet {
      */
     public AdminViewAllTrades() {
         super();
-        // TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub mhgygku
     }
 
 	/**
