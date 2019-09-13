@@ -248,7 +248,11 @@ public class TradeDAOImpl implements TradeDAO {
 		try(PreparedStatement ps = conn.prepareStatement(LAST_TRADE))
 		{
 			ResultSet rs = ps.executeQuery();
-			lastTrade = rs.getInt(1);
+			//lastTrade = rs.getInt(1);
+			while(rs.next())
+			{
+				lastTrade = rs.getInt(1);
+			}
 		}
 		catch (SQLException e)
 		{

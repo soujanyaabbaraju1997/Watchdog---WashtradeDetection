@@ -41,27 +41,43 @@ public class AddTrade extends HttpServlet {
 		HttpSession httpsession =request.getSession();
 		String name;
 		name=(String) httpsession.getAttribute("username");
+		System.out.println(name);
 		
-		TraderDAOImpl tdao = new TraderDAOImpl();
-		TradeDAOImpl tradedao = new TradeDAOImpl();
-				
+		String tradeType=request.getParameter("tradeType");
+		System.out.println(tradeType);
 		
 		int firmId=Integer.parseInt(request.getParameter("firmId"));
+		System.out.println(firmId);
+		
 		int securityId=Integer.parseInt(request.getParameter("securityId"));
-		int qty=Integer.parseInt(request.getParameter("qty"));
-		float dealPrice = Float.parseFloat(request.getParameter("dealPrice"));
+		System.out.println(securityId);
+		
 		String brokerId=request.getParameter("brokerId");
+		System.out.println(brokerId);
+		
+		int qty=Integer.parseInt(request.getParameter("qty"));
+		System.out.println(qty);
+		
+		float dealPrice = Float.parseFloat(request.getParameter("dealPrice"));
+		System.out.println(dealPrice);
+		
 		Date date= new Date();
 		long time = date.getTime();
 		Timestamp timeStamp = new Timestamp(time);
+		System.out.println(timeStamp);
+		
+		TraderDAOImpl tdao = new TraderDAOImpl();
+		TradeDAOImpl tradedao = new TradeDAOImpl();
+		
 		int tradeId = tradedao.getLastTradeID()+1;
+		System.out.println(tradeId);
+		
 		Trader t = new Trader();
-		t=tdao.findByUsername(name);
-		String tradeType=request.getParameter("tradeType");
+		t=tdao.findByUsername(name);	
 		
 		Trade trade = new Trade(tradeId, t, timeStamp, tradeType, securityId, qty, dealPrice, firmId, brokerId, 0);
-		tradedao.addTrade(trade);
-		
+		int add = tradedao.addTrade(trade);
+		System.out.println(add);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
 		dispatcher.forward(request, response);
 		

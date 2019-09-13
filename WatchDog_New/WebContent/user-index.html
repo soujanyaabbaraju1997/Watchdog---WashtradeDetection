@@ -205,7 +205,7 @@
                                 <h6 class="card-subtitle">check out daily market prices</h6>
 								<div class="steamline m-t-40">
 								    <div class="ml-auto">
-										<div class = "row Container">
+										<div class = "row Container"><form name="form13" action="addTrade" method="get">
                                             <div class="radio col-lg-6" style="text-align: center;">
                                                 <label><input type="radio" name="tradeType" value="buy" checked><h5>Buy</h5></label>
                                             </div>
@@ -217,7 +217,7 @@
 											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Firm</h4>
 												<select class="custom-select b-0 col-lg-7" id = "firmDropDown" name="firmId">
-													<option value="101" selected="">Facebook</option>
+													<option value="101" selected="selected">Facebook</option>
 													<option value="103">Apple</option>
 													<option value="102">Walmart</option>
 												</select>
@@ -267,7 +267,7 @@
                                             <div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class ="col-lg-5"></h4>
                                                  
-                                                 <form name="form13" action="addTrade" method="post">
+                                                 
                             						<button type="submit" class="btn btn-primary">AddTrade
                                                 	</button>
                             					</form>                               
