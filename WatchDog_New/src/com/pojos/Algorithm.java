@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 public class Algorithm {
 
-	public static void main(String[] args) {
-		System.out.println(RunAlgo()) ;
-	}
+//	public static void main(String[] args) {
+//		System.out.println(RunAlgo()) ;
+//	}
 	public static <T> Set<Set<T>> powerSet(Set<T> originalSet) {
 	    Set<Set<T>> sets = new HashSet<Set<T>>();
 	    if (originalSet.isEmpty()) {

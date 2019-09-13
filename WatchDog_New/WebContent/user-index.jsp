@@ -1,3 +1,7 @@
+<%@page import="com.pojos.Trade"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,7 +123,11 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li> <a class="waves-effect waves-dark" href="user-index.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="ViewAllForTrader" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a></li>
+                        <li>
+                            	<a class="waves-effect waves-dark" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a>
+                        
+                        
+                        </li>
                         <li> <a class="waves-effect waves-dark" href="user-profile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
                         <div class="text-center m-t-30">
                            <form name="form12" action="logout" method="post">
@@ -169,20 +177,54 @@
                 <!-- Yearly Sales -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card oh">
+                    <!-- column -->
+                    <div class="col-12">
                             <div class="card-body">
-                                <div class="d-flex m-b-30 align-items-center no-block">
-                                    <h5 class="card-title ">Yearly Sales</h5>
-                                    <div class="ml-auto">
-                                        <ul class="list-inline font-12">
-                                            <li><i class="fa fa-circle text-info"></i> Iphone</li>
-                                            <li><i class="fa fa-circle text-primary"></i> Ipad</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="morris-area-chart" style="height: 350px;"></div>
-                            </div>
+                                <h4 class="card-title">Trading Data</h4>
+                                        <div class="table-responsive">
+                                        <table class ="table">
+                                        
+                                        <tr>
+                                                <th>Trade ID</th>
+                                                <th>Trader</th>
+                                                <th>Time Stamp</th>
+                                                <th>Buy or Sell</th>
+                                                <th>Security</th>
+                                                <th>Quantity</th>
+                                                <th>Deal Price</th>
+                                                <th>Firm</th>
+                                                <th>Broker</th>
+                                            </tr>
+                                        
+											<%
+												List<Trade> allTrades = (List<Trade>) request.getAttribute("data");
+									
+												for (Trade t : allTrades) {
+											%>
+											<%-- Arranging data in tabular form 
+									        --%>
+										
+											
+                                            <tr>
+												
+												<td><%=t.getTradeId()%></td>
+												<td><%=t.getTrader().getTraderName()%></td>
+												<td><%=t.getTimeStamp()%></td>
+												<td><%=t.isTradeType()%></td>
+												<td><%=t.getSecurityId()%></td>
+												<td><%=t.getQty()%></td>
+												<td><%=t.getDealPrice()%></td>
+												<td><%=t.getFirmId()%></td>
+												<td><%=t.getBrokerId()%></td>
+									
+									
+											</tr>
+											<%
+												}
+											%>
+										</table>
+                                        </div>
+                
                             <div class="card-body bg-light">
                                 <div class="row text-center m-b-20">
                                     <div class="col-lg-4 col-md-4 m-t-20">
@@ -235,22 +277,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class = "row">
-                                            <div class = "col-lg-12 row" style="padding-bottom: 10px;">
-                                                <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Broker</h4>
-                                                <select class="custom-select b-0 col-lg-7" id = "brokerDropDown" name="brokerId">
-                                                    <option value="1" selected="">5Paisa</option>
-                                                    <option value="Angel Broking">Angel Broking</option>
-                                                    <option value="Fyers">Fyers</option>
-                                                    <option value="ICICI Direct">ICICI Direct</option>
-                                                    <option value="Motilal Oswal">Motilal Oswal</option>
-                                                    <option value="Sharekhan">Sharekhan</option>
-                                                    <option value="Upstox">Upstox</option>
-                                                    <option value="Zerodha">Zerodha</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
+                                        
 										<div class = "row">
 											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class ="col-lg-5">Quantity</h4>
@@ -298,7 +325,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            Â© 2019 Watchdog User by Team 8, Batch 1, 2019 Grads Batch.
+            © 2019 Watchdog User by Team 8, Batch 1, 2019 Grads Batch.
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

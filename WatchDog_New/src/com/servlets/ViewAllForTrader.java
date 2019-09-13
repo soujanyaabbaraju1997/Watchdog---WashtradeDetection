@@ -20,16 +20,16 @@ import com.pojos.Trade;
 import com.pojos.Trader;
 
 /**
- * Servlet implementation class ViewTradesForTraderId
+ * Servlet implementation class ViewAllForTrader
  */
-@WebServlet("/viewtradesfortradeid")
-public class ViewTradesForTraderId extends HttpServlet {
+@WebServlet("/ViewAllForTrader")
+public class ViewAllForTrader extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewTradesForTraderId() {
+    public ViewAllForTrader() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,41 +37,28 @@ public class ViewTradesForTraderId extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
 		HttpSession httpsession =request.getSession();
 		String name;
 		name=(String) httpsession.getAttribute("username");
 		System.out.println(name);
-		TraderDAOImpl tdao = new TraderDAOImpl();
-		TradeDAOImpl tradedao = new TradeDAOImpl();
+		
+		TraderDAO tdao = new TraderDAOImpl();
+		TradeDAO tradedao = new TradeDAOImpl();
+		
 		Trader t = new Trader();
 		t=tdao.findByUsername(name);
 		System.out.println(t);
+		
 		List <Trade> tradelist= new ArrayList<Trade>();
 		tradelist=tradedao.findByTraderId(t.getTraderId());
-		
-		
+				
 		request.setAttribute("data",tradelist);
 		System.out.println(tradelist.size());
 		
-		
-		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
-
-		
-		//doGet(request, response);
 	}
 
 }

@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-				RequestDispatcher rd=request.getRequestDispatcher("user-index.html");
+				RequestDispatcher rd=request.getRequestDispatcher("user-index.jsp");
 				rd.forward(request, response);
 
 			}
