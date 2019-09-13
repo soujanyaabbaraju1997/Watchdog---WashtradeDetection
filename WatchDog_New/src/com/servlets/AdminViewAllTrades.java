@@ -41,7 +41,7 @@ public class AdminViewAllTrades extends HttpServlet {
 		
 		allTrades = tdao.findAllTrades();
 		request.setAttribute("data", allTrades);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("trading-data.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("display.jsp");
 		dispatcher.forward(request, response);
 	}
 
