@@ -15,7 +15,7 @@
 
 			for (Trade t : trade) {
 		%>
-		<%-- AArranging data in tabular form 
+		<%-- Arranging data in tabular form 
         --%>
 		<tr>
 			<td><%=t.getTradeId()%></td>
