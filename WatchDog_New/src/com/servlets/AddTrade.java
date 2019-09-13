@@ -54,7 +54,7 @@ public class AddTrade extends HttpServlet {
 		
 		String brokerId=request.getParameter("brokerId");
 		System.out.println(brokerId);
-		
+		System.out.println(request.getParameter("qty"));
 		int qty=Integer.parseInt(request.getParameter("qty"));
 		System.out.println(qty);
 		
@@ -78,7 +78,7 @@ public class AddTrade extends HttpServlet {
 		Trade trade = new Trade(tradeId, t, timeStamp, tradeType, securityId, qty, dealPrice, firmId, brokerId, 0);
 		int add = tradedao.addTrade(trade);
 		System.out.println(add);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.jsp");
 		dispatcher.forward(request, response);
 		
 		//

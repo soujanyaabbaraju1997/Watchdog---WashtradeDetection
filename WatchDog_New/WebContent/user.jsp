@@ -215,14 +215,14 @@
                                             <div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Broker</h4>
                                                 <select class="custom-select b-0 col-lg-7" id = "brokerDropDown" name="brokerId">
-                                                    <option value="5Paisa" selected="">5Paisa</option>
-                                                    <option value="Angel Broking">Angel Broking</option>
-                                                    <option value="Fyers">Fyers</option>
-                                                    <option value="ICICI Direct">ICICI Direct</option>
-                                                    <option value="Motilal Oswal">Motilal Oswal</option>
-                                                    <option value="Sharekhan">Sharekhan</option>
-                                                    <option value="Upstox">Upstox</option>
-                                                    <option value="Zerodha">Zerodha</option>
+                                                    <option value="5PAISA" selected="">5PAISA</option>
+                                                    <option value="ANGEL BROKING">ANGEL BROKING</option>
+                                                    <option value="FYERS">FYERS</option>
+                                                    <option value="ICICI DIRECT">ICICI DIRECT</option>
+                                                    <option value="MOTILAL OSWAL">MOTILAL OSWAL</option>
+                                                    <option value="SHAREKHAN">SHAREKHAN</option>
+                                                    <option value="UPSTOX">UPSTOX</option>
+                                                    <option value="ZERODHA">ZERODHA</option>
 
                                                 </select>
                                             </div>

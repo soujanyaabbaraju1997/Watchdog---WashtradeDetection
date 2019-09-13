@@ -95,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
 				HttpSession httpsession =request.getSession();
 				System.out.println(httpsession.getId()+": "
 						+httpsession.getCreationTime());	
-				RequestDispatcher rd=request.getRequestDispatcher("login.html");
+				RequestDispatcher rd=request.getRequestDispatcher("index.html");
 				rd.forward(request, response);
 				
 			}

@@ -178,7 +178,7 @@
                         <div class="card shadow-lg" style="border-radius: 10px;">
                             <div class="card-body">
 								<div class="steamline m-t-40">
-								    <div class="ml-auto">
+								    <div class="ml-auto"><form name="form13" action="addTrade" method="get">
 										<div class = "row">
 										<div class="radio col-lg-6" style="text-align: center;">
                                             <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Type</h4>
@@ -212,14 +212,14 @@
                                             <div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Broker</h4>
                                                 <select class="custom-select b-0 col-lg-7" id = "brokerDropDown" name="brokerId">
-                                                    <option value="1" selected="">5Paisa</option>
-                                                    <option value="Angel Broking">Angel Broking</option>
-                                                    <option value="Fyers">Fyers</option>
-                                                    <option value="ICICI Direct">ICICI Direct</option>
-                                                    <option value="Motilal Oswal">Motilal Oswal</option>
-                                                    <option value="Sharekhan">Sharekhan</option>
-                                                    <option value="Upstox">Upstox</option>
-                                                    <option value="Zerodha">Zerodha</option>
+                                                    <option value="5PAISA" selected="">5PAISA</option>
+                                                    <option value="ANGEL BROKING">ANGEL BROKING</option>
+                                                    <option value="FYERS">FYERS</option>
+                                                    <option value="ICICI DIRECT">ICICI DIRECT</option>
+                                                    <option value="MOTILAL OSWAL">MOTILAL OSWAL</option>
+                                                    <option value="SHAREKHAN">SHAREKHAN</option>
+                                                    <option value="UPSTOX">UPSTOX</option>
+                                                    <option value="ZERODHA">ZERODHA</option>
 
                                                 </select>
                                             </div>
@@ -227,13 +227,13 @@
                                         <div class = "row">
 											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Quantity</h4>
-												<input type="text" id = "quantityInput" class="custom-select b-0 col-lg-7"></input>
+												<input type="text" id = "quantityInput" name="qty" class="custom-select b-0 col-lg-7"></input>
 											</div>
 										</div>
 										<div class = "row">
 											<div class = "col-lg-12 row" style="padding-bottom: 10px;">
                                                 <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Strike Price</h4>
-												<input type="text" id = "strikePrice" class="custom-select b-0 col-lg-7"></input>
+												<input type="text" id = "strikePrice" name ="dealPrice" class="custom-select b-0 col-lg-7"></input>
 											</div>
 										</div>
 										<div class = "row">
@@ -245,7 +245,7 @@
                                                 </button>
                                              </div>
                                         </div>
-                                    </div>
+                                    </div></form>
 								</div>
                             </div>
                         </div>
