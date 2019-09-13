@@ -39,15 +39,7 @@ public class ViewTradesForTraderId extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		HttpSession httpsession =request.getSession();
 		String name;
 		name=(String) httpsession.getAttribute("username");
@@ -62,9 +54,18 @@ public class ViewTradesForTraderId extends HttpServlet {
 		request.setAttribute("data",tradelist);
 		
 		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.jsp");
 		dispatcher.forward(request, response);
 
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		
 		
 		//doGet(request, response);
 	}

@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
+    <!------ Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
     <title>WATCHDOG - Wash Trade Detection Software</title>
     <!-- This page CSS -->
@@ -130,8 +130,8 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li> <a class="waves-effect waves-dark" href="admin-index.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="trading-data.html" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a></li>
-                        <li> <a class="waves-effect waves-dark" href="wash-trades.html" aria-expanded="false"><i class="fa fa-bookmark-o"></i><span class="hide-menu"></span>Wash Trades</a></li>
+                        <li> <a class="waves-effect waves-dark" href="userViewAllTrades" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a></li>
+                        <li> <a class="waves-effect waves-dark" href="viewAllWashTrades" aria-expanded="false"><i class="fa fa-bookmark-o"></i><span class="hide-menu"></span>Wash Trades</a></li>
                         <li> <a class="waves-effect waves-dark" href="admin-profile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
                         <div class="text-center m-t-30">
                             <a href="#" class="btn waves-effect waves-light btn-success hidden-md-down"> Logout</a>

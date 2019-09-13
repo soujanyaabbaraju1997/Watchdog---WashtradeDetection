@@ -1,3 +1,7 @@
+<%@page import="com.pojos.Trade"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +15,22 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.jpg">
     <title>WATCHDOG - Wash Trade Detection Software</title>
+    <!---- This page CSS -->
+    <!-- chartist CSS -->
+    <link href="../assets/node_modules/morrisjs/morris.css" rel="stylesheet">
+    <!--c3 plugins CSS -->
+    <link href="../assets/node_modules/c3-master/c3.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet">
-    <!---- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- Dashboard 1 Page CSS -->
+    <link href="dist/css/pages/dashboard1.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -37,6 +49,7 @@
     <div id="main-wrapper">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
         <!-- ============================================================== -->
         <header class="topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
@@ -110,11 +123,15 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li> <a class="waves-effect waves-dark" href="user-index.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="user-data.html" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a></li>
+                        <li>
+                            <a class="waves-effect waves-dark" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Trading Data</a>
+                       
+                       
+                        </li>
                         <li> <a class="waves-effect waves-dark" href="user-profile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
                         <div class="text-center m-t-30">
-                            <form name="form12" action="logout" method="post">
-                            	<button type="submit" class="btn btn-primary">
+                           <form name="form12" action="logout" method="post">
+                            <button type="submit" class="btn btn-primary">
                                                 Logout
                                                 </button>
                             </form>
@@ -141,15 +158,15 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Trading Data</h4>
+                        <h4 class="text-themecolor">Dashboard</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Trading Data</li>
+                                <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
-                            <button type="button" class="btn btn-success d-none d-lg-block m-l-15"> Report</button>
+                            <a class="btn btn-success d-none d-lg-block m-l-15" href="#"> Report</a>
                         </div>
                     </div>
                 </div>
@@ -157,19 +174,20 @@
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <!-- ============================================================== -->
-                <!---- Start Page Content -->
+                <!-- Yearly Sales -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- column -->
                     <div class="col-12">
-                        <div class="card" style="border-radius: 10px;">
                             <div class="card-body">
                                 <h4 class="card-title">Trading Data</h4>
-                                <h6 class="card-subtitle">Add class <code>.table</code></h6>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
+                                        <div class="table-responsive">
+                                        <table class ="table">
+                                       
+                                        <tr>
+                                                <th>Trade ID</th>
+                                                <th>Trader</th>
+                                                <th>Time Stamp</th>
                                                 <th>Buy or Sell</th>
                                                 <th>Security</th>
                                                 <th>Quantity</th>
@@ -177,61 +195,123 @@
                                                 <th>Firm</th>
                                                 <th>Broker</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                       
+<%
+List<Trade> allTrades = (List<Trade>) request.getAttribute("data");
+
+for (Trade t : allTrades) {
+%>
+<%-- Arranging data in tabular form
+       --%>
+
+
                                             <tr>
-                                                <td>Buy</td>
-                                                <td>Options</td>
-                                                <td>48553</td>
-                                                <td>199.0060094170755</td>
-                                                <td>Apple</td>
-                                                <td>Zerodha</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Buy</td>
-                                                <td>Options</td>
-                                                <td>48553</td>
-                                                <td>199.0060094170755</td>
-                                                <td>Apple</td>
-                                                <td>Zerodha</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                                <td><span class="label label-warning">developer</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                                <td><span class="label label-success">supporter</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Joshi</td>
-                                                <td>Hickle</td>
-                                                <td>@Maruti</td>
-                                                <td><span class="label label-info">member</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Nigam</td>
-                                                <td>Eichmann</td>
-                                                <td>@Sonu</td>
-                                                <td><span class="label label-success">supporter</span> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
+<td><%=t.getTradeId()%></td>
+<td><%=t.getTrader().getTraderName()%></td>
+<td><%=t.getTimeStamp()%></td>
+<td><%=t.isTradeType()%></td>
+<td><%=t.getSecurityId()%></td>
+<td><%=t.getQty()%></td>
+<td><%=t.getDealPrice()%></td>
+<td><%=t.getFirmId()%></td>
+<td><%=t.getBrokerId()%></td>
+
+
+</tr>
+<%
+}
+%>
+</table>
+                                        </div>
+               
+                            <div class="card-body bg-light">
+                                <div class="row text-center m-b-20">
+                                    <div class="col-lg-4 col-md-4 m-t-20">
+                                        <h2 class="m-b-0 font-light">256.80$</h2><span class="text-muted">Highest Price</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 m-t-20">
+                                        <h2 class="m-b-0 font-light">259.20$</h2><span class="text-muted">Market Price</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 m-t-20">
+                                        <h2 class="m-b-0 font-light">2000k</h2><span class="text-muted">Total Volume</span>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow-lg" style="border-radius: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title">Facebook - Apple - Walmart</h5>
+                                <h6 class="card-subtitle">check out daily market prices</h6>
+<div class="steamline m-t-40">
+   <div class="ml-auto">
+<div class = "row Container"><form name="form13" action="addTrade" method="get">
+                                            <div class="radio col-lg-6" style="text-align: center;">
+                                                <label><input type="radio" name="tradeType" value="buy" checked><h5>Buy</h5></label>
+                                            </div>
+                                            <div class="radio col-lg-6" style="text-align: center;">
+                                              <label><input type="radio" name="tradeType" value="sell"><h5>Sell</h5></label>
+                                            </div>
+                                        </div>
+<div class = "row">
+<div class = "col-lg-12 row" style="padding-bottom: 10px;">
+                                                <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Firm</h4>
+<select class="custom-select b-0 col-lg-7" id = "firmDropDown" name="firmId">
+<option value="101" selected="selected">Facebook</option>
+<option value="103">Apple</option>
+<option value="102">Walmart</option>
+</select>
+</div>
+</div>
+                                        <div class = "row">
+                                            <div class = "col-lg-12 row" style="padding-bottom: 10px;">
+                                                <h4 style="padding-top: 7px;padding-left: 30px;" class = "col-lg-5">Securities</h4>
+                                                <select class="custom-select b-0 col-lg-7" id = "securityDropDown" name="securityId">
+                                                    <option value="7890" selected="">Equity Shares</option>
+                                                    <option value="9811">Futures</option>
+                                                    <option value="3030">Call Option</option>
+                                                    <option value="1204">Put Option</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                       
+<div class = "row">
+<div class = "col-lg-12 row" style="padding-bottom: 10px;">
+                                                <h4 style="padding-top: 7px;padding-left: 30px;" class ="col-lg-5">Quantity</h4>
+    <input type="text" id = "quantityId" name="qty" class = "custom-select b-0 col-lg-7"></input>
+                                             </div>
+</div>
+                                        <div class = "row">
+                                            <div class = "col-lg-12 row" style="padding-bottom: 10px;">
+                                                <h4 style="padding-top: 7px;padding-left: 30px;" class ="col-lg-5">Strike Price</h4>
+                                                 <input type="text" id = "strikePrice" name="dealPrice" class = "custom-select b-0 col-lg-7"></input>                                  
+                                             </div>
+                                        </div>
+                                        <div class = "row">
+                                            <div class = "col-lg-12 row" style="padding-bottom: 10px;">
+                                                <h4 style="padding-top: 7px;padding-left: 30px;" class ="col-lg-5"></h4>
+                                                 
+                                                 
+                            <button type="submit" class="btn btn-primary">AddTrade
+                                                </button>
+                            </form>                              
+                                             </div>
+                                        </div>
+                                    </div>
+</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- News -->
+                <!-- ============================================================== -->
+               
+                <!-- ============================================================== -->
+                <!-- To do chat and message -->
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
@@ -245,12 +325,18 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            Â© 2019 Watchdog User by Team 8, Batch 1, 2019 Grads Batch.
+            © 2019 Watchdog User by Team 8, Batch 1, 2019 Grads Batch.
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->
     </div>
+
+
+
+
+
+
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -258,7 +344,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
+    <!-- Bootstrap popper Core JavaScript -->
     <script src="../assets/node_modules/popper/popper.min.js"></script>
     <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
@@ -267,11 +353,27 @@
     <script src="dist/js/waves.js"></script>
     <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--morris JavaScript -->
+    <script src="../assets/node_modules/raphael/raphael-min.js"></script>
+    <script src="../assets/node_modules/morrisjs/morris.min.js"></script>
+    <script src="../assets/node_modules/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--c3 JavaScript -->
+    <script src="../assets/node_modules/d3/d3.min.js"></script>
+    <script src="../assets/node_modules/c3-master/c3.min.js"></script>
+    <!-- Chart JS -->
+    <script src="dist/js/dashboard1.js"></script>
+
+   
+
+   
+
+
+
 </body>
 
 </html>

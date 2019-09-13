@@ -52,7 +52,7 @@ public class ViewAllWashTradeSet extends HttpServlet {
 		request.setAttribute("data",washTrades);
 		
 		//CHANGE THE NAME OF THE TARGET PAGE AND DELETE COMMENT
-		RequestDispatcher dispatcher = request.getRequestDispatcher("page.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("wash-trades.jsp");
 		dispatcher.forward(request, response);
 	}
 

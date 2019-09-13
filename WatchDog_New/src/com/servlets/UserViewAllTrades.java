@@ -42,7 +42,7 @@ public class UserViewAllTrades extends HttpServlet {
 		
 		//VERIFY THE NAME OF REQUEST ATTRIBUTE.
 		request.setAttribute("data", allTrades);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("user-index.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("display.jsp");
 		dispatcher.forward(request, response);
 	}
 
